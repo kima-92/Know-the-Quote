@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct Quote {
+struct QuoteRepresentation {
     
     var firstPart: String = ""
     var secondPart: String = ""
     var answerOptions: [String]
     var answer: String
+    var quiz: Quiz
 }

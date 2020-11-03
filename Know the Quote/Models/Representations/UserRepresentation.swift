@@ -7,13 +7,12 @@
 
 import Foundation
 
-struct User {
+struct UserRepresentation {
     
-    var id =  UUID()
+    var id: UUID
     var username: String
     var password: String
     
-    var coins: Int = 0
-    var quizesCreated: [UUID]?
-    var quizesTakenByID: [UUID]?
+    var coins: Int16
+    var quizesCreated: [Quiz]?
 }

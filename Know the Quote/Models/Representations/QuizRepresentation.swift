@@ -7,14 +7,13 @@
 
 import UIKit
 
-struct Quiz {
+struct QuizRepresentation {
     
-    var id = UUID()
+    var id: UUID
     var title: String
-    var dateCreated = Date()
-    var creatorID = UUID()
+    var dateCreated: Date
+    var creator: User
     
     var quotes: [Quote]
-    var image: UIImage
-    var hasBeenReported = false
+    var hasBeenReported: Bool
 }

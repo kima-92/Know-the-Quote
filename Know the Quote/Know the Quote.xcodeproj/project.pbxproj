@@ -17,9 +17,15 @@
 		FA4228D42551B450003CD327 /* StartNewQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228D32551B450003CD327 /* StartNewQuizViewController.swift */; };
 		FA4228D72551C2F4003CD327 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228D62551C2F4003CD327 /* Home.storyboard */; };
 		FA4228DB2551C31E003CD327 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228DA2551C31E003CD327 /* HomeViewController.swift */; };
-		FA4228E22551C59C003CD327 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E12551C59C003CD327 /* User.swift */; };
-		FA4228E52551C63C003CD327 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E42551C63C003CD327 /* Quiz.swift */; };
-		FA4228E82551C6C5003CD327 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E72551C6C5003CD327 /* Quote.swift */; };
+		FA4228E22551C59C003CD327 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E12551C59C003CD327 /* UserRepresentation.swift */; };
+		FA4228E52551C63C003CD327 /* QuizRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E42551C63C003CD327 /* QuizRepresentation.swift */; };
+		FA4228E82551C6C5003CD327 /* QuoteRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E72551C6C5003CD327 /* QuoteRepresentation.swift */; };
+		FA4228ED2551CD84003CD327 /* QuizController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228EC2551CD84003CD327 /* QuizController.swift */; };
+		FA4228F12551CF0A003CD327 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228F02551CF09003CD327 /* CoreDataStack.swift */; };
+		FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA4228F32551D036003CD327 /* KnowTheQuote.xcdatamodeld */; };
+		FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228FA2551D794003CD327 /* User+Convenience.swift */; };
+		FA4229012551DB10003CD327 /* Quiz+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4229002551DB10003CD327 /* Quiz+Convenience.swift */; };
+		FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4229032551DB23003CD327 /* Quote+Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +41,15 @@
 		FA4228D32551B450003CD327 /* StartNewQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNewQuizViewController.swift; sourceTree = "<group>"; };
 		FA4228D62551C2F4003CD327 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		FA4228DA2551C31E003CD327 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		FA4228E12551C59C003CD327 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		FA4228E42551C63C003CD327 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
-		FA4228E72551C6C5003CD327 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		FA4228E12551C59C003CD327 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
+		FA4228E42551C63C003CD327 /* QuizRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRepresentation.swift; sourceTree = "<group>"; };
+		FA4228E72551C6C5003CD327 /* QuoteRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRepresentation.swift; sourceTree = "<group>"; };
+		FA4228EC2551CD84003CD327 /* QuizController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizController.swift; sourceTree = "<group>"; };
+		FA4228F02551CF09003CD327 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		FA4228F42551D036003CD327 /* KnowTheQuote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KnowTheQuote.xcdatamodel; sourceTree = "<group>"; };
+		FA4228FA2551D794003CD327 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
+		FA4229002551DB10003CD327 /* Quiz+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quiz+Convenience.swift"; sourceTree = "<group>"; };
+		FA4229032551DB23003CD327 /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +68,9 @@
 			children = (
 				FA4228C72551A6ED003CD327 /* Storyboards */,
 				FA4228C82551A6F3003CD327 /* View Controllers */,
+				FA4228EB2551CD53003CD327 /* Controllers */,
 				FA4228E02551C584003CD327 /* Models */,
+				FA4228EF2551CE95003CD327 /* Helpers */,
 				FA4228B12551A6DF003CD327 /* Know the Quote */,
 				FA4228B02551A6DF003CD327 /* Products */,
 			);
@@ -129,11 +143,55 @@
 		FA4228E02551C584003CD327 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FA4228E12551C59C003CD327 /* User.swift */,
-				FA4228E42551C63C003CD327 /* Quiz.swift */,
-				FA4228E72551C6C5003CD327 /* Quote.swift */,
+				FA4228F32551D036003CD327 /* KnowTheQuote.xcdatamodeld */,
+				FA4229072551E04A003CD327 /* Model+Convenience */,
+				FA4229062551E02B003CD327 /* Representations */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FA4228EA2551CD45003CD327 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228EC2551CD84003CD327 /* QuizController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		FA4228EB2551CD53003CD327 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228EA2551CD45003CD327 /* Model Controllers */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FA4228EF2551CE95003CD327 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228F02551CF09003CD327 /* CoreDataStack.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FA4229062551E02B003CD327 /* Representations */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228E12551C59C003CD327 /* UserRepresentation.swift */,
+				FA4228E42551C63C003CD327 /* QuizRepresentation.swift */,
+				FA4228E72551C6C5003CD327 /* QuoteRepresentation.swift */,
+			);
+			path = Representations;
+			sourceTree = "<group>";
+		};
+		FA4229072551E04A003CD327 /* Model+Convenience */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228FA2551D794003CD327 /* User+Convenience.swift */,
+				FA4229002551DB10003CD327 /* Quiz+Convenience.swift */,
+				FA4229032551DB23003CD327 /* Quote+Convenience.swift */,
+			);
+			path = "Model+Convenience";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,11 +268,17 @@
 			files = (
 				FA4228DB2551C31E003CD327 /* HomeViewController.swift in Sources */,
 				FA4228B32551A6DF003CD327 /* AppDelegate.swift in Sources */,
-				FA4228E52551C63C003CD327 /* Quiz.swift in Sources */,
-				FA4228E22551C59C003CD327 /* User.swift in Sources */,
-				FA4228E82551C6C5003CD327 /* Quote.swift in Sources */,
+				FA4228ED2551CD84003CD327 /* QuizController.swift in Sources */,
+				FA4228E52551C63C003CD327 /* QuizRepresentation.swift in Sources */,
+				FA4228E22551C59C003CD327 /* UserRepresentation.swift in Sources */,
+				FA4228F12551CF0A003CD327 /* CoreDataStack.swift in Sources */,
+				FA4228E82551C6C5003CD327 /* QuoteRepresentation.swift in Sources */,
+				FA4229012551DB10003CD327 /* Quiz+Convenience.swift in Sources */,
 				FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */,
+				FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */,
+				FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */,
 				FA4228D42551B450003CD327 /* StartNewQuizViewController.swift in Sources */,
+				FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */,
 				FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +481,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FA4228F32551D036003CD327 /* KnowTheQuote.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FA4228F42551D036003CD327 /* KnowTheQuote.xcdatamodel */,
+			);
+			currentVersion = FA4228F42551D036003CD327 /* KnowTheQuote.xcdatamodel */;
+			path = KnowTheQuote.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FA4228A72551A6DF003CD327 /* Project object */;
 }
