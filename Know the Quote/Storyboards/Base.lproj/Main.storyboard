@@ -16,18 +16,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETd-bP-gez">
-                                <rect key="frame" x="89" y="419" width="236" height="58"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="48"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="5aG-kh-sLL">
+                                <rect key="frame" x="89.5" y="305.5" width="235.5" height="177.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETd-bP-gez">
+                                        <rect key="frame" x="0.0" y="0.0" width="235.5" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmA-lU-ACI">
+                                        <rect key="frame" x="0.0" y="117.5" width="235.5" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="Login"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YWK-1y-KL9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ETd-bP-gez" firstAttribute="centerY" secondItem="cTP-ro-RC4" secondAttribute="centerY" id="Rym-V2-gWI"/>
-                            <constraint firstItem="ETd-bP-gez" firstAttribute="centerX" secondItem="cTP-ro-RC4" secondAttribute="centerX" id="Y8v-nL-AAA"/>
+                            <constraint firstItem="5aG-kh-sLL" firstAttribute="centerX" secondItem="cTP-ro-RC4" secondAttribute="centerX" id="Yj9-16-0HF"/>
+                            <constraint firstItem="tmA-lU-ACI" firstAttribute="centerY" secondItem="YWK-1y-KL9" secondAttribute="centerY" id="odG-p6-5bm"/>
                         </constraints>
                     </view>
                 </viewController>
