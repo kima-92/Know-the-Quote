@@ -15,6 +15,8 @@
 		FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228CB2551B0BE003CD327 /* LogInViewController.swift */; };
 		FA4228CF2551B3CA003CD327 /* CreateQuiz.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */; };
 		FA4228D42551B450003CD327 /* StartNewQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228D32551B450003CD327 /* StartNewQuizViewController.swift */; };
+		FA4228D72551C2F4003CD327 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228D62551C2F4003CD327 /* Home.storyboard */; };
+		FA4228DB2551C31E003CD327 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228DA2551C31E003CD327 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		FA4228CB2551B0BE003CD327 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateQuiz.storyboard; sourceTree = "<group>"; };
 		FA4228D32551B450003CD327 /* StartNewQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNewQuizViewController.swift; sourceTree = "<group>"; };
+		FA4228D62551C2F4003CD327 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		FA4228DA2551C31E003CD327 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 				FA4228B82551A6DF003CD327 /* Main.storyboard */,
 				FA4228BD2551A6E2003CD327 /* LaunchScreen.storyboard */,
 				FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */,
+				FA4228D62551C2F4003CD327 /* Home.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -83,6 +88,7 @@
 		FA4228C82551A6F3003CD327 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FA4228D92551C304003CD327 /* Home SB */,
 				FA4228D12551B3E1003CD327 /* CreateQuiz SB */,
 				FA4228CB2551B0BE003CD327 /* LogInViewController.swift */,
 			);
@@ -95,6 +101,14 @@
 				FA4228D32551B450003CD327 /* StartNewQuizViewController.swift */,
 			);
 			path = "CreateQuiz SB";
+			sourceTree = "<group>";
+		};
+		FA4228D92551C304003CD327 /* Home SB */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228DA2551C31E003CD327 /* HomeViewController.swift */,
+			);
+			path = "Home SB";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4228BF2551A6E2003CD327 /* LaunchScreen.storyboard in Resources */,
+				FA4228D72551C2F4003CD327 /* Home.storyboard in Resources */,
 				FA4228CF2551B3CA003CD327 /* CreateQuiz.storyboard in Resources */,
 				FA4228BC2551A6E2003CD327 /* Assets.xcassets in Resources */,
 				FA4228BA2551A6DF003CD327 /* Main.storyboard in Resources */,
@@ -168,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4228DB2551C31E003CD327 /* HomeViewController.swift in Sources */,
 				FA4228B32551A6DF003CD327 /* AppDelegate.swift in Sources */,
 				FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */,
 				FA4228D42551B450003CD327 /* StartNewQuizViewController.swift in Sources */,

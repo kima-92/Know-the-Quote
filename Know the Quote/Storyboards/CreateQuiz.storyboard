@@ -15,8 +15,20 @@
                     <view key="view" contentMode="scaleToFill" id="Sba-Sj-Vm3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create new Quiz here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9c-wo-9wR">
+                                <rect key="frame" x="69" y="430" width="276" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="LQ8-xN-dg3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="S9c-wo-9wR" firstAttribute="centerX" secondItem="Sba-Sj-Vm3" secondAttribute="centerX" id="H5z-Ms-mAC"/>
+                            <constraint firstItem="S9c-wo-9wR" firstAttribute="centerY" secondItem="Sba-Sj-Vm3" secondAttribute="centerY" id="HEV-LA-wJv"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGx-4J-sHC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
