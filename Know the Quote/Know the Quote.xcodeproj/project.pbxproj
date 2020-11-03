@@ -88,9 +88,9 @@
 		FA4228C82551A6F3003CD327 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FA4228DE2551C53E003CD327 /* Main SB */,
 				FA4228D92551C304003CD327 /* Home SB */,
 				FA4228D12551B3E1003CD327 /* CreateQuiz SB */,
-				FA4228CB2551B0BE003CD327 /* LogInViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -109,6 +109,14 @@
 				FA4228DA2551C31E003CD327 /* HomeViewController.swift */,
 			);
 			path = "Home SB";
+			sourceTree = "<group>";
+		};
+		FA4228DE2551C53E003CD327 /* Main SB */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228CB2551B0BE003CD327 /* LogInViewController.swift */,
+			);
+			path = "Main SB";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
