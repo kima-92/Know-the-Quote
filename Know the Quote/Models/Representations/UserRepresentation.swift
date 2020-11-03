@@ -14,5 +14,5 @@ struct UserRepresentation {
     var password: String
     
     var coins: Int16
-    var quizesCreated: [Quiz]?
+    var quizesCreated: [QuizRepresentation]?
 }

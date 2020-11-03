@@ -12,8 +12,8 @@ struct QuizRepresentation {
     var id: UUID
     var title: String
     var dateCreated: Date
-    var creator: User
+    var creator: UserRepresentation
     
-    var quotes: [Quote]
+    var quotes: [QuoteRepresentation]
     var hasBeenReported: Bool
 }

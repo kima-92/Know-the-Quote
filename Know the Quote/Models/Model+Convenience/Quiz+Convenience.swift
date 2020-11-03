@@ -10,20 +10,23 @@ import Foundation
 extension Quiz {
     
     var quizRepresentation: QuizRepresentation? {
-        var theQuotes: [Quote] = []
+        var quotesReps: [QuoteRepresentation] = []
         
         guard let id = id,
               let title = title,
               let date = dateCreated,
-              let creator = creator else { return nil }
+              let creator = creator,
+              let creatorRep = creator.userRepresentation,
+              let quotes = quotes else { return nil }
         
-        if let storedQuotes = quotes {
-            
-            for quote in storedQuotes {
-                theQuotes.append(quote as! Quote)
+        // Getting the representation of each quote
+        for quote in quotes {
+            let q = quote as? Quote
+            if let quoteRep = q?.quoteRepresentation {
+                quotesReps.append(quoteRep)
             }
         }
         
-        return QuizRepresentation(id: id, title: title, dateCreated: date, creator: creator, quotes: theQuotes, hasBeenReported: hasBeenReported)
+        return QuizRepresentation(id: id, title: title, dateCreated: date, creator: creatorRep, quotes: quotesReps, hasBeenReported: hasBeenReported)
     }
 }

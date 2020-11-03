@@ -10,18 +10,20 @@ import Foundation
 extension User {
     
     var userRepresentation: UserRepresentation? {
-        var quizes: [Quiz] = []
+        var quizes: [QuizRepresentation] = []
         
         guard let id = id,
               let username = username,
-              let password = password else { return nil }
+              let password = password,
+              let quizesCreated = quizesCreated else { return nil }
         
-        if let quizesCreated = quizesCreated {
-            
+            // Creating a Representation for each Quiz
             for quiz in quizesCreated {
-                quizes.append(quiz as! Quiz)
+                let q = quiz as? Quiz
+                if let quizRep = q?.quizRepresentation {
+                    quizes.append(quizRep)
+                }
             }
-        }
         
         return UserRepresentation(id: id, username: username, password: password, coins: coins, quizesCreated: quizes)
     }

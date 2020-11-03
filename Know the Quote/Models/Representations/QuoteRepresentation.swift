@@ -13,5 +13,5 @@ struct QuoteRepresentation {
     var secondPart: String = ""
     var answerOptions: [String]
     var answer: String
-    var quiz: Quiz
+    var quiz: QuizRepresentation
 }
