@@ -10,6 +10,7 @@ import Foundation
 struct UserRepresentation {
     
     var id: UUID
+    var signupDate: Date
     var username: String
     var password: String
     

@@ -5,7 +5,8 @@
 //  Created by macbook on 11/3/20.
 //
 
-import Foundation
+//import Foundation
+import CoreData
 
 extension User {
     
@@ -15,7 +16,8 @@ extension User {
         guard let id = id,
               let username = username,
               let password = password,
-              let quizesCreated = quizesCreated else { return nil }
+              let quizesCreated = quizesCreated,
+              let signupDate = signupDate else { return nil }
         
             // Creating a Representation for each Quiz
             for quiz in quizesCreated {
@@ -25,6 +27,19 @@ extension User {
                 }
             }
         
-        return UserRepresentation(id: id, username: username, password: password, coins: coins, quizesCreated: quizes)
+        return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizesCreated: quizes)
+    }
+    
+    // Init
+    @discardableResult convenience init(username: String, password: String, context: NSManagedObjectContext) {
+        self.init(context: context)
+        
+        id = UUID()
+        signupDate = Date()
+        coins = 250
+        quizesCreated = []
+        
+        self.username = username
+        self.password = password
     }
 }

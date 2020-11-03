@@ -19,12 +19,13 @@
         <attribute name="coins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="signupDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="username" optional="YES" attributeType="String"/>
         <relationship name="quizesCreated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quiz" inverseName="creator" inverseEntity="Quiz"/>
     </entity>
     <elements>
         <element name="Quiz" positionX="-63" positionY="-18" width="128" height="28"/>
-        <element name="User" positionX="-54" positionY="-9" width="128" height="28"/>
         <element name="Quote" positionX="-45" positionY="54" width="128" height="118"/>
+        <element name="User" positionX="-54" positionY="-9" width="128" height="133"/>
     </elements>
 </model>

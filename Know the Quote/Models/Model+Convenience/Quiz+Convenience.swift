@@ -5,10 +5,12 @@
 //  Created by macbook on 11/3/20.
 //
 
-import Foundation
+//import Foundation
+import CoreData
 
 extension Quiz {
     
+    // Representation
     var quizRepresentation: QuizRepresentation? {
         var quotesReps: [QuoteRepresentation] = []
         
@@ -28,5 +30,18 @@ extension Quiz {
         }
         
         return QuizRepresentation(id: id, title: title, dateCreated: date, creator: creatorRep, quotes: quotesReps, hasBeenReported: hasBeenReported)
+    }
+    
+    // Init
+    @discardableResult convenience init(title: String, creator: User, context: NSManagedObjectContext) {
+        self.init(context: context)
+        
+        id = UUID()
+        dateCreated = Date()
+        
+        self.title = title
+        self.creator = creator
+        
+        // * NOTE * : Quotes are NOT being added here
     }
 }
