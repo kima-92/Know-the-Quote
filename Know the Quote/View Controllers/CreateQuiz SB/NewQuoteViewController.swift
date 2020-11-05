@@ -8,6 +8,11 @@
 import UIKit
 
 class NewQuoteViewController: UIViewController {
+    
+    // MARK: - Poperties
+    
+    var quizController: QuizController?
+    var user: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()

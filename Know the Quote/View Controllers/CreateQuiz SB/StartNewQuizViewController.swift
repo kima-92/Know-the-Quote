@@ -38,4 +38,17 @@ class StartNewQuizViewController: UIViewController {
             // TODO: - Alert the user the title can't be empty
         }
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // NewQuoteVC
+        if segue.identifier == "newQuoteDetailsSegue" {
+            if let newQuoteVC = segue.destination as? NewQuoteViewController {
+                newQuoteVC.user = user
+                newQuoteVC.quizController = quizController
+            }
+        }
+    }
 }
