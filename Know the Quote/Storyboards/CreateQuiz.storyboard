@@ -160,12 +160,15 @@
                     <navigationItem key="navigationItem" id="KCB-uJ-L6t"/>
                     <connections>
                         <outlet property="correctAnswTextField" destination="dB5-qp-m54" id="4hI-qf-EAd"/>
+                        <outlet property="doneButton" destination="EBe-NX-r69" id="TNI-4O-JQ3"/>
                         <outlet property="incorrectOpt1TextField" destination="Qi3-j8-ZbP" id="csO-aK-bXj"/>
                         <outlet property="incorrectOpt2TextField" destination="48O-Ml-m7e" id="dd1-pO-Khq"/>
                         <outlet property="incorrectOpt3TextField" destination="4J2-rl-iiH" id="X0d-DO-Meb"/>
                         <outlet property="incorrectOpt4TextField" destination="cmR-po-4zt" id="YXx-D2-j0n"/>
+                        <outlet property="nextButton" destination="cLi-Sb-Bv2" id="QEf-HF-WB5"/>
                         <outlet property="part1TextField" destination="9M8-Ma-zB4" id="XYX-6p-FNA"/>
                         <outlet property="part2TextField" destination="D6k-bu-pbV" id="24b-N7-p7B"/>
+                        <outlet property="prevButton" destination="K2E-p5-ijN" id="jUq-gJ-Yr5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qag-HK-vUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

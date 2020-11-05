@@ -18,7 +18,8 @@ class NewQuoteViewController: UIViewController {
     var textFields: [QuotePart: UITextField]?
     
     // MARK: - Outlets
-
+    
+    // TextFields
     @IBOutlet weak var part1TextField: UITextField!
     @IBOutlet weak var part2TextField: UITextField!
     @IBOutlet weak var correctAnswTextField: UITextField!
@@ -28,21 +29,30 @@ class NewQuoteViewController: UIViewController {
     @IBOutlet weak var incorrectOpt3TextField: UITextField!
     @IBOutlet weak var incorrectOpt4TextField: UITextField!
     
+    // Buttons
+    @IBOutlet weak var prevButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+    
     // MARK: - DidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         gatherTextFields()
+        updateButtonsViews()
     }
     
     // MARK: - Actions
     
     @IBAction func prevButtonTapped(_ sender: UIButton) {
+        updateButtonsViews()
     }
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         saveQuote()
+        updateButtonsViews()
     }
     @IBAction func doneButtonTapped(_ sender: UIButton) {
+        updateButtonsViews()
     }
     
     // MARK: - Methods
@@ -90,5 +100,44 @@ class NewQuoteViewController: UIViewController {
         textFields?[.incorrectOpt2] = incorrectOpt2TextField
         textFields?[.incorrectOpt3] = incorrectOpt3TextField
         textFields?[.incorrectOpt4] = incorrectOpt4TextField
+    }
+    
+    private func updateButtonsViews() {
+        guard let quizController = quizController,
+              let textFields = textFields else { return }
+        
+        // Clear the textFields
+        for textField in textFields.values {
+            textField.text = ""
+        }
+        
+        let count = quizController.quotes.count
+        
+        // Prev Button
+        if count == 0 {
+            prevButton.isEnabled = false
+            prevButton.alpha = 0.5
+        } else {
+            prevButton.isEnabled = true
+            prevButton.alpha = 1
+        }
+        
+        // Done Button
+        if count >= 3 && count < 16 {
+            doneButton.isEnabled = true
+            doneButton.alpha = 1
+        } else {
+            doneButton.isEnabled = false
+            doneButton.alpha = 0.5
+        }
+        
+        // Next Button
+        if count < 15 {
+            nextButton.isEnabled = true
+            nextButton.alpha = 1
+        } else {
+            nextButton.isEnabled = false
+            nextButton.alpha = 0.5
+        }
     }
 }
