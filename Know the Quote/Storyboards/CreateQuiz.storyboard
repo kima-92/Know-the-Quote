@@ -17,25 +17,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="151" translatesAutoresizingMaskIntoConstraints="NO" id="yHp-vP-Xhz">
-                                <rect key="frame" x="20" y="294.5" width="374" height="307"/>
+                                <rect key="frame" x="20" y="331.5" width="374" height="233"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="ko4-wY-tt7">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="19G-hw-suD">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How many quotes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dat-Ke-o9j">
-                                                <rect key="frame" x="0.0" y="74" width="374" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="19G-hw-suD">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJq-EK-Pua">
-                                        <rect key="frame" x="0.0" y="259" width="374" height="48"/>
+                                        <rect key="frame" x="0.0" y="185" width="374" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Start"/>
                                         <connections>
@@ -55,13 +45,29 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="numOfQuotesTextField" destination="dat-Ke-o9j" id="Ak2-Sp-unS"/>
                         <outlet property="titleTextField" destination="19G-hw-suD" id="Uzo-jS-q8U"/>
+                        <segue destination="tmp-dp-uPM" kind="show" identifier="newQuoteDetailsSegue" id="F9b-F1-OrT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGx-4J-sHC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="296" y="-56"/>
+        </scene>
+        <!--New Quote-->
+        <scene sceneID="x5l-87-rvO">
+            <objects>
+                <viewController title="New Quote" id="tmp-dp-uPM" customClass="NewQuoteViewController" customModule="Know_the_Quote" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dAM-Zm-Inl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="SbX-HD-WNR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KCB-uJ-L6t"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qag-HK-vUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1355" y="-56"/>
         </scene>
     </scenes>
     <resources>

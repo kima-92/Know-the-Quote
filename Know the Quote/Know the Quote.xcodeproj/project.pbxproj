@@ -26,6 +26,7 @@
 		FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228FA2551D794003CD327 /* User+Convenience.swift */; };
 		FA4229012551DB10003CD327 /* Quiz+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4229002551DB10003CD327 /* Quiz+Convenience.swift */; };
 		FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4229032551DB23003CD327 /* Quote+Convenience.swift */; };
+		FA7550C42553BA1D0034F9C8 /* NewQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		FA4228FA2551D794003CD327 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
 		FA4229002551DB10003CD327 /* Quiz+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quiz+Convenience.swift"; sourceTree = "<group>"; };
 		FA4229032551DB23003CD327 /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
+		FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				FA4228D32551B450003CD327 /* StartNewQuizViewController.swift */,
+				FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */,
 			);
 			path = "CreateQuiz SB";
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */,
 				FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */,
 				FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */,
+				FA7550C42553BA1D0034F9C8 /* NewQuoteViewController.swift in Sources */,
 				FA4228D42551B450003CD327 /* StartNewQuizViewController.swift in Sources */,
 				FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */,
 				FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */,

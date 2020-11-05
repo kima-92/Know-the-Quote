@@ -9,10 +9,14 @@ import UIKit
 
 class StartNewQuizViewController: UIViewController {
     
+    // MARK: - Poperties
+    
+    var quizController = QuizController()
+    let user = User(username: "user", password: "pass", context: CoreDataStack.shared.mainContext)
+    
     // MARK: - Outlets
     
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var numOfQuotesTextField: UITextField!
     
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -22,5 +26,16 @@ class StartNewQuizViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
+        
+        // Try to save title and creator then segue to next VC
+        if let title = titleTextField.text,
+           !title.isEmpty {
+            quizController.creator = user
+            quizController.title = titleTextField.text
+            
+            performSegue(withIdentifier: "newQuoteDetailsSegue", sender: self)
+        } else {
+            // TODO: - Alert the user the title can't be empty
+        }
     }
 }

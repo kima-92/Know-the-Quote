@@ -12,11 +12,16 @@ class QuizController {
     
     // MARK: - Properties
     var quotes: [Quote] = []
+    var title: String?
+    var creator: User?
     
     // MARK: - Methods
     
     // Create new Quiz and save in CD
-    func createQuiz(title: String, creator: User, context: NSManagedObjectContext) {
+    func createQuiz(context: NSManagedObjectContext) {
+        
+        guard let title = title,
+              let creator = creator else { return }
         
         // If there's more than 3 quotes, create the quiz and add it to it's creator's quizzesCreated.
         if quotes.count > 3 {
