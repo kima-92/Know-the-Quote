@@ -53,9 +53,18 @@ class NewQuoteViewController: UIViewController {
     }
     @IBAction func doneButtonTapped(_ sender: UIButton) {
         updateButtonsViews()
+        saveQuiz()
     }
     
     // MARK: - Methods
+    
+    private func saveQuiz() {
+        guard let quizController = quizController else { return }
+        quizController.createQuiz(context: CoreDataStack.shared.mainContext)
+        
+        // TODO: - Alert the user if the quiz was not created successfully
+        navigationController?.popToRootViewController(animated: true)
+    }
     
     // Save this Quote if the Data is complete
     private func saveQuote() {

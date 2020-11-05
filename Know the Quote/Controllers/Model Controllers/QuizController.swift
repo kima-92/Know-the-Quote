@@ -24,7 +24,7 @@ class QuizController {
               let creator = creator else { return }
         
         // If there's more than 3 quotes, create the quiz and add it to it's creator's quizzesCreated.
-        if quotes.count > 3 {
+        if quotes.count >= 3 {
             
             let quiz = Quiz(title: title, creator: creator, context: context)
             
