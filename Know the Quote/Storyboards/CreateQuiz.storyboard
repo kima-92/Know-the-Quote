@@ -8,28 +8,56 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Start New Quiz View Controller-->
+        <!--New Quiz-->
         <scene sceneID="ing-r2-jK5">
             <objects>
-                <viewController id="ZqO-Pv-OOc" customClass="StartNewQuizViewController" customModule="Know_the_Quote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New Quiz" id="ZqO-Pv-OOc" customClass="StartNewQuizViewController" customModule="Know_the_Quote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sba-Sj-Vm3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create new Quiz here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9c-wo-9wR">
-                                <rect key="frame" x="69" y="430" width="276" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="151" translatesAutoresizingMaskIntoConstraints="NO" id="yHp-vP-Xhz">
+                                <rect key="frame" x="20" y="294.5" width="374" height="307"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="ko4-wY-tt7">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="19G-hw-suD">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How many quotes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dat-Ke-o9j">
+                                                <rect key="frame" x="0.0" y="74" width="374" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJq-EK-Pua">
+                                        <rect key="frame" x="0.0" y="259" width="374" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startButtonTapped:" destination="ZqO-Pv-OOc" eventType="touchUpInside" id="H7X-X2-ihR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LQ8-xN-dg3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="S9c-wo-9wR" firstAttribute="centerX" secondItem="Sba-Sj-Vm3" secondAttribute="centerX" id="H5z-Ms-mAC"/>
-                            <constraint firstItem="S9c-wo-9wR" firstAttribute="centerY" secondItem="Sba-Sj-Vm3" secondAttribute="centerY" id="HEV-LA-wJv"/>
+                            <constraint firstItem="yHp-vP-Xhz" firstAttribute="centerY" secondItem="Sba-Sj-Vm3" secondAttribute="centerY" id="44b-I6-Yuu"/>
+                            <constraint firstItem="yHp-vP-Xhz" firstAttribute="leading" secondItem="LQ8-xN-dg3" secondAttribute="leading" constant="20" id="P11-Vc-ABe"/>
+                            <constraint firstItem="LQ8-xN-dg3" firstAttribute="trailing" secondItem="yHp-vP-Xhz" secondAttribute="trailing" constant="20" id="Pu8-J4-BjZ"/>
+                            <constraint firstItem="yHp-vP-Xhz" firstAttribute="centerX" secondItem="Sba-Sj-Vm3" secondAttribute="centerX" id="ZcD-iV-Uxm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="numOfQuotesTextField" destination="dat-Ke-o9j" id="Ak2-Sp-unS"/>
+                        <outlet property="titleTextField" destination="19G-hw-suD" id="Uzo-jS-q8U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGx-4J-sHC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
