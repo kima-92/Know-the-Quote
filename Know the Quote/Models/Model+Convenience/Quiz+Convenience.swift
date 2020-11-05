@@ -38,6 +38,7 @@ extension Quiz {
         
         id = UUID()
         dateCreated = Date()
+        hasBeenReported = false
         
         self.title = title
         self.creator = creator
