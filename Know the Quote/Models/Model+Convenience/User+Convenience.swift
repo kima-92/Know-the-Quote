@@ -5,7 +5,6 @@
 //  Created by macbook on 11/3/20.
 //
 
-//import Foundation
 import CoreData
 
 extension User {
