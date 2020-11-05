@@ -1,5 +1,5 @@
 //
-//  StartNewQuizViewController.swift
+//  NewQuizViewController.swift
 //  Know the Quote
 //
 //  Created by macbook on 11/3/20.
