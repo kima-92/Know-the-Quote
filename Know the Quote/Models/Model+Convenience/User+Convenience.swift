@@ -16,7 +16,7 @@ extension User {
         guard let id = id,
               let username = username,
               let password = password,
-              let quizesCreated = quizesCreated,
+              let quizesCreated = quizzesCreated,
               let signupDate = signupDate else { return nil }
         
             // Creating a Representation for each Quiz
@@ -37,7 +37,7 @@ extension User {
         id = UUID()
         signupDate = Date()
         coins = 250
-        quizesCreated = []
+        quizzesCreated = []
         
         self.username = username
         self.password = password

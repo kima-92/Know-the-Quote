@@ -5,7 +5,7 @@
         <attribute name="hasBeenReported" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="quizesCreated" inverseEntity="User"/>
+        <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="quizzesCreated" inverseEntity="User"/>
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="quiz" inverseEntity="Quote"/>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES" codeGenerationType="class">
@@ -21,7 +21,7 @@
         <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="signupDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="username" optional="YES" attributeType="String"/>
-        <relationship name="quizesCreated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quiz" inverseName="creator" inverseEntity="Quiz"/>
+        <relationship name="quizzesCreated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quiz" inverseName="creator" inverseEntity="Quiz"/>
     </entity>
     <elements>
         <element name="Quiz" positionX="-63" positionY="-18" width="128" height="28"/>

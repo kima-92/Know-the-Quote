@@ -18,7 +18,7 @@ class QuizController {
     // Create new Quiz and save in CD
     func createQuiz(title: String, creator: User, context: NSManagedObjectContext) {
         
-        // If there's more than 3 quotes, create the quiz and add it to it's creator's quizesCreated.
+        // If there's more than 3 quotes, create the quiz and add it to it's creator's quizzesCreated.
         if quotes.count > 3 {
             
             let quiz = Quiz(title: title, creator: creator, context: context)
@@ -26,7 +26,7 @@ class QuizController {
             for quote in quotes {
                 quiz.addToQuotes(quote)
             }
-            creator.addToQuizesCreated(quiz)
+            creator.addToQuizzesCreated(quiz)
             CoreDataStack.shared.save(context: context)
             
         } else {
