@@ -40,11 +40,11 @@ class QuizController {
     }
     
     // Add a new quote to the array
-    func createQuote(firstPart: String = "", secondPart: String = "", incorrectAnswers: [String], correctAnswer: String, context: NSManagedObjectContext) {
+    func createQuote(firstPart: String?, secondPart: String?, incorrectAnswers: [String], correctAnswer: String, context: NSManagedObjectContext) {
         
         // If there's less than 16 quotes in the array, create this new quote and add it to the array (NOT saved in CD yet)
         if quotes.count < 16 {
-            let quote = Quote(firstPart: firstPart, secondPart: secondPart, incorrectAnswers: incorrectAnswers, correctAnswer: correctAnswer, context: context)
+            let quote = Quote(firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectAnswers: incorrectAnswers, correctAnswer: correctAnswer, context: context)
             
             self.quotes.append(quote)
         } else {
