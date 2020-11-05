@@ -13,22 +13,30 @@ class NewQuoteViewController: UIViewController {
     
     var quizController: QuizController?
     var user: User?
+    
+    // MARK: - Outlets
 
+    @IBOutlet weak var part1TextField: UITextField!
+    @IBOutlet weak var part2TextField: UITextField!
+    @IBOutlet weak var correctAnswTextField: UITextField!
+    
+    @IBOutlet weak var incorrectOpt1TextField: UITextField!
+    @IBOutlet weak var incorrectOpt2TextField: UITextField!
+    @IBOutlet weak var incorrectOpt3TextField: UITextField!
+    @IBOutlet weak var incorrectOpt4TextField: UITextField!
+    
+    // MARK: - DidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Actions
+    
+    @IBAction func prevButtonTapped(_ sender: UIButton) {
     }
-    */
-
+    @IBAction func nextButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func doneButtonTapped(_ sender: UIButton) {
+    }
 }
