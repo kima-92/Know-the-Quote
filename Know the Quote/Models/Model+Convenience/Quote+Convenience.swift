@@ -16,30 +16,25 @@ extension Quote {
               let answer = answer,
               let quiz = quiz,
               let quizRep = quiz.quizRepresentation,
-              let answerOptions = answerOptions as? [String] else { return nil }
+              let allOptions = allOptions as? [String],
+              let incorrectOptions = incorrectOptions as? [QuotePart : String] else { return nil }
         
-        // Get the possible answers
-        var options: [String] = []
-        
-        for option in answerOptions {
-            options.append(option)
-        }
-        
-        return QuoteRepresentation(firstPart: first, secondPart: second, answerOptions: options, answer: answer, quiz: quizRep)
+        return QuoteRepresentation(firstPart: first, secondPart: second, answer: answer, quiz: quizRep, incorrectOptions: incorrectOptions, allOptions: allOptions)
     }
     
     // Init
-    @discardableResult convenience init(firstPart: String = "", secondPart: String = "", incorrectAnswers: [String], correctAnswer: String, context: NSManagedObjectContext) {
+    @discardableResult convenience init(firstPart: String = "", secondPart: String = "", incorrectOptions: [QuotePart : String], answer: String, context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.firstPart = firstPart
         self.secondPart = secondPart
-        self.answer = correctAnswer
+        self.answer = answer
+        self.incorrectOptions = incorrectOptions as NSObject
         
         // Adding the correct answer among the options
-        answerOptions = {
-            var arr = incorrectAnswers
-            arr.append(correctAnswer)
+        allOptions = {
+            var arr = incorrectOptions
+            arr[.answer] = answer
             
             return arr as NSObject
         }()

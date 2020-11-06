@@ -9,9 +9,10 @@
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="quiz" inverseEntity="Quote"/>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES" codeGenerationType="class">
+        <attribute name="allOptions" optional="YES" attributeType="Transformable"/>
         <attribute name="answer" optional="YES" attributeType="String"/>
-        <attribute name="answerOptions" optional="YES" attributeType="Transformable"/>
         <attribute name="firstPart" optional="YES" attributeType="String"/>
+        <attribute name="incorrectOptions" optional="YES" attributeType="Transformable"/>
         <attribute name="secondPart" optional="YES" attributeType="String"/>
         <relationship name="quiz" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quiz" inverseName="quotes" inverseEntity="Quiz"/>
     </entity>
@@ -25,7 +26,7 @@
     </entity>
     <elements>
         <element name="Quiz" positionX="-63" positionY="-18" width="128" height="28"/>
-        <element name="Quote" positionX="-45" positionY="54" width="128" height="118"/>
+        <element name="Quote" positionX="-45" positionY="54" width="128" height="133"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="133"/>
     </elements>
 </model>

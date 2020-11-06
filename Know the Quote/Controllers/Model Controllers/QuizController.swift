@@ -11,9 +11,17 @@ import CoreData
 class QuizController {
     
     // MARK: - Properties
-    var quotes: [Quote] = []
+    
+    var quotes: [Int : Quote] = [:]
     var title: String?
     var creator: User?
+    
+    var currentQuote = 1
+    
+    let quoteCountMin = 0
+    let quoteCountMax = 15
+    let currentQuoteMinIndex = 1
+    let currentQuoteMaxIndex = 14
     
     // MARK: - Methods
     
@@ -28,7 +36,7 @@ class QuizController {
             
             let quiz = Quiz(title: title, creator: creator, context: context)
             
-            for quote in quotes {
+            for quote in quotes.values {
                 quiz.addToQuotes(quote)
             }
             creator.addToQuizzesCreated(quiz)
@@ -40,15 +48,33 @@ class QuizController {
     }
     
     // Add a new quote to the array
-    func createQuote(firstPart: String?, secondPart: String?, incorrectAnswers: [String], correctAnswer: String, context: NSManagedObjectContext) {
+    func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [QuotePart : String], context: NSManagedObjectContext) {
         
         // If there's less than 16 quotes in the array, create this new quote and add it to the array (NOT saved in CD yet)
         if quotes.count < 16 {
-            let quote = Quote(firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectAnswers: incorrectAnswers, correctAnswer: correctAnswer, context: context)
+            let quote = Quote(firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
-            self.quotes.append(quote)
+            self.quotes[quotes.count + 1] = quote
         } else {
             // TODO: - Alert the user they can't create a Quiz with more than 15 Quotes
         }
+    }
+    
+    // Check if currentQuote can move Prev/Next
+    func canMoveToNext() -> Bool {
+        if quotes.count <= quoteCountMax && currentQuote <= currentQuoteMaxIndex { return true }
+        return false
+    }
+    func canMoveToPrev() -> Bool {
+        if quotes.count != quoteCountMin && currentQuote >= currentQuoteMinIndex { return true }
+        return false
+    }
+    
+    // Move currentQuote Prev/Next
+    func moveToNextQuote() {
+        if quotes.count <= quoteCountMax && currentQuote <= currentQuoteMaxIndex { currentQuote += 1 }
+    }
+    func moveToPrevQuote() {
+        if quotes.count != quoteCountMin && currentQuote >= currentQuoteMinIndex { currentQuote -= 1 }
     }
 }
