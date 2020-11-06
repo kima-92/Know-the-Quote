@@ -76,9 +76,10 @@ class NewQuoteViewController: UIViewController {
         if quizController.currentQuote == quizController.quotes.count + 1 {
             // New quote
             
-            saveQuote()
-            quizController.moveToNextQuote()
-            updateButtonsViews(clearTextFields: true)
+            if saveQuote() { // if it's successfull
+                quizController.moveToNextQuote()
+                updateButtonsViews(clearTextFields: true)
+            }
         
         } else if quizController.currentQuote == quizController.quotes.count {
             // Clear the screen for the next new Quote
@@ -124,11 +125,12 @@ class NewQuoteViewController: UIViewController {
     }
     
     // Save this Quote if the Data is complete
-    private func saveQuote() {
+    private func saveQuote() -> Bool {
         guard collectCompleteData(),
-              let quizController = quizController else { return }
+              let quizController = quizController else { return false }
         
         quizController.createQuote(firstPart: dataDictionary[.part1], secondPart: dataDictionary[.part2], answer: dataDictionary[.answer]!, incorrectAnswers: incorrectOptsDictionary, context: CoreDataStack.shared.mainContext)
+        return true
     }
     
     // Store data from all textFields or alert user the data is not complete
