@@ -22,6 +22,8 @@ class QuizController {
     let quoteCountMax = 15
     let currentQuoteMinIndex = 1
     let currentQuoteMaxIndex = 14
+    let quizMinQuotes = 3
+    let quizMaxQuotes = 15
     
     // MARK: - Methods
     
@@ -60,13 +62,19 @@ class QuizController {
         }
     }
     
+    // Check if there's enough quotes to create a quiz
+    func quizCanBeSaved() -> Bool {
+        if quotes.count <= quizMaxQuotes && quotes.count >= quizMinQuotes { return true }
+        return false
+    }
+    
     // Check if currentQuote can move Prev/Next
     func canMoveToNext() -> Bool {
         if quotes.count <= quoteCountMax && currentQuote <= currentQuoteMaxIndex { return true }
         return false
     }
     func canMoveToPrev() -> Bool {
-        if quotes.count != quoteCountMin && currentQuote >= currentQuoteMinIndex { return true }
+        if quotes.count != quoteCountMin && currentQuote > currentQuoteMinIndex { return true }
         return false
     }
     

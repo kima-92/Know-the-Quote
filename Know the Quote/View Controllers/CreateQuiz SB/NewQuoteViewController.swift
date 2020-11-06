@@ -79,14 +79,14 @@ class NewQuoteViewController: UIViewController {
             saveQuote()
             quizController.moveToNextQuote()
             updateButtonsViews(clearTextFields: true)
-            
+        
         } else if quizController.currentQuote == quizController.quotes.count {
             // Clear the screen for the next new Quote
             
             // TODO: - Save changes made to this quote
             quizController.moveToNextQuote()
             updateButtonsViews(clearTextFields: true)
-            
+        
         } else {
             // Display next quote
             
@@ -149,7 +149,6 @@ class NewQuoteViewController: UIViewController {
                     self.dataDictionary[key] = text
                 case .answer:
                     self.dataDictionary[key] = text
-                    
                 case .incorrectOpt1:
                     self.incorrectOptsDictionary[key] = text
                 case .incorrectOpt2:
@@ -192,39 +191,35 @@ class NewQuoteViewController: UIViewController {
             }
         }
         
-        let current = quizController.currentQuote
-        let count = quizController.quotes.count
-        
-        let quoteCountMin = quizController.quoteCountMin
-        let quoteCountMax = quizController.quoteCountMax
-        let currentQuoteMinIndex = quizController.currentQuoteMinIndex
-        let currentQuoteMaxIndex = quizController.currentQuoteMaxIndex
-        
         // Prev Button
-        if current <= currentQuoteMinIndex {
-            prevButton.isEnabled = false
-            prevButton.alpha = 0.5
+        if quizController.canMoveToPrev() {
+            enable(button: prevButton)
         } else {
-            prevButton.isEnabled = true
-            prevButton.alpha = 1
+            disable(button: prevButton)
         }
-        
-        // Done Button
-        if count >= 3 && count <= quoteCountMax {
-            doneButton.isEnabled = true
-            doneButton.alpha = 1
-        } else {
-            doneButton.isEnabled = false
-            doneButton.alpha = 0.5
-        }
-        
+    
         // Next Button
-        if current <= currentQuoteMaxIndex {
-            nextButton.isEnabled = true
-            nextButton.alpha = 1
+        if quizController.canMoveToNext() {
+            enable(button: nextButton)
         } else {
-            nextButton.isEnabled = false
-            nextButton.alpha = 0.5
+            disable(button: nextButton)
         }
+    
+        // Done Button
+        if quizController.quizCanBeSaved() {
+            enable(button: doneButton)
+        } else {
+            disable(button: doneButton)
+        }
+    }
+
+    // Enable/Disable a button
+    private func enable(button: UIButton) {
+        button.isEnabled = true
+        button.alpha = 1
+    }
+    private func disable(button: UIButton) {
+            button.isEnabled = false
+            button.alpha = 0.5
     }
 }
