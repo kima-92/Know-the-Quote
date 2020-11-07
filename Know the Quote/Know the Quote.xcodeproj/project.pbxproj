@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FA14276E255650AB00E7478E /* QuotePartModel+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14276D255650AB00E7478E /* QuotePartModel+Convenience.swift */; };
+		FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244C982557508300658CD5 /* QuizzesTableViewController.swift */; };
+		FA244C9E2557509E00658CD5 /* Quizzes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA244C9D2557509E00658CD5 /* Quizzes.storyboard */; };
 		FA4228B32551A6DF003CD327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228B22551A6DF003CD327 /* AppDelegate.swift */; };
 		FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228B42551A6DF003CD327 /* SceneDelegate.swift */; };
 		FA4228BA2551A6DF003CD327 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228B82551A6DF003CD327 /* Main.storyboard */; };
@@ -33,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		FA14276D255650AB00E7478E /* QuotePartModel+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuotePartModel+Convenience.swift"; sourceTree = "<group>"; };
+		FA244C982557508300658CD5 /* QuizzesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesTableViewController.swift; sourceTree = "<group>"; };
+		FA244C9D2557509E00658CD5 /* Quizzes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Quizzes.storyboard; sourceTree = "<group>"; };
 		FA4228AF2551A6DF003CD327 /* Know the Quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Know the Quote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4228B22551A6DF003CD327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA4228B42551A6DF003CD327 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA244C972557505500658CD5 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				FA244C982557508300658CD5 /* QuizzesTableViewController.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
 		FA4228A62551A6DF003CD327 = {
 			isa = PBXGroup;
 			children = (
@@ -104,10 +116,11 @@
 		FA4228C72551A6ED003CD327 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				FA4228B82551A6DF003CD327 /* Main.storyboard */,
 				FA4228BD2551A6E2003CD327 /* LaunchScreen.storyboard */,
-				FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */,
+				FA4228B82551A6DF003CD327 /* Main.storyboard */,
 				FA4228D62551C2F4003CD327 /* Home.storyboard */,
+				FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */,
+				FA244C9D2557509E00658CD5 /* Quizzes.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -115,6 +128,7 @@
 		FA4228C82551A6F3003CD327 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FA244C972557505500658CD5 /* Quiz */,
 				FA4228DE2551C53E003CD327 /* Main SB */,
 				FA4228D92551C304003CD327 /* Home SB */,
 				FA4228D12551B3E1003CD327 /* CreateQuiz SB */,
@@ -264,6 +278,7 @@
 				FA4228D72551C2F4003CD327 /* Home.storyboard in Resources */,
 				FA4228CF2551B3CA003CD327 /* CreateQuiz.storyboard in Resources */,
 				FA4228BC2551A6E2003CD327 /* Assets.xcassets in Resources */,
+				FA244C9E2557509E00658CD5 /* Quizzes.storyboard in Resources */,
 				FA4228BA2551A6DF003CD327 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +306,7 @@
 				FA14276E255650AB00E7478E /* QuotePartModel+Convenience.swift in Sources */,
 				FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */,
 				FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */,
+				FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */,
 				FA4E15AD255496790093EAB6 /* QuotePart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

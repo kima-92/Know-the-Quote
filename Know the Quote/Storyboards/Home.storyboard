@@ -16,20 +16,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqJ-C3-iQH">
-                                <rect key="frame" x="98" y="424" width="218" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Create New Quiz"/>
-                                <connections>
-                                    <segue destination="7Xm-hn-YmF" kind="show" id="aDQ-9v-HYt"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="8oz-iy-Ruf">
+                                <rect key="frame" x="98" y="379" width="218" height="138"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqJ-C3-iQH">
+                                        <rect key="frame" x="0.0" y="0.0" width="218" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Create New Quiz"/>
+                                        <connections>
+                                            <segue destination="7Xm-hn-YmF" kind="show" id="aDQ-9v-HYt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hb-Cz-r1G">
+                                        <rect key="frame" x="0.0" y="90" width="218" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Quizzes"/>
+                                        <connections>
+                                            <segue destination="G6c-GU-U0u" kind="show" id="GPz-Fe-PlG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ciK-G0-tzG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="KqJ-C3-iQH" firstAttribute="centerX" secondItem="VSi-aO-CH4" secondAttribute="centerX" id="BMk-9F-Bjv"/>
-                            <constraint firstItem="KqJ-C3-iQH" firstAttribute="centerY" secondItem="VSi-aO-CH4" secondAttribute="centerY" id="MvE-JB-93d"/>
+                            <constraint firstItem="8oz-iy-Ruf" firstAttribute="centerY" secondItem="VSi-aO-CH4" secondAttribute="centerY" id="3HB-Wb-yDQ"/>
+                            <constraint firstItem="8oz-iy-Ruf" firstAttribute="centerX" secondItem="VSi-aO-CH4" secondAttribute="centerX" id="6rS-Yc-XhK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BFQ-5E-mwu"/>
@@ -46,7 +59,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GA5-1G-72v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1513.0434782608697" y="91.741071428571431"/>
+            <point key="canvasLocation" x="1529" y="74"/>
+        </scene>
+        <!--Quizzes-->
+        <scene sceneID="h3R-jr-mOR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Quizzes" id="G6c-GU-U0u" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="NEC-Hu-buv"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hg4-u6-GEC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1500" y="109"/>
         </scene>
     </scenes>
     <resources>
