@@ -16,6 +16,9 @@
         <attribute name="secondPart" optional="YES" attributeType="String"/>
         <relationship name="quiz" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quiz" inverseName="quotes" inverseEntity="Quiz"/>
     </entity>
+    <entity name="QuotePartModel" representedClassName="QuotePartModel" syncable="YES" codeGenerationType="class">
+        <attribute name="cdValue" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="coins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -28,5 +31,6 @@
         <element name="Quiz" positionX="-63" positionY="-18" width="128" height="28"/>
         <element name="Quote" positionX="-45" positionY="54" width="128" height="133"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="133"/>
+        <element name="QuotePartModel" positionX="-54" positionY="72" width="128" height="58"/>
     </elements>
 </model>

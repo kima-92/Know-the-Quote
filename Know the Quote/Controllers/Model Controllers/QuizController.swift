@@ -12,11 +12,12 @@ class QuizController {
     
     // MARK: - Properties
     
-    var quotes: [Int : Quote] = [:]
+    var quiz: Quiz?
+    var currentQuote = 1
+    
     var title: String?
     var creator: User?
-    
-    var currentQuote = 1
+    var quotes: [Int : Quote] = [:]
     
     let quoteCountMin = 0
     let quoteCountMax = 15
@@ -27,36 +28,30 @@ class QuizController {
     
     // MARK: - Methods
     
-    // Create new Quiz and save in CD
-    func createQuiz(context: NSManagedObjectContext) {
+    // Create new Quiz and save in CD WITHOUT any quotes
+    func createEmptyQuiz(context: NSManagedObjectContext) {
         
         guard let title = title,
               let creator = creator else { return }
         
-        // If there's more than 3 quotes, create the quiz and add it to it's creator's quizzesCreated.
-        if quotes.count >= 3 {
-            
-            let quiz = Quiz(title: title, creator: creator, context: context)
-            
-            for quote in quotes.values {
-                quiz.addToQuotes(quote)
-            }
-            creator.addToQuizzesCreated(quiz)
-            CoreDataStack.shared.save(context: context)
-            
-        } else {
-            // TODO: - Alert the user they need to add at least 3 Quotes to save the new Quiz
-        }
+        quiz = Quiz(title: title, creator: creator, context: context)
+        guard let quiz = quiz else { return }
+        
+        creator.addToQuizzesCreated(quiz)
+        CoreDataStack.shared.save(context: context)
     }
     
-    // Add a new quote to the array
+    // Add a new quote to the quiz
     func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [QuotePart : String], context: NSManagedObjectContext) {
         
-        // If there's less than 16 quotes in the array, create this new quote and add it to the array (NOT saved in CD yet)
+        // If there's less than 16 quotes in the array, create this new quote and add it to the quiz
         if quotes.count < 16 {
             let quote = Quote(firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
             self.quotes[quotes.count + 1] = quote
+            guard let quiz = quiz else { return }
+            quiz.addToQuotes(quote)
+            CoreDataStack.shared.save(context: context)
         } else {
             // TODO: - Alert the user they can't create a Quiz with more than 15 Quotes
         }

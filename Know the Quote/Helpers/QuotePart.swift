@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum QuotePart {
+enum QuotePart: String {
     case part1
     case part2
     case answer

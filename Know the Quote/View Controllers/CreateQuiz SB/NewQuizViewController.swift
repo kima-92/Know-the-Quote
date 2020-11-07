@@ -27,11 +27,13 @@ class NewQuizViewController: UIViewController {
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
         
-        // Try to save title and creator then segue to next VC
+        // Create empty Quiz then segue
         if let title = titleTextField.text,
            !title.isEmpty {
             quizController.creator = user
             quizController.title = titleTextField.text
+            
+            quizController.createEmptyQuiz(context: CoreDataStack.shared.mainContext)
             
             performSegue(withIdentifier: "newQuoteDetailsSegue", sender: self)
         } else {

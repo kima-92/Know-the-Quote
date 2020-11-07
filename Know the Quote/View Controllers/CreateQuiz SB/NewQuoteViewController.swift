@@ -80,14 +80,14 @@ class NewQuoteViewController: UIViewController {
                 quizController.moveToNextQuote()
                 updateButtonsViews(clearTextFields: true)
             }
-        
+            
         } else if quizController.currentQuote == quizController.quotes.count {
             // Clear the screen for the next new Quote
             
             // TODO: - Save changes made to this quote
             quizController.moveToNextQuote()
             updateButtonsViews(clearTextFields: true)
-        
+            
         } else {
             // Display next quote
             
@@ -118,10 +118,12 @@ class NewQuoteViewController: UIViewController {
     // Save the Quiz and popToRoot
     private func saveQuiz() {
         guard let quizController = quizController else { return }
-        quizController.createQuiz(context: CoreDataStack.shared.mainContext)
         
-        // TODO: - Alert the user if the quiz was not created successfully
-        navigationController?.popToRootViewController(animated: true)
+        if quizController.quotes.count >= 3 {
+            
+            // TODO: - Alert the user if the quiz was not created successfully
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     // Save this Quote if the Data is complete
@@ -199,14 +201,14 @@ class NewQuoteViewController: UIViewController {
         } else {
             disable(button: prevButton)
         }
-    
+        
         // Next Button
         if quizController.canMoveToNext() {
             enable(button: nextButton)
         } else {
             disable(button: nextButton)
         }
-    
+        
         // Done Button
         if quizController.quizCanBeSaved() {
             enable(button: doneButton)
@@ -214,14 +216,14 @@ class NewQuoteViewController: UIViewController {
             disable(button: doneButton)
         }
     }
-
+    
     // Enable/Disable a button
     private func enable(button: UIButton) {
         button.isEnabled = true
         button.alpha = 1
     }
     private func disable(button: UIButton) {
-            button.isEnabled = false
-            button.alpha = 0.5
+        button.isEnabled = false
+        button.alpha = 0.5
     }
 }
