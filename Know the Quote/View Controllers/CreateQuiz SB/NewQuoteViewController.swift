@@ -52,7 +52,16 @@ class NewQuoteViewController: UIViewController {
         moveToNext()
     }
     @IBAction func doneButtonTapped(_ sender: UIButton) {
-        saveQuiz()
+        finishCreatingQuiz()
+    }
+    
+    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
+        if let quizController = quizController,
+           quizController.quotes.count == 2,
+            isDataComplete() {
+            
+            enable(button: doneButton)
+        }
     }
     
     // MARK: - Methods
@@ -126,29 +135,32 @@ class NewQuoteViewController: UIViewController {
         // TODO: - Alert user of something fails
     }
     
-    // Save the Quiz and popToRoot
-    private func saveQuiz() {
+    // Finish saving the Quiz and popToRoot
+    private func finishCreatingQuiz() {
         guard let quizController = quizController else { return }
         
-        if quizController.quotes.count >= 3 {
-            
-            // TODO: - Alert the user if the quiz was not created successfully
+        if quizController.quotes.count >= 2,
+           isDataComplete(),
+           saveQuote() {
             navigationController?.popToRootViewController(animated: true)
         }
+        // TODO: - Alert the user if something went wrong
     }
     
     // Save this Quote if the Data is complete
     private func saveQuote() -> Bool {
-        guard collectCompleteData(),
+        guard isDataComplete(),
               let quizController = quizController else { return false }
         
+        collectCompleteData()
         quizController.createQuote(firstPart: dataDictionary[.part1], secondPart: dataDictionary[.part2], answer: dataDictionary[.answer]!, incorrectAnswers: incorrectOptsDictionary, context: CoreDataStack.shared.mainContext)
         return true
     }
     
     // Store data from all textFields or alert user the data is not complete
-    private func collectCompleteData() -> Bool {
-        guard let textFields = textFields else { return false }
+    private func collectCompleteData() {
+        guard let textFields = textFields,
+              isDataComplete() else { return }
         
         // Save the textField's text in the respective distionary or alert the user the textFields is empty
         for (key, textField) in textFields {
@@ -174,6 +186,17 @@ class NewQuoteViewController: UIViewController {
                 }
             } else {
                 // TODO: - Alert the user this textField can't be empty
+            }
+        }
+    }
+    
+    private func isDataComplete() -> Bool {
+        guard let textFields = textFields else { return false }
+        
+        // Return false if any of the textFields are empty
+        for textField in textFields.values {
+            if let text = textField.text,
+               text.isEmpty {
                 return false
             }
         }
