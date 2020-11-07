@@ -40,7 +40,7 @@ class NewQuoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         gatherTextFields()
-        updateButtonsViews(clearTextFields: true)
+        updateButtonsViews(clearTextFields: true, shouldEnableNext: false)
     }
     
     // MARK: - Actions
@@ -56,11 +56,20 @@ class NewQuoteViewController: UIViewController {
     }
     
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
-        if let quizController = quizController,
+        // Done button
+        if doneButton.isEnabled == false,
+            let quizController = quizController,
            quizController.quotes.count == 2,
             isDataComplete() {
             
             enable(button: doneButton)
+        }
+        
+        if nextButton.isEnabled == false,
+           let quizController = quizController,
+           quizController.canMoveToNext(),
+           isDataComplete() {
+            enable(button: nextButton)
         }
     }
     
@@ -87,7 +96,7 @@ class NewQuoteViewController: UIViewController {
             
             if saveQuote() { // if it's successfull
                 quizController.moveToNextQuote()
-                updateButtonsViews(clearTextFields: true)
+                updateButtonsViews(clearTextFields: true, shouldEnableNext: false)
             }
             
         } else if quizController.currentQuote == quizController.quotes.count {
@@ -95,7 +104,7 @@ class NewQuoteViewController: UIViewController {
             
             // TODO: - Save changes made to this quote
             quizController.moveToNextQuote()
-            updateButtonsViews(clearTextFields: true)
+            updateButtonsViews(clearTextFields: true, shouldEnableNext: false)
             
         } else {
             // Display next quote
@@ -117,7 +126,7 @@ class NewQuoteViewController: UIViewController {
         correctAnswTextField.text = quote.answer
         filloutOptsTextFields(incorrectOptions: incorrectOptions)
         
-        updateButtonsViews(clearTextFields: false)
+        updateButtonsViews(clearTextFields: false, shouldEnableNext: true)
     }
     
     // Fill out the incorrect options TextFields
@@ -217,7 +226,7 @@ class NewQuoteViewController: UIViewController {
     }
     
     // Disable/Enable buttons and clear (or not) TextFields
-    private func updateButtonsViews(clearTextFields: Bool) {
+    private func updateButtonsViews(clearTextFields: Bool, shouldEnableNext: Bool) {
         guard let quizController = quizController,
               let textFields = textFields else { return }
         
@@ -236,7 +245,8 @@ class NewQuoteViewController: UIViewController {
         }
         
         // Next Button
-        if quizController.canMoveToNext() {
+        if shouldEnableNext,
+           quizController.canMoveToNext() {
             enable(button: nextButton)
         } else {
             disable(button: nextButton)
