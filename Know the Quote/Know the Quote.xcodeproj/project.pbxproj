@@ -7,15 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA14276E255650AB00E7478E /* QuotePartModel+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14276D255650AB00E7478E /* QuotePartModel+Convenience.swift */; };
 		FA4228B32551A6DF003CD327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228B22551A6DF003CD327 /* AppDelegate.swift */; };
 		FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228B42551A6DF003CD327 /* SceneDelegate.swift */; };
 		FA4228BA2551A6DF003CD327 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228B82551A6DF003CD327 /* Main.storyboard */; };
 		FA4228BC2551A6E2003CD327 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA4228BB2551A6E2003CD327 /* Assets.xcassets */; };
 		FA4228BF2551A6E2003CD327 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228BD2551A6E2003CD327 /* LaunchScreen.storyboard */; };
 		FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228CB2551B0BE003CD327 /* LogInViewController.swift */; };
+		FA4228CF2551B3CA003CD327 /* CreateQuiz.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */; };
+		FA4228D42551B450003CD327 /* NewQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228D32551B450003CD327 /* NewQuizViewController.swift */; };
+		FA4228D72551C2F4003CD327 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228D62551C2F4003CD327 /* Home.storyboard */; };
+		FA4228DB2551C31E003CD327 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228DA2551C31E003CD327 /* HomeViewController.swift */; };
+		FA4228E22551C59C003CD327 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E12551C59C003CD327 /* UserRepresentation.swift */; };
+		FA4228E52551C63C003CD327 /* QuizRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E42551C63C003CD327 /* QuizRepresentation.swift */; };
+		FA4228E82551C6C5003CD327 /* QuoteRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228E72551C6C5003CD327 /* QuoteRepresentation.swift */; };
+		FA4228ED2551CD84003CD327 /* QuizController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228EC2551CD84003CD327 /* QuizController.swift */; };
+		FA4228F12551CF0A003CD327 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228F02551CF09003CD327 /* CoreDataStack.swift */; };
+		FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA4228F32551D036003CD327 /* KnowTheQuote.xcdatamodeld */; };
+		FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228FA2551D794003CD327 /* User+Convenience.swift */; };
+		FA4229012551DB10003CD327 /* Quiz+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4229002551DB10003CD327 /* Quiz+Convenience.swift */; };
+		FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4229032551DB23003CD327 /* Quote+Convenience.swift */; };
+		FA4E15AD255496790093EAB6 /* QuotePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E15AC255496790093EAB6 /* QuotePart.swift */; };
+		FA7550C42553BA1D0034F9C8 /* NewQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA14276D255650AB00E7478E /* QuotePartModel+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuotePartModel+Convenience.swift"; sourceTree = "<group>"; };
 		FA4228AF2551A6DF003CD327 /* Know the Quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Know the Quote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4228B22551A6DF003CD327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA4228B42551A6DF003CD327 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +41,21 @@
 		FA4228BE2551A6E2003CD327 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA4228C02551A6E2003CD327 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA4228CB2551B0BE003CD327 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateQuiz.storyboard; sourceTree = "<group>"; };
+		FA4228D32551B450003CD327 /* NewQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuizViewController.swift; sourceTree = "<group>"; };
+		FA4228D62551C2F4003CD327 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		FA4228DA2551C31E003CD327 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FA4228E12551C59C003CD327 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
+		FA4228E42551C63C003CD327 /* QuizRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRepresentation.swift; sourceTree = "<group>"; };
+		FA4228E72551C6C5003CD327 /* QuoteRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRepresentation.swift; sourceTree = "<group>"; };
+		FA4228EC2551CD84003CD327 /* QuizController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizController.swift; sourceTree = "<group>"; };
+		FA4228F02551CF09003CD327 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		FA4228F42551D036003CD327 /* KnowTheQuote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KnowTheQuote.xcdatamodel; sourceTree = "<group>"; };
+		FA4228FA2551D794003CD327 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
+		FA4229002551DB10003CD327 /* Quiz+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quiz+Convenience.swift"; sourceTree = "<group>"; };
+		FA4229032551DB23003CD327 /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
+		FA4E15AC255496790093EAB6 /* QuotePart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotePart.swift; sourceTree = "<group>"; };
+		FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +74,9 @@
 			children = (
 				FA4228C72551A6ED003CD327 /* Storyboards */,
 				FA4228C82551A6F3003CD327 /* View Controllers */,
+				FA4228EB2551CD53003CD327 /* Controllers */,
+				FA4228E02551C584003CD327 /* Models */,
+				FA4228EF2551CE95003CD327 /* Helpers */,
 				FA4228B12551A6DF003CD327 /* Know the Quote */,
 				FA4228B02551A6DF003CD327 /* Products */,
 			);
@@ -71,6 +106,8 @@
 			children = (
 				FA4228B82551A6DF003CD327 /* Main.storyboard */,
 				FA4228BD2551A6E2003CD327 /* LaunchScreen.storyboard */,
+				FA4228CE2551B3CA003CD327 /* CreateQuiz.storyboard */,
+				FA4228D62551C2F4003CD327 /* Home.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -78,9 +115,92 @@
 		FA4228C82551A6F3003CD327 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA4228CB2551B0BE003CD327 /* LogInViewController.swift */,
+				FA4228DE2551C53E003CD327 /* Main SB */,
+				FA4228D92551C304003CD327 /* Home SB */,
+				FA4228D12551B3E1003CD327 /* CreateQuiz SB */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		FA4228D12551B3E1003CD327 /* CreateQuiz SB */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228D32551B450003CD327 /* NewQuizViewController.swift */,
+				FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */,
+			);
+			path = "CreateQuiz SB";
+			sourceTree = "<group>";
+		};
+		FA4228D92551C304003CD327 /* Home SB */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228DA2551C31E003CD327 /* HomeViewController.swift */,
+			);
+			path = "Home SB";
+			sourceTree = "<group>";
+		};
+		FA4228DE2551C53E003CD327 /* Main SB */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228CB2551B0BE003CD327 /* LogInViewController.swift */,
+			);
+			path = "Main SB";
+			sourceTree = "<group>";
+		};
+		FA4228E02551C584003CD327 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228F32551D036003CD327 /* KnowTheQuote.xcdatamodeld */,
+				FA4229072551E04A003CD327 /* Model+Convenience */,
+				FA4229062551E02B003CD327 /* Representations */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA4228EA2551CD45003CD327 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228EC2551CD84003CD327 /* QuizController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		FA4228EB2551CD53003CD327 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228EA2551CD45003CD327 /* Model Controllers */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FA4228EF2551CE95003CD327 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228F02551CF09003CD327 /* CoreDataStack.swift */,
+				FA4E15AC255496790093EAB6 /* QuotePart.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FA4229062551E02B003CD327 /* Representations */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228E12551C59C003CD327 /* UserRepresentation.swift */,
+				FA4228E42551C63C003CD327 /* QuizRepresentation.swift */,
+				FA4228E72551C6C5003CD327 /* QuoteRepresentation.swift */,
+			);
+			path = Representations;
+			sourceTree = "<group>";
+		};
+		FA4229072551E04A003CD327 /* Model+Convenience */ = {
+			isa = PBXGroup;
+			children = (
+				FA4228FA2551D794003CD327 /* User+Convenience.swift */,
+				FA4229002551DB10003CD327 /* Quiz+Convenience.swift */,
+				FA4229032551DB23003CD327 /* Quote+Convenience.swift */,
+				FA14276D255650AB00E7478E /* QuotePartModel+Convenience.swift */,
+			);
+			path = "Model+Convenience";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +261,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4228BF2551A6E2003CD327 /* LaunchScreen.storyboard in Resources */,
+				FA4228D72551C2F4003CD327 /* Home.storyboard in Resources */,
+				FA4228CF2551B3CA003CD327 /* CreateQuiz.storyboard in Resources */,
 				FA4228BC2551A6E2003CD327 /* Assets.xcassets in Resources */,
 				FA4228BA2551A6DF003CD327 /* Main.storyboard in Resources */,
 			);
@@ -153,9 +275,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4228DB2551C31E003CD327 /* HomeViewController.swift in Sources */,
 				FA4228B32551A6DF003CD327 /* AppDelegate.swift in Sources */,
+				FA4228ED2551CD84003CD327 /* QuizController.swift in Sources */,
+				FA4228E52551C63C003CD327 /* QuizRepresentation.swift in Sources */,
+				FA4228E22551C59C003CD327 /* UserRepresentation.swift in Sources */,
+				FA4228F12551CF0A003CD327 /* CoreDataStack.swift in Sources */,
+				FA4228E82551C6C5003CD327 /* QuoteRepresentation.swift in Sources */,
+				FA4229012551DB10003CD327 /* Quiz+Convenience.swift in Sources */,
 				FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */,
+				FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */,
+				FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */,
+				FA7550C42553BA1D0034F9C8 /* NewQuoteViewController.swift in Sources */,
+				FA4228D42551B450003CD327 /* NewQuizViewController.swift in Sources */,
+				FA14276E255650AB00E7478E /* QuotePartModel+Convenience.swift in Sources */,
+				FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */,
 				FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */,
+				FA4E15AD255496790093EAB6 /* QuotePart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +493,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FA4228F32551D036003CD327 /* KnowTheQuote.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FA4228F42551D036003CD327 /* KnowTheQuote.xcdatamodel */,
+			);
+			currentVersion = FA4228F42551D036003CD327 /* KnowTheQuote.xcdatamodel */;
+			path = KnowTheQuote.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FA4228A72551A6DF003CD327 /* Project object */;
 }

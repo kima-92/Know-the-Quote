@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZqO-Pv-OOc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Quiz-->
+        <scene sceneID="ing-r2-jK5">
+            <objects>
+                <viewController title="New Quiz" id="ZqO-Pv-OOc" customClass="NewQuizViewController" customModule="Know_the_Quote" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sba-Sj-Vm3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="151" translatesAutoresizingMaskIntoConstraints="NO" id="yHp-vP-Xhz">
+                                <rect key="frame" x="20" y="331.5" width="374" height="233"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="19G-hw-suD">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJq-EK-Pua">
+                                        <rect key="frame" x="0.0" y="185" width="374" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startButtonTapped:" destination="ZqO-Pv-OOc" eventType="touchUpInside" id="H7X-X2-ihR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LQ8-xN-dg3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yHp-vP-Xhz" firstAttribute="centerY" secondItem="Sba-Sj-Vm3" secondAttribute="centerY" id="44b-I6-Yuu"/>
+                            <constraint firstItem="yHp-vP-Xhz" firstAttribute="leading" secondItem="LQ8-xN-dg3" secondAttribute="leading" constant="20" id="P11-Vc-ABe"/>
+                            <constraint firstItem="LQ8-xN-dg3" firstAttribute="trailing" secondItem="yHp-vP-Xhz" secondAttribute="trailing" constant="20" id="Pu8-J4-BjZ"/>
+                            <constraint firstItem="yHp-vP-Xhz" firstAttribute="centerX" secondItem="Sba-Sj-Vm3" secondAttribute="centerX" id="ZcD-iV-Uxm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleTextField" destination="19G-hw-suD" id="Uzo-jS-q8U"/>
+                        <segue destination="tmp-dp-uPM" kind="show" identifier="newQuoteDetailsSegue" id="F9b-F1-OrT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RGx-4J-sHC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="296" y="-56"/>
+        </scene>
+        <!--New Quote-->
+        <scene sceneID="x5l-87-rvO">
+            <objects>
+                <viewController title="New Quote" id="tmp-dp-uPM" customClass="NewQuoteViewController" customModule="Know_the_Quote" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dAM-Zm-Inl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="OCU-zr-G67">
+                                <rect key="frame" x="20" y="134" width="374" height="574"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="54" translatesAutoresizingMaskIntoConstraints="NO" id="8Ga-os-wKX">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="436"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="WTi-Yb-EAJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Part" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9M8-Ma-zB4">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="tmp-dp-uPM" eventType="editingChanged" id="gyH-Sc-D4h"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Second Part" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D6k-bu-pbV">
+                                                        <rect key="frame" x="0.0" y="58" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="tmp-dp-uPM" eventType="editingChanged" id="Lk8-ek-g9W"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Correct Answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dB5-qp-m54">
+                                                        <rect key="frame" x="0.0" y="116" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="tmp-dp-uPM" eventType="editingChanged" id="YOd-Cp-a4R"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="4eb-40-5PS">
+                                                <rect key="frame" x="0.0" y="204" width="374" height="232"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Incorrect option #1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qi3-j8-ZbP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="tmp-dp-uPM" eventType="editingChanged" id="fjs-xD-GXr"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Incorrect option #2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="48O-Ml-m7e">
+                                                        <rect key="frame" x="0.0" y="66" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="tmp-dp-uPM" eventType="editingChanged" id="ASj-hB-jR4"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Incorrect option #3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4J2-rl-iiH">
+                                                        <rect key="frame" x="0.0" y="132" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="tmp-dp-uPM" eventType="editingChanged" id="3VZ-Cr-cjl"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Incorrect option #4" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cmR-po-4zt">
+                                                        <rect key="frame" x="0.0" y="198" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingChanged:" destination="tmp-dp-uPM" eventType="editingChanged" id="kAf-X0-bvs"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="9hU-eN-DBF">
+                                        <rect key="frame" x="0.0" y="478" width="374" height="96"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="89" translatesAutoresizingMaskIntoConstraints="NO" id="RjE-qi-9Nb">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2E-p5-ijN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="142.5" height="30"/>
+                                                        <state key="normal" title="Prev"/>
+                                                        <connections>
+                                                            <action selector="prevButtonTapped:" destination="tmp-dp-uPM" eventType="touchUpInside" id="Xdx-1s-uvP"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cLi-Sb-Bv2">
+                                                        <rect key="frame" x="231.5" y="0.0" width="142.5" height="30"/>
+                                                        <state key="normal" title="Next"/>
+                                                        <connections>
+                                                            <action selector="nextButtonTapped:" destination="tmp-dp-uPM" eventType="touchUpInside" id="KOe-1W-YGP"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBe-NX-r69">
+                                                <rect key="frame" x="0.0" y="66" width="374" height="30"/>
+                                                <state key="normal" title="Done"/>
+                                                <connections>
+                                                    <action selector="doneButtonTapped:" destination="tmp-dp-uPM" eventType="touchUpInside" id="xgo-s0-6PS"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SbX-HD-WNR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OCU-zr-G67" firstAttribute="centerY" secondItem="dAM-Zm-Inl" secondAttribute="centerY" id="16k-Uv-aNC"/>
+                            <constraint firstItem="OCU-zr-G67" firstAttribute="centerX" secondItem="dAM-Zm-Inl" secondAttribute="centerX" id="EM1-kz-QKR"/>
+                            <constraint firstItem="SbX-HD-WNR" firstAttribute="trailing" secondItem="OCU-zr-G67" secondAttribute="trailing" constant="20" id="FUx-Vx-4rY"/>
+                            <constraint firstItem="OCU-zr-G67" firstAttribute="leading" secondItem="SbX-HD-WNR" secondAttribute="leading" constant="20" id="taM-St-oFl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="KCB-uJ-L6t"/>
+                    <connections>
+                        <outlet property="correctAnswTextField" destination="dB5-qp-m54" id="4hI-qf-EAd"/>
+                        <outlet property="doneButton" destination="EBe-NX-r69" id="TNI-4O-JQ3"/>
+                        <outlet property="incorrectOpt1TextField" destination="Qi3-j8-ZbP" id="csO-aK-bXj"/>
+                        <outlet property="incorrectOpt2TextField" destination="48O-Ml-m7e" id="dd1-pO-Khq"/>
+                        <outlet property="incorrectOpt3TextField" destination="4J2-rl-iiH" id="X0d-DO-Meb"/>
+                        <outlet property="incorrectOpt4TextField" destination="cmR-po-4zt" id="YXx-D2-j0n"/>
+                        <outlet property="nextButton" destination="cLi-Sb-Bv2" id="QEf-HF-WB5"/>
+                        <outlet property="part1TextField" destination="9M8-Ma-zB4" id="XYX-6p-FNA"/>
+                        <outlet property="part2TextField" destination="D6k-bu-pbV" id="24b-N7-p7B"/>
+                        <outlet property="prevButton" destination="K2E-p5-ijN" id="jUq-gJ-Yr5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qag-HK-vUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1355" y="-56"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
