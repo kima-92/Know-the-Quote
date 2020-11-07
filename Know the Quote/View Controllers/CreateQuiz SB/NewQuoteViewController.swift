@@ -13,6 +13,7 @@ class NewQuoteViewController: UIViewController {
     
     var quizController: QuizController?
     var user: User?
+    var incompleteQuote: [QuotePart : String]?
     
     var dataDictionary: [QuotePart : String] = [:]
     var textFields: [QuotePart: UITextField]?
@@ -78,21 +79,36 @@ class NewQuoteViewController: UIViewController {
     private func moveToPrev() {
         guard let quizController = quizController,
               quizController.canMoveToPrev() else { return }
+        
+        saveIncompleteData()
         quizController.moveToPrevQuote()
         displayQuoteData()
     }
     
-    // Check if you need to display an existing quote or create a new one
+    // Saving Incomplete Quote inside an array
+    private func saveIncompleteData() {
+        incompleteQuote = [:]
+        
+        guard let textFields = textFields,
+              let _ = incompleteQuote else { return }
+        
+        for (quotePart, textField) in textFields {
+            self.incompleteQuote![quotePart] = textField.text
+        }
+    }
+    
+    // Check if need to display an existing quote, or set the screen for a new one
     private func moveToNext() {
         guard let quizController = quizController,
               quizController.canMoveToNext()
+        
         else {
             // TODO: - Alert user you can't move forward
             return
         }
         
         if quizController.currentQuote == quizController.quotes.count + 1 {
-            // New quote
+            // Saving the latest (unsaved) quote
             
             if saveQuote() { // if it's successfull
                 quizController.moveToNextQuote()
@@ -100,19 +116,36 @@ class NewQuoteViewController: UIViewController {
             }
             
         } else if quizController.currentQuote == quizController.quotes.count {
-            // Clear the screen for the next new Quote
+            // Clear out the screen for the next quote,
+            // or filling in with the previously (still incomplete) quote
             
-            // TODO: - Save changes made to this quote
+            // TODO: - Save changes made to this quote before moving to the next
+            
+            updateButtonsViews(clearTextFields: true, shouldEnableNext: false) // clear the screen
             quizController.moveToNextQuote()
-            updateButtonsViews(clearTextFields: true, shouldEnableNext: false)
-            
+            tryLoadIncompleteData()
+                
+            if isDataComplete() {
+                enable(button: nextButton)
+            }
         } else {
-            // Display next quote
+            // Display next previously saved quote
             
             // TODO: - Save changes made to this quote
             quizController.moveToNextQuote()
             displayQuoteData()
         }
+    }
+    
+    // Try to get the incomplete Quote from the incompleteQuoteArray
+    private func tryLoadIncompleteData() {
+        guard let textFields = textFields,
+              let incompleteQuote = incompleteQuote else { return }
+        
+        for (quotePart, textField) in textFields {
+            textField.text = incompleteQuote[quotePart]
+        }
+        self.incompleteQuote = nil
     }
     
     // Fill in the textFields with a Quote's data
