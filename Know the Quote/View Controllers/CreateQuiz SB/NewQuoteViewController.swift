@@ -99,20 +99,31 @@ class NewQuoteViewController: UIViewController {
     
     // Fill in the textFields with a Quote's data
     private func displayQuoteData() {
-        
         guard let quizController = quizController,
               let quote = quizController.quotes[quizController.currentQuote],
-              let incorrectOptions = quote.incorrectOptions as? [QuotePart : String]  else { return }
+              let incorrectOptions = quote.incorrectOptions as? [QuotePartModel : String]  else { return }
         
         part1TextField.text = quote.firstPart
         part2TextField.text = quote.secondPart
         correctAnswTextField.text = quote.answer
-        incorrectOpt1TextField.text = incorrectOptions[.incorrectOpt1]
-        incorrectOpt2TextField.text = incorrectOptions[.incorrectOpt2]
-        incorrectOpt3TextField.text = incorrectOptions[.incorrectOpt3]
-        incorrectOpt4TextField.text = incorrectOptions[.incorrectOpt4]
+        filloutOptsTextFields(incorrectOptions: incorrectOptions)
         
         updateButtonsViews(clearTextFields: false)
+    }
+    
+    // Fill out the incorrect options TextFields
+    private func filloutOptsTextFields(incorrectOptions: [QuotePartModel : String]) {
+        guard let textFields = textFields else { return }
+        
+        // Filter out the quotePartModel for this QuotePart, then fill out the textField
+        for (quotePart, textField) in textFields {
+            let quotePartModelArray = incorrectOptions.filter({ $0.key.quotePart == quotePart})
+            
+            if let quotePartModel = quotePartModelArray.first {
+                textField.text = quotePartModel.value
+            }
+        }
+        // TODO: - Alert user of something fails
     }
     
     // Save the Quiz and popToRoot
@@ -137,7 +148,6 @@ class NewQuoteViewController: UIViewController {
     
     // Store data from all textFields or alert user the data is not complete
     private func collectCompleteData() -> Bool {
-        
         guard let textFields = textFields else { return false }
         
         // Save the textField's text in the respective distionary or alert the user the textFields is empty

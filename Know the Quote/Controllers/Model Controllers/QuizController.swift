@@ -75,9 +75,9 @@ class QuizController {
     
     // Move currentQuote Prev/Next
     func moveToNextQuote() {
-        if quotes.count <= quoteCountMax && currentQuote <= currentQuoteMaxIndex { currentQuote += 1 }
+        if canMoveToNext() { currentQuote += 1 }
     }
     func moveToPrevQuote() {
-        if quotes.count != quoteCountMin && currentQuote >= currentQuoteMinIndex { currentQuote -= 1 }
+        if canMoveToPrev() { currentQuote -= 1 }
     }
 }
