@@ -16,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "fetResultController"
+            landmarkName = "fetchedResultController"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,6 +11,9 @@
 		FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244C982557508300658CD5 /* QuizzesTableViewController.swift */; };
 		FA244C9E2557509E00658CD5 /* Quizzes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA244C9D2557509E00658CD5 /* Quizzes.storyboard */; };
 		FA244CA52557524300658CD5 /* QuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244CA42557524300658CD5 /* QuizTableViewCell.swift */; };
+		FA244CA825576F4400658CD5 /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244CA725576F4300658CD5 /* QuizResultViewController.swift */; };
+		FA244CAE25576F8B00658CD5 /* QuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244CAD25576F8B00658CD5 /* QuoteViewController.swift */; };
+		FA244CB125576FA400658CD5 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244CB025576FA400658CD5 /* QuizViewController.swift */; };
 		FA4228B32551A6DF003CD327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228B22551A6DF003CD327 /* AppDelegate.swift */; };
 		FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4228B42551A6DF003CD327 /* SceneDelegate.swift */; };
 		FA4228BA2551A6DF003CD327 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4228B82551A6DF003CD327 /* Main.storyboard */; };
@@ -39,6 +42,9 @@
 		FA244C982557508300658CD5 /* QuizzesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesTableViewController.swift; sourceTree = "<group>"; };
 		FA244C9D2557509E00658CD5 /* Quizzes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Quizzes.storyboard; sourceTree = "<group>"; };
 		FA244CA42557524300658CD5 /* QuizTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewCell.swift; sourceTree = "<group>"; };
+		FA244CA725576F4300658CD5 /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
+		FA244CAD25576F8B00658CD5 /* QuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteViewController.swift; sourceTree = "<group>"; };
+		FA244CB025576FA400658CD5 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		FA4228AF2551A6DF003CD327 /* Know the Quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Know the Quote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4228B22551A6DF003CD327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA4228B42551A6DF003CD327 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				FA244C982557508300658CD5 /* QuizzesTableViewController.swift */,
+				FA244CB025576FA400658CD5 /* QuizViewController.swift */,
+				FA244CAD25576F8B00658CD5 /* QuoteViewController.swift */,
+				FA244CA725576F4300658CD5 /* QuizResultViewController.swift */,
 			);
 			path = "Quiz SB";
 			sourceTree = "<group>";
@@ -318,6 +327,7 @@
 				FA4228E82551C6C5003CD327 /* QuoteRepresentation.swift in Sources */,
 				FA4229012551DB10003CD327 /* Quiz+Convenience.swift in Sources */,
 				FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */,
+				FA244CAE25576F8B00658CD5 /* QuoteViewController.swift in Sources */,
 				FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */,
 				FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */,
 				FA7550C42553BA1D0034F9C8 /* NewQuoteViewController.swift in Sources */,
@@ -325,7 +335,9 @@
 				FA4228D42551B450003CD327 /* NewQuizViewController.swift in Sources */,
 				FA14276E255650AB00E7478E /* QuotePartModel+Convenience.swift in Sources */,
 				FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */,
+				FA244CA825576F4400658CD5 /* QuizResultViewController.swift in Sources */,
 				FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */,
+				FA244CB125576FA400658CD5 /* QuizViewController.swift in Sources */,
 				FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */,
 				FA4E15AD255496790093EAB6 /* QuotePart.swift in Sources */,
 			);
