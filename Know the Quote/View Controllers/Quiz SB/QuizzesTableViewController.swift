@@ -12,6 +12,9 @@ class QuizzesTableViewController: UITableViewController {
     
     // MARK: - Properties
     
+    var quizController = QuizController()
+    var user = User()
+    
     var fetchedResultController: NSFetchedResultsController<Quiz> {
         let fetchRequest: NSFetchRequest<Quiz> = Quiz.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
@@ -63,6 +66,21 @@ class QuizzesTableViewController: UITableViewController {
         return true
     }
     */
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // QuizVC
+        if segue.identifier == "ShowQuizSegue" {
+            guard let quizVC = segue.destination as? QuizViewController else { return }
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                quizVC.quiz = fetchedResultController.object(at: indexPath)
+                quizVC.user = user
+                quizVC.quizController = quizController
+            }
+        }
+    }
 }
 
 // MARK: - Extensions

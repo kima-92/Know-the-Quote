@@ -74,6 +74,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
+                                    <action selector="startButtonTapped:" destination="gsO-LH-VrK" eventType="touchUpInside" id="TFZ-Iu-2uV"/>
                                     <segue destination="ovV-Zw-ra6" kind="show" identifier="StartQuizSegue" id="REu-G1-oGl"/>
                                 </connections>
                             </button>
@@ -95,6 +96,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sJq-Tc-S6G"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="G4j-4x-Pjd" id="tFB-W9-McF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bd1-mX-mwv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
