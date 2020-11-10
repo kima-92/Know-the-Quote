@@ -24,7 +24,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Create New Quiz"/>
                                         <connections>
-                                            <segue destination="7Xm-hn-YmF" kind="show" id="aDQ-9v-HYt"/>
+                                            <segue destination="7Xm-hn-YmF" kind="show" identifier="showCreateQuizSBSegue" id="aDQ-9v-HYt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hb-Cz-r1G">
@@ -32,7 +32,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Quizzes"/>
                                         <connections>
-                                            <segue destination="G6c-GU-U0u" kind="show" id="GPz-Fe-PlG"/>
+                                            <segue destination="G6c-GU-U0u" kind="show" identifier="showQuizzesSBSegue" id="GPz-Fe-PlG"/>
                                         </connections>
                                     </button>
                                 </subviews>

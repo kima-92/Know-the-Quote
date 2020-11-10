@@ -181,6 +181,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ruc-lt-LFo"/>
                     <connections>
+                        <outlet property="opt1Button" destination="E7B-Dk-Rw4" id="aZ7-Ji-1Yt"/>
+                        <outlet property="opt2Button" destination="9vl-H5-enC" id="4gH-ia-Cn4"/>
+                        <outlet property="opt3Button" destination="iWi-I9-vwU" id="QHj-s5-7gZ"/>
+                        <outlet property="opt4Button" destination="jhZ-Cl-J7j" id="zfm-gM-nNS"/>
+                        <outlet property="opt5Button" destination="gGo-07-Bh5" id="Ia8-xh-5Sp"/>
+                        <outlet property="progressView" destination="tsv-oD-hAb" id="KI7-Qj-XGz"/>
+                        <outlet property="quoteLabel" destination="rRv-pv-bo5" id="0vB-qG-ysd"/>
                         <segue destination="MBE-qR-szw" kind="show" identifier="ShowQuizResultVCSegue" id="CrS-S6-VDG"/>
                     </connections>
                 </viewController>
