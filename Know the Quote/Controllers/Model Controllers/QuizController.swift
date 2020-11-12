@@ -31,9 +31,12 @@ class QuizController {
     
     // MARK: - Shared Methods
     
-    func resetCounters() {
-        quotes = [:]
+    private func resetCounter() {
         currentQuote = 1
+    }
+    
+    private func resetQuotesDictionary() {
+        quotes = [:]
     }
     
     // MARK: - NewQuizVC Methods
@@ -98,10 +101,13 @@ class QuizController {
     
     // Setup to start a quiz
     func setupStart(quiz: Quiz) -> Quote? {
-        resetCounters()
+        resetCounter()
+        resetQuotesDictionary()
         
         // Fetch all quotes
         getAllQuotesOf(quiz: quiz)
+        
+        resetCounter()
         
         // Return the first quote
         return quotes[currentQuote]
@@ -123,6 +129,7 @@ class QuizController {
             // Store each quote in the dictionary
                 for quote in quotes {
                     self.quotes[currentQuote] = quote
+                    currentQuote += 1
                 }
         } catch {
             NSLog("Could not fetch quotes")

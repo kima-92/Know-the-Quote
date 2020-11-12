@@ -39,6 +39,14 @@ class QuoteViewController: UIViewController {
         displayQuote()
     }
     
+    // MARK: - Action
+    
+    @IBAction func optButtonTapped(_ sender: UIButton) {
+        guard let quizController = quizController else { return }
+        quote = quizController.nextQuoteToDisplay()
+        displayQuote()
+    }
+    
     // MARK: - Methods
     
     private func gatherButtons() {

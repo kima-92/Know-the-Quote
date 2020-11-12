@@ -127,6 +127,9 @@
                                         <state key="normal" title="Opt1">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="optButtonTapped:" destination="ovV-Zw-ra6" eventType="touchUpInside" id="13m-V3-Lmg"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vl-H5-enC">
                                         <rect key="frame" x="0.0" y="51" width="354" height="36"/>
@@ -134,6 +137,9 @@
                                         <state key="normal" title="Opt2">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="optButtonTapped:" destination="ovV-Zw-ra6" eventType="touchUpInside" id="tFL-Wm-J1t"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWi-I9-vwU">
                                         <rect key="frame" x="0.0" y="102" width="354" height="36"/>
@@ -141,6 +147,9 @@
                                         <state key="normal" title="Opt3">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="optButtonTapped:" destination="ovV-Zw-ra6" eventType="touchUpInside" id="fkZ-a1-2R0"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhZ-Cl-J7j">
                                         <rect key="frame" x="0.0" y="153" width="354" height="36"/>
@@ -148,6 +157,9 @@
                                         <state key="normal" title="Opt4">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="optButtonTapped:" destination="ovV-Zw-ra6" eventType="touchUpInside" id="kxJ-Ps-nQB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGo-07-Bh5">
                                         <rect key="frame" x="0.0" y="204" width="354" height="36"/>
@@ -155,6 +167,9 @@
                                         <state key="normal" title="Opt5">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="optButtonTapped:" destination="ovV-Zw-ra6" eventType="touchUpInside" id="Ay1-aJ-KxA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
