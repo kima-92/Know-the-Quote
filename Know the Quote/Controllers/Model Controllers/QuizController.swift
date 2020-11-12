@@ -51,7 +51,9 @@ class QuizController {
             
             self.quotes[quotes.count + 1] = quote
             guard let quiz = quiz else { return }
+            quote.quizID = quiz.id?.uuidString
             quiz.addToQuotes(quote)
+            
             CoreDataStack.shared.save(context: context)
         } else {
             // TODO: - Alert the user they can't create a Quiz with more than 15 Quotes
@@ -88,6 +90,10 @@ class QuizController {
         
         let moc = CoreDataStack.shared.mainContext
         let fetchRequest = NSFetchRequest<Quote>(entityName: "Quote")
+        
+        if let quizIDString = quiz.id?.uuidString {
+            fetchRequest.predicate = NSPredicate(format: "quizID == %@", quizIDString)
+        }
         
         do {
             let quotes = try moc.fetch(fetchRequest)
