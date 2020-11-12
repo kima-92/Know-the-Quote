@@ -13,12 +13,11 @@ class QuizController {
     // MARK: - Properties
     
     var quiz: Quiz?
-    var currentQuote = 1
     
     var title: String?
     var creator: User?
-    var quotes: [Int : Quote] = [:]
     
+    // Max / Min
     let quoteCountMin = 0
     let quoteCountMax = 15
     let currentQuoteMinIndex = 1
@@ -26,7 +25,18 @@ class QuizController {
     let quizMinQuotes = 3
     let quizMaxQuotes = 15
     
-    // MARK: - Methods
+    // Counters and cache
+    var currentQuote = 1
+    var quotes: [Int : Quote] = [:]
+    
+    // MARK: - Shared Methods
+    
+    func resetCounters() {
+        quotes = [:]
+        currentQuote = 1
+    }
+    
+    // MARK: - NewQuizVC Methods
     
     // Create new Quiz and save in CD WITHOUT any quotes
     func createEmptyQuiz(context: NSManagedObjectContext) {
@@ -84,8 +94,20 @@ class QuizController {
         if canMoveToPrev() { currentQuote -= 1 }
     }
     
-    // MARK: - QuizVC
+    // MARK: - QuizVC Methods
     
+    // Setup to start a quiz
+    func setupStart(quiz: Quiz) -> Quote? {
+        resetCounters()
+        
+        // Fetch all quotes
+        getAllQuotesOf(quiz: quiz)
+        
+        // Return the first quote
+        return quotes[currentQuote]
+    }
+    
+    // Fetch quotes of a specific quiz from CoreData
     func getAllQuotesOf(quiz: Quiz) {
         
         let moc = CoreDataStack.shared.mainContext
@@ -98,12 +120,23 @@ class QuizController {
         do {
             let quotes = try moc.fetch(fetchRequest)
                 
+            // Store each quote in the dictionary
                 for quote in quotes {
-                    print(quote.firstPart)
+                    self.quotes[currentQuote] = quote
                 }
         } catch {
             NSLog("Could not fetch quotes")
             // TODO: - Alert the user
         }
+    }
+    
+    // Return the next quote that needs to be displayed
+    func nextQuoteToDisplay() -> Quote? {
+        if currentQuote < quotes.count {
+            
+            currentQuote += 1
+            return quotes[currentQuote]
+        }
+        return nil
     }
 }

@@ -14,6 +14,7 @@ class QuoteViewController: UIViewController {
     var quizController: QuizController?
     var user: User?
     var quiz: Quiz?
+    var quote: Quote?
     var buttons: [UIButton?] = []
     
     // MARK: - Outlets
@@ -32,8 +33,10 @@ class QuoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         gatherButtons()
-        updateViews()
+        setupQuiz()
+        displayQuote()
     }
     
     // MARK: - Methods
@@ -46,33 +49,42 @@ class QuoteViewController: UIViewController {
         buttons.append(opt5Button)
     }
     
+    // Display the current quote
     private func displayQuote() {
-        guard let quizController = quizController,
-              let quiz = quiz else { return }
-
-        quizController.getAllQuotesOf(quiz: quiz)
-//        quoteLabel.text = quizController.getCurrentQuoteText()
+        guard let quote = quote,
+              let first = quote.firstPart,
+              let second = quote.secondPart,
+              let allOptions = quote.allOptions as? [String] else { return }
+        
+        quoteLabel.text = first + " _____ " + second
+        
+        // Buttons
+        for option in allOptions {
+            for button in buttons {
+                button?.setTitle(option, for: .normal)
+            }
+        }
     }
     
-    private func setAllOptions() {
-//        guard let quizController = quizController,
-//              let quote = quizController.currentQuote1 else { return }
-//
-//        if let options = quote.allOptions as? [String] {
-//
-//            for option in options {
-//                for button in buttons {
-//                    button?.setTitle(option, for: .normal)
-//                }
-//            }
-//        }
-    }
-    
-    private func updateViews() {
+    // Start the Quiz
+    private func setupQuiz() {
         guard let quizController = quizController,
               let quiz = quiz else { return }
         
-        displayQuote()
-        setAllOptions()
+        // Setup the quiz if it hasn't started yet
+        if quote == nil {
+            self.quote = quizController.setupStart(quiz: quiz)
+        }
+        // Display the next quote if the quiz already started
+        else if let quote = quizController.nextQuoteToDisplay() {
+            self.quote = quote
+        }
+        
+        // TODO: - Alert the user something went wrong
+    }
+    
+    private func updateViews() {
+        guard let _ = quizController,
+              let _ = quiz else { return }
     }
 }
