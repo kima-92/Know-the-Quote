@@ -47,10 +47,10 @@ class QuoteViewController: UIViewController {
     }
     
     private func displayQuote() {
-//        guard let quizController = quizController,
-//              let quiz = quiz else { return }
-//
-//        quizController.getAllQuotes(quiz: quiz)
+        guard let quizController = quizController,
+              let quiz = quiz else { return }
+
+        quizController.getAllQuotesOf(quiz: quiz)
 //        quoteLabel.text = quizController.getCurrentQuoteText()
     }
     

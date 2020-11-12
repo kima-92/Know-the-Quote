@@ -81,4 +81,23 @@ class QuizController {
     func moveToPrevQuote() {
         if canMoveToPrev() { currentQuote -= 1 }
     }
+    
+    // MARK: - QuizVC
+    
+    func getAllQuotesOf(quiz: Quiz) {
+        
+        let moc = CoreDataStack.shared.mainContext
+        let fetchRequest = NSFetchRequest<Quote>(entityName: "Quote")
+        
+        do {
+            let quotes = try moc.fetch(fetchRequest)
+                
+                for quote in quotes {
+                    print(quote.firstPart)
+                }
+        } catch {
+            NSLog("Could not fetch quotes")
+            // TODO: - Alert the user
+        }
+    }
 }
