@@ -17,7 +17,7 @@ class NewQuoteViewController: UIViewController {
     
     var dataDictionary: [QuotePart : String] = [:]
     var textFields: [QuotePart: UITextField]?
-    var incorrectOptsDictionary: [QuotePart : String] = [:]
+    var incorrectOptsArray: [String] = []
     
     // MARK: - Outlets
     
@@ -152,7 +152,7 @@ class NewQuoteViewController: UIViewController {
     private func displayQuoteData() {
         guard let quizController = quizController,
               let quote = quizController.quotes[quizController.currentQuote],
-              let incorrectOptions = quote.incorrectOptions as? [QuotePartModel : String]  else { return }
+              let incorrectOptions = quote.incorrectOptions as? [String]  else { return }
         
         part1TextField.text = quote.firstPart
         part2TextField.text = quote.secondPart
@@ -163,17 +163,17 @@ class NewQuoteViewController: UIViewController {
     }
     
     // Fill out the incorrect options TextFields
-    private func filloutOptsTextFields(incorrectOptions: [QuotePartModel : String]) {
+    private func filloutOptsTextFields(incorrectOptions: [String]) {
         guard let textFields = textFields else { return }
         
         // Filter out the quotePartModel for this QuotePart, then fill out the textField
-        for (quotePart, textField) in textFields {
-            let quotePartModelArray = incorrectOptions.filter({ $0.key.quotePart == quotePart})
-            
-            if let quotePartModel = quotePartModelArray.first {
-                textField.text = quotePartModel.value
-            }
-        }
+//        for (quotePart, textField) in textFields {
+//            let quotePartModelArray = incorrectOptions.filter({ $0.key.quotePart == quotePart})
+//
+//            if let quotePartModel = quotePartModelArray.first {
+//                textField.text = quotePartModel.value
+//            }
+//        }
         // TODO: - Alert user of something fails
     }
     
@@ -195,7 +195,8 @@ class NewQuoteViewController: UIViewController {
               let quizController = quizController else { return false }
         
         collectCompleteData()
-        quizController.createQuote(firstPart: dataDictionary[.part1], secondPart: dataDictionary[.part2], answer: dataDictionary[.answer]!, incorrectAnswers: incorrectOptsDictionary, context: CoreDataStack.shared.mainContext)
+        
+        quizController.createQuote(firstPart: dataDictionary[.part1], secondPart: dataDictionary[.part2], answer: dataDictionary[.answer]!, incorrectAnswers: incorrectOptsArray, context: CoreDataStack.shared.mainContext)
         return true
     }
     
@@ -218,13 +219,13 @@ class NewQuoteViewController: UIViewController {
                 case .answer:
                     self.dataDictionary[key] = text
                 case .incorrectOpt1:
-                    self.incorrectOptsDictionary[key] = text
+                    self.incorrectOptsArray.append(text)
                 case .incorrectOpt2:
-                    self.incorrectOptsDictionary[key] = text
+                    self.incorrectOptsArray.append(text)
                 case .incorrectOpt3:
-                    self.incorrectOptsDictionary[key] = text
+                    self.incorrectOptsArray.append(text)
                 case .incorrectOpt4:
-                    self.incorrectOptsDictionary[key] = text
+                    self.incorrectOptsArray.append(text)
                 }
             } else {
                 // TODO: - Alert the user this textField can't be empty
