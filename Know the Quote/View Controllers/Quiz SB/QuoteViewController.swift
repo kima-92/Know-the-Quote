@@ -107,10 +107,11 @@ class QuoteViewController: UIViewController {
         quoteLabel.text = first + " _____ " + second
         
         // Buttons
-        for option in allOptions {
-            for button in buttons {
-                button?.setTitle(option, for: .normal)
-            }
+        var options = allOptions.shuffled()
+        
+        for button in buttons {
+            let last = options.popLast()
+            button?.setTitle(last, for: .normal)
         }
     }
     

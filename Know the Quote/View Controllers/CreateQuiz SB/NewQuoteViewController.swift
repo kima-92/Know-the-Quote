@@ -135,6 +135,7 @@ class NewQuoteViewController: UIViewController {
             quizController.moveToNextQuote()
             displayQuoteData()
         }
+        resetSets()
     }
     
     // Try to get the incomplete Quote from the incompleteQuoteArray
@@ -302,5 +303,11 @@ class NewQuoteViewController: UIViewController {
     private func disable(button: UIButton) {
         button.isEnabled = false
         button.alpha = 0.5
+    }
+    
+    // Empty stored data
+    private func resetSets() {
+        incorrectOptsArray = []
+        dataDictionary = [:]
     }
 }
