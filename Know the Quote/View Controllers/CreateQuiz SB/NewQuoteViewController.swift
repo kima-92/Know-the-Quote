@@ -59,9 +59,9 @@ class NewQuoteViewController: UIViewController {
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
         // Done button
         if doneButton.isEnabled == false,
-            let quizController = quizController,
+           let quizController = quizController,
            quizController.quotes.count == 2,
-            isDataComplete() {
+           isDataComplete() {
             
             enable(button: doneButton)
         }
@@ -124,7 +124,7 @@ class NewQuoteViewController: UIViewController {
             updateButtonsViews(clearTextFields: true, shouldEnableNext: false) // clear the screen
             quizController.moveToNextQuote()
             tryLoadIncompleteData()
-                
+            
             if isDataComplete() {
                 enable(button: nextButton)
             }
@@ -167,13 +167,13 @@ class NewQuoteViewController: UIViewController {
         guard let textFields = textFields else { return }
         
         // Filter out the quotePartModel for this QuotePart, then fill out the textField
-//        for (quotePart, textField) in textFields {
-//            let quotePartModelArray = incorrectOptions.filter({ $0.key.quotePart == quotePart})
-//
-//            if let quotePartModel = quotePartModelArray.first {
-//                textField.text = quotePartModel.value
-//            }
-//        }
+        //        for (quotePart, textField) in textFields {
+        //            let quotePartModelArray = incorrectOptions.filter({ $0.key.quotePart == quotePart})
+        //
+        //            if let quotePartModel = quotePartModelArray.first {
+        //                textField.text = quotePartModel.value
+        //            }
+        //        }
         // TODO: - Alert user of something fails
     }
     

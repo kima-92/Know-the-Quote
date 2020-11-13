@@ -63,7 +63,6 @@ class QuoteViewController: UIViewController {
         } else {
             score.selectedResponses[optSelected] = false
         }
-        print(score.points)
     }
     
     private func gatherButtons() {

@@ -125,12 +125,12 @@ class QuizController {
         
         do {
             let quotes = try moc.fetch(fetchRequest)
-                
+            
             // Store each quote in the dictionary
-                for quote in quotes {
-                    self.quotes[currentQuote] = quote
-                    currentQuote += 1
-                }
+            for quote in quotes {
+                self.quotes[currentQuote] = quote
+                currentQuote += 1
+            }
         } catch {
             NSLog("Could not fetch quotes")
             // TODO: - Alert the user

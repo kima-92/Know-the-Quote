@@ -13,7 +13,6 @@ struct UserRepresentation {
     var signupDate: Date
     var username: String
     var password: String
-    
     var coins: Int16
     var quizesCreated: [QuizRepresentation]?
 }
