@@ -44,6 +44,13 @@ class QuoteViewController: UIViewController {
     // MARK: - Action
     
     @IBAction func optButtonTapped(_ sender: UIButton) {
+        processSelection(sender)
+    }
+    
+    // MARK: - Methods
+    
+    // Processing the user's selection and updating UI
+    private func processSelection(_ sender: UIButton) {
         guard let quizController = quizController else { return }
         
         updateScore(sender)
@@ -58,8 +65,6 @@ class QuoteViewController: UIViewController {
             updateProgressBar()
         }
     }
-    
-    // MARK: - Methods
     
     private func updateProgressBar(_ isLast: Bool = false) {
         guard let quizController = quizController else { return }
@@ -122,7 +127,6 @@ class QuoteViewController: UIViewController {
         else if let quote = quizController.nextQuoteToDisplay() {
             self.quote = quote
         }
-        
         // TODO: - Alert the user something went wrong
     }
     
