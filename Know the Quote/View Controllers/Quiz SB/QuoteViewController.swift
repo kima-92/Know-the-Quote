@@ -38,6 +38,7 @@ class QuoteViewController: UIViewController {
         gatherButtons()
         setupQuiz()
         displayQuote()
+        updateProgressBar()
     }
     
     // MARK: - Action
@@ -46,12 +47,30 @@ class QuoteViewController: UIViewController {
         guard let quizController = quizController else { return }
         
         updateScore(sender)
-        
         quote = quizController.nextQuoteToDisplay()
         displayQuote()
+        
+        // Segue to the next VC if this was the last quote
+        if quote == nil {
+            updateProgressBar(true)
+            // TODO: - Segue to the result page
+        } else {
+            updateProgressBar()
+        }
     }
     
     // MARK: - Methods
+    
+    private func updateProgressBar(_ isLast: Bool = false) {
+        guard let quizController = quizController else { return }
+        
+        if isLast {
+            progressView.setProgress(1.0, animated: true)
+        } else {
+            let currentProgress = Float(quizController.currentQuote - 1) / Float(quizController.quotes.count)
+            progressView.setProgress(currentProgress, animated: true)
+        }
+    }
     
     private func updateScore(_ sender: UIButton) {
         guard let quote = quote,
