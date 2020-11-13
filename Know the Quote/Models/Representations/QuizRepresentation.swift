@@ -13,7 +13,6 @@ struct QuizRepresentation {
     var title: String
     var dateCreated: Date
     var creator: UserRepresentation
-    
     var quotes: [QuoteRepresentation]
     var hasBeenReported: Bool
 }

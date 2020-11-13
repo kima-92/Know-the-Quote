@@ -18,14 +18,13 @@ extension User {
               let quizesCreated = quizzesCreated,
               let signupDate = signupDate else { return nil }
         
-            // Creating a Representation for each Quiz
-            for quiz in quizesCreated {
-                let q = quiz as? Quiz
-                if let quizRep = q?.quizRepresentation {
-                    quizes.append(quizRep)
-                }
+        // Creating a Representation for each Quiz
+        for quiz in quizesCreated {
+            let q = quiz as? Quiz
+            if let quizRep = q?.quizRepresentation {
+                quizes.append(quizRep)
             }
-        
+        }
         return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizesCreated: quizes)
     }
     

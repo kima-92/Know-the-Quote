@@ -13,12 +13,11 @@ class QuizController {
     // MARK: - Properties
     
     var quiz: Quiz?
-    var currentQuote = 1
     
     var title: String?
     var creator: User?
-    var quotes: [Int : Quote] = [:]
     
+    // Max / Min
     let quoteCountMin = 0
     let quoteCountMax = 15
     let currentQuoteMinIndex = 1
@@ -26,7 +25,21 @@ class QuizController {
     let quizMinQuotes = 3
     let quizMaxQuotes = 15
     
-    // MARK: - Methods
+    // Counters and cache
+    var currentQuote = 1
+    var quotes: [Int : Quote] = [:]
+    
+    // MARK: - Shared Methods
+    
+    private func resetCounter() {
+        currentQuote = 1
+    }
+    
+    private func resetQuotesDictionary() {
+        quotes = [:]
+    }
+    
+    // MARK: - NewQuizVC Methods
     
     // Create new Quiz and save in CD WITHOUT any quotes
     func createEmptyQuiz(context: NSManagedObjectContext) {
@@ -42,15 +55,18 @@ class QuizController {
     }
     
     // Add a new quote to the quiz
-    func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [QuotePart : String], context: NSManagedObjectContext) {
+    func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [String], context: NSManagedObjectContext) {
         
         // If there's less than 16 quotes in the array, create this new quote and add it to the quiz
         if quotes.count < 16 {
+            
             let quote = Quote(firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
             self.quotes[quotes.count + 1] = quote
             guard let quiz = quiz else { return }
+            quote.quizID = quiz.id?.uuidString
             quiz.addToQuotes(quote)
+            
             CoreDataStack.shared.save(context: context)
         } else {
             // TODO: - Alert the user they can't create a Quiz with more than 15 Quotes
@@ -79,5 +95,55 @@ class QuizController {
     }
     func moveToPrevQuote() {
         if canMoveToPrev() { currentQuote -= 1 }
+    }
+    
+    // MARK: - QuizVC Methods
+    
+    // Setup to start a quiz
+    func setupStart(quiz: Quiz) -> Quote? {
+        resetCounter()
+        resetQuotesDictionary()
+        
+        // Fetch all quotes
+        getAllQuotesOf(quiz: quiz)
+        
+        resetCounter()
+        
+        // Return the first quote
+        return quotes[currentQuote]
+    }
+    
+    // Fetch quotes of a specific quiz from CoreData
+    func getAllQuotesOf(quiz: Quiz) {
+        
+        let moc = CoreDataStack.shared.mainContext
+        let fetchRequest = NSFetchRequest<Quote>(entityName: "Quote")
+        
+        if let quizIDString = quiz.id?.uuidString {
+            fetchRequest.predicate = NSPredicate(format: "quizID == %@", quizIDString)
+        }
+        
+        do {
+            let quotes = try moc.fetch(fetchRequest)
+            
+            // Store each quote in the dictionary
+            for quote in quotes {
+                self.quotes[currentQuote] = quote
+                currentQuote += 1
+            }
+        } catch {
+            NSLog("Could not fetch quotes")
+            // TODO: - Alert the user
+        }
+    }
+    
+    // Return the next quote that needs to be displayed
+    func nextQuoteToDisplay() -> Quote? {
+        if currentQuote < quotes.count {
+            
+            currentQuote += 1
+            return quotes[currentQuote]
+        }
+        return nil
     }
 }

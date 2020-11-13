@@ -13,6 +13,6 @@ struct QuoteRepresentation {
     var secondPart: String
     var answer: String
     var quiz: QuizRepresentation
-    var incorrectOptions: [QuotePart : String]
+    var incorrectOptions: [String]
     var allOptions: [String]
 }
