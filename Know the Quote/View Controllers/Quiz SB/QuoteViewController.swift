@@ -16,6 +16,7 @@ class QuoteViewController: UIViewController {
     var quiz: Quiz?
     var quote: Quote?
     var buttons: [UIButton?] = []
+    var score = Score()
     
     // MARK: - Outlets
     
@@ -43,11 +44,27 @@ class QuoteViewController: UIViewController {
     
     @IBAction func optButtonTapped(_ sender: UIButton) {
         guard let quizController = quizController else { return }
+        
+        updateScore(sender)
+        
         quote = quizController.nextQuoteToDisplay()
         displayQuote()
     }
     
     // MARK: - Methods
+    
+    private func updateScore(_ sender: UIButton) {
+        guard let quote = quote,
+              let optSelected = sender.title(for: .normal) else { return }
+        
+        if optSelected == quote.answer {
+            score.points += 1
+            score.selectedResponses[optSelected] = true
+        } else {
+            score.selectedResponses[optSelected] = false
+        }
+        print(score.points)
+    }
     
     private func gatherButtons() {
         buttons.append(opt1Button)

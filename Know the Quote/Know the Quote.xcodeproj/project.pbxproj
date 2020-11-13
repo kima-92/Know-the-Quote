@@ -34,6 +34,7 @@
 		FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4229032551DB23003CD327 /* Quote+Convenience.swift */; };
 		FA4E15AD255496790093EAB6 /* QuotePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E15AC255496790093EAB6 /* QuotePart.swift */; };
 		FA7550C42553BA1D0034F9C8 /* NewQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */; };
+		FAD9C5C1255F22A600A97B04 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD9C5C0255F22A600A97B04 /* Score.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		FA4229032551DB23003CD327 /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
 		FA4E15AC255496790093EAB6 /* QuotePart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotePart.swift; sourceTree = "<group>"; };
 		FA7550C32553BA1D0034F9C8 /* NewQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuoteViewController.swift; sourceTree = "<group>"; };
+		FAD9C5C0255F22A600A97B04 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				FA4228F32551D036003CD327 /* KnowTheQuote.xcdatamodeld */,
 				FA4229072551E04A003CD327 /* Model+Convenience */,
 				FA4229062551E02B003CD327 /* Representations */,
+				FAD9C5C0255F22A600A97B04 /* Score.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */,
 				FA244CB125576FA400658CD5 /* QuizViewController.swift in Sources */,
 				FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */,
+				FAD9C5C1255F22A600A97B04 /* Score.swift in Sources */,
 				FA4E15AD255496790093EAB6 /* QuotePart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
