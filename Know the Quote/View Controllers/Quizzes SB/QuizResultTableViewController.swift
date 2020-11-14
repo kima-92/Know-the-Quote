@@ -35,14 +35,17 @@ class QuizResultTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return score?.selectedResponses.count ?? 0
+        return score?.answers.count ?? 0
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteResultCell", for: indexPath)
-        cell.textLabel?.text = "1"
-
+        
+        guard let quizController = quizController,
+              let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteResultCell", for: indexPath) as? QuoteResultTableViewCell else { return UITableViewCell() }
+        
+        cell.score = score
+        cell.quote = quizController.quotes[indexPath.row + 1]
+        cell.updateCell()
 
         return cell
     }
@@ -82,6 +85,13 @@ class QuizResultTableViewController: UITableViewController {
         return true
     }
     */
+    
+    // MARK: - Methods
+    
+    private func resetCurrentQuoteIndex() {
+        guard let quizController = quizController else { return }
+//        quizController.res
+    }
 
     /*
     // MARK: - Navigation

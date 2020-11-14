@@ -9,5 +9,5 @@ import Foundation
 
 struct Score {
     var points: Int = 0
-    var selectedResponses: [String: Bool] = [:]
+    var answers: [Quote : SelectedOption] = [:]
 }

@@ -83,9 +83,12 @@ class QuoteViewController: UIViewController {
         
         if optSelected == quote.answer {
             score.points += 1
-            score.selectedResponses[optSelected] = true
+            score.answers[quote] = SelectedOption(selection: optSelected, isCorrect: true)
+//            score.selectedResponses[optSelected] = true
+            
         } else {
-            score.selectedResponses[optSelected] = false
+            score.answers[quote] = SelectedOption(selection: optSelected, isCorrect: false)
+//            score.selectedResponses[optSelected] = false
         }
     }
     
