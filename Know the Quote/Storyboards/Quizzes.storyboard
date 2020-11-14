@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Ll-9p-gKX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Ll-9p-gKX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -203,40 +203,93 @@
                         <outlet property="opt5Button" destination="gGo-07-Bh5" id="Ia8-xh-5Sp"/>
                         <outlet property="progressView" destination="tsv-oD-hAb" id="KI7-Qj-XGz"/>
                         <outlet property="quoteLabel" destination="rRv-pv-bo5" id="0vB-qG-ysd"/>
-                        <segue destination="MBE-qR-szw" kind="show" identifier="ShowQuizResultVCSegue" id="CrS-S6-VDG"/>
+                        <segue destination="Fcs-aW-zsh" kind="show" identifier="ShowQuizResultVCSegue" id="Hho-GM-p10"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mzq-LM-ffK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2251" y="188"/>
         </scene>
-        <!--Quiz Result View Controller-->
-        <scene sceneID="dKX-WW-5fG">
+        <!--Quiz Result Table View Controller-->
+        <scene sceneID="vFN-N2-f1i">
             <objects>
-                <viewController id="MBE-qR-szw" customClass="QuizResultViewController" customModule="Know_the_Quote" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fFi-4J-7Gl">
+                <tableViewController id="Fcs-aW-zsh" customClass="QuizResultTableViewController" customModule="Know_the_Quote" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IYI-t5-46f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H9-sf-Rjq">
-                                <rect key="frame" x="123.5" y="403" width="167" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="OqK-nF-pJB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="3H9-sf-Rjq" firstAttribute="centerX" secondItem="fFi-4J-7Gl" secondAttribute="centerX" id="Cea-Ws-jSE"/>
-                            <constraint firstItem="3H9-sf-Rjq" firstAttribute="centerY" secondItem="fFi-4J-7Gl" secondAttribute="centerY" id="o91-BT-s5j"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="x33-xC-ara"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hpm-rv-g8C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="iC4-he-Jfu">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="snP-je-G58">
+                                    <rect key="frame" x="171" y="18" width="72" height="41"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quiz Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGo-O1-SLy">
+                                            <rect key="frame" x="0.0" y="0.0" width="72" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORj-xE-I0G">
+                                            <rect key="frame" x="0.0" y="20.5" width="44.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="snP-je-G58" firstAttribute="centerY" secondItem="iC4-he-Jfu" secondAttribute="centerY" id="3q5-z5-AWN"/>
+                                <constraint firstItem="snP-je-G58" firstAttribute="centerX" secondItem="iC4-he-Jfu" secondAttribute="centerX" id="SOE-NQ-kgZ"/>
+                            </constraints>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="r1C-Cy-gjg">
+                            <rect key="frame" x="0.0" y="176.5" width="414" height="95"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVe-js-Pea">
+                                    <rect key="frame" x="188.5" y="32.5" width="37" height="30"/>
+                                    <state key="normal" title="Done"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="HVe-js-Pea" firstAttribute="centerX" secondItem="r1C-Cy-gjg" secondAttribute="centerX" id="FqG-26-ajr"/>
+                                <constraint firstItem="HVe-js-Pea" firstAttribute="centerY" secondItem="r1C-Cy-gjg" secondAttribute="centerY" id="GUj-RC-QnX"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuoteResultCell" textLabel="xeo-Q6-LfV" style="IBUITableViewCellStyleDefault" id="GTB-Uv-Xou" customClass="QuoteResultTableViewCell" customModule="Know_the_Quote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="105" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GTB-Uv-Xou" id="q2a-kg-gjj">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xeo-Q6-LfV">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Fcs-aW-zsh" id="eZq-pa-LGT"/>
+                            <outlet property="delegate" destination="Fcs-aW-zsh" id="LEl-B0-CdS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Syo-6R-NRD"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kjY-Ch-1lX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3146" y="188"/>
+            <point key="canvasLocation" x="3186" y="188"/>
         </scene>
     </scenes>
     <resources>

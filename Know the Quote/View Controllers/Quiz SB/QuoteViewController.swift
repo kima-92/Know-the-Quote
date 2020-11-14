@@ -141,12 +141,12 @@ class QuoteViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ShowQuizResultVCSegue" {
-            guard let quizResultVC = segue.destination as? QuizResultViewController else { return }
+            guard let quizResultTVC = segue.destination as? QuizResultTableViewController else { return }
             
-            quizResultVC.user = user
-            quizResultVC.quizController = quizController
-            quizResultVC.quiz = quiz
-            quizResultVC.score = score
+            quizResultTVC.user = user
+            quizResultTVC.quizController = quizController
+            quizResultTVC.quiz = quiz
+            quizResultTVC.score = score
         }
     }
 }
