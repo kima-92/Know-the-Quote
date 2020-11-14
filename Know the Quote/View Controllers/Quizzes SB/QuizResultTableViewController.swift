@@ -25,6 +25,7 @@ class QuizResultTableViewController: UITableViewController {
     // MARK: - DidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateViews()
     }
     
     // MARK: - Actions
@@ -88,9 +89,12 @@ class QuizResultTableViewController: UITableViewController {
     
     // MARK: - Methods
     
-    private func resetCurrentQuoteIndex() {
-        guard let quizController = quizController else { return }
-//        quizController.res
+    private func updateViews() {
+        guard let quiz = quiz,
+              let score = score else { return }
+        
+        scoreLabel.text = "Score: " + String(score.points)
+        quizTitleLabel.text = quiz.title
     }
 
     /*
