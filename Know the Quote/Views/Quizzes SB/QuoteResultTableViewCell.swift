@@ -38,6 +38,15 @@ class QuoteResultTableViewCell: UITableViewCell {
         
         quoteLabel.text = first + " _____ " + second
         answerChosenLabel.text = chosenAnswer.selection
+        
+        // Change color based if user was correct
+        if chosenAnswer.isCorrect {
+            answerChosenLabel.backgroundColor = UIColor(red: 80/255, green: 200/255, blue: 120/255, alpha: 0.5)
+            
+        } else {
+            answerChosenLabel.backgroundColor = UIColor(red: 214/255, green: 44/255, blue: 67/255, alpha: 0.5)
+        }
+        answerChosenLabel.layer.masksToBounds = true
+        answerChosenLabel.layer.cornerRadius = 5
     }
-    // TODO: - Change the color of the label based on whether they chose right or wrong
 }
