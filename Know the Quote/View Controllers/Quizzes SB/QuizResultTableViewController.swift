@@ -31,6 +31,7 @@ class QuizResultTableViewController: UITableViewController {
     // MARK: - Actions
 
     @IBAction func doneButtonTapped(_ sender: UIButton) {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: - Table view data source
