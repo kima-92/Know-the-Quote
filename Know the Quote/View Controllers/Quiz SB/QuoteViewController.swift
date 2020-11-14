@@ -60,7 +60,7 @@ class QuoteViewController: UIViewController {
         // Segue to the next VC if this was the last quote
         if quote == nil {
             updateProgressBar(true)
-            // TODO: - Segue to the result page
+            performSegue(withIdentifier: "ShowQuizResultVCSegue", sender: self)
         } else {
             updateProgressBar()
         }
@@ -134,5 +134,19 @@ class QuoteViewController: UIViewController {
     private func updateViews() {
         guard let _ = quizController,
               let _ = quiz else { return }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ShowQuizResultVCSegue" {
+            guard let quizResultVC = segue.destination as? QuizResultViewController else { return }
+            
+            quizResultVC.user = user
+            quizResultVC.quizController = quizController
+            quizResultVC.quiz = quiz
+            quizResultVC.score = score
+        }
     }
 }

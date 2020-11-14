@@ -8,6 +8,15 @@
 import UIKit
 
 class QuizResultViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    var quizController: QuizController?
+    var user: User?
+    var quiz: Quiz?
+    var score: Score?
+    
+    // MARK: - DidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
