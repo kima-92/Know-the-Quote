@@ -83,7 +83,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FA244C972557505500658CD5 /* Quiz SB */ = {
+		FA244C972557505500658CD5 /* Quizzes SB */ = {
 			isa = PBXGroup;
 			children = (
 				FA244C982557508300658CD5 /* QuizzesTableViewController.swift */,
@@ -91,7 +91,7 @@
 				FA244CAD25576F8B00658CD5 /* QuoteViewController.swift */,
 				FA9032A7255F8735009AB858 /* QuizResultTableViewController.swift */,
 			);
-			path = "Quiz SB";
+			path = "Quizzes SB";
 			sourceTree = "<group>";
 		};
 		FA244CA12557521100658CD5 /* Views */ = {
@@ -159,7 +159,7 @@
 		FA4228C82551A6F3003CD327 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA244C972557505500658CD5 /* Quiz SB */,
+				FA244C972557505500658CD5 /* Quizzes SB */,
 				FA4228DE2551C53E003CD327 /* Main SB */,
 				FA4228D92551C304003CD327 /* Home SB */,
 				FA4228D12551B3E1003CD327 /* CreateQuiz SB */,
