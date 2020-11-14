@@ -8,7 +8,12 @@
 import UIKit
 
 class QuoteResultTableViewCell: UITableViewCell {
+    
+    // MARK: - Outlets
 
+    @IBOutlet weak var quoteLabel: UILabel!
+    @IBOutlet weak var answerChosenLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
