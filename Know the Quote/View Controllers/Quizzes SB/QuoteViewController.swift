@@ -60,7 +60,7 @@ class QuoteViewController: UIViewController {
         // Segue to the next VC if this was the last quote
         if quote == nil {
             updateProgressBar(true)
-            // TODO: - Segue to the result page
+            performSegue(withIdentifier: "ShowQuizResultVCSegue", sender: self)
         } else {
             updateProgressBar()
         }
@@ -83,9 +83,12 @@ class QuoteViewController: UIViewController {
         
         if optSelected == quote.answer {
             score.points += 1
-            score.selectedResponses[optSelected] = true
+            score.answers[quote] = SelectedOption(selection: optSelected, isCorrect: true)
+//            score.selectedResponses[optSelected] = true
+            
         } else {
-            score.selectedResponses[optSelected] = false
+            score.answers[quote] = SelectedOption(selection: optSelected, isCorrect: false)
+//            score.selectedResponses[optSelected] = false
         }
     }
     
@@ -134,5 +137,19 @@ class QuoteViewController: UIViewController {
     private func updateViews() {
         guard let _ = quizController,
               let _ = quiz else { return }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ShowQuizResultVCSegue" {
+            guard let quizResultTVC = segue.destination as? QuizResultTableViewController else { return }
+            
+            quizResultTVC.user = user
+            quizResultTVC.quizController = quizController
+            quizResultTVC.quiz = quiz
+            quizResultTVC.score = score
+        }
     }
 }
