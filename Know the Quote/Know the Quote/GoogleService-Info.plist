@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>347599035379-vk545vc8r7cghd343cvn91b1mjq2fim7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.347599035379-vk545vc8r7cghd343cvn91b1mjq2fim7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDYOHFIcGRV8FPCKk8kPWqKZvYqLJ4bvz8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>347599035379</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.wilmarodriguez.Know-the-Quote</string>
+	<key>PROJECT_ID</key>
+	<string>know-the-quote</string>
+	<key>STORAGE_BUCKET</key>
+	<string>know-the-quote.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:347599035379:ios:dd5411044a4c7176689086</string>
+	<key>DATABASE_URL</key>
+	<string>https://know-the-quote.firebaseio.com</string>
+</dict>
+</plist>
