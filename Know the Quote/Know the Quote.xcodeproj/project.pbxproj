@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A52C27F460B581ADB7B1D79 /* Pods_Know_the_Quote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FB781956BBD01159431538 /* Pods_Know_the_Quote.framework */; };
 		FA0A5A302561E4B800C06D72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0A5A2F2561E4B800C06D72 /* GoogleService-Info.plist */; };
 		FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244C982557508300658CD5 /* QuizzesTableViewController.swift */; };
 		FA244C9E2557509E00658CD5 /* Quizzes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA244C9D2557509E00658CD5 /* Quizzes.storyboard */; };
@@ -41,6 +42,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32FB781956BBD01159431538 /* Pods_Know_the_Quote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Know_the_Quote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EAEA126E8C4FBEE27B08029 /* Pods-Know the Quote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Know the Quote.release.xcconfig"; path = "Target Support Files/Pods-Know the Quote/Pods-Know the Quote.release.xcconfig"; sourceTree = "<group>"; };
+		AE10800AA1E1910063ED0F31 /* Pods-Know the Quote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Know the Quote.debug.xcconfig"; path = "Target Support Files/Pods-Know the Quote/Pods-Know the Quote.debug.xcconfig"; sourceTree = "<group>"; };
 		FA0A5A2F2561E4B800C06D72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA244C982557508300658CD5 /* QuizzesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesTableViewController.swift; sourceTree = "<group>"; };
 		FA244C9D2557509E00658CD5 /* Quizzes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Quizzes.storyboard; sourceTree = "<group>"; };
@@ -81,12 +85,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A52C27F460B581ADB7B1D79 /* Pods_Know_the_Quote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C92D46626E2E679555344FC0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32FB781956BBD01159431538 /* Pods_Know_the_Quote.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F096E263975501BB9762D136 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AE10800AA1E1910063ED0F31 /* Pods-Know the Quote.debug.xcconfig */,
+				9EAEA126E8C4FBEE27B08029 /* Pods-Know the Quote.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FA244C972557505500658CD5 /* Quizzes SB */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +149,8 @@
 				FA4228EF2551CE95003CD327 /* Helpers */,
 				FA4228B12551A6DF003CD327 /* Know the Quote */,
 				FA4228B02551A6DF003CD327 /* Products */,
+				F096E263975501BB9762D136 /* Pods */,
+				C92D46626E2E679555344FC0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,9 +286,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA4228C32551A6E2003CD327 /* Build configuration list for PBXNativeTarget "Know the Quote" */;
 			buildPhases = (
+				051D097867A9240509A4D1DF /* [CP] Check Pods Manifest.lock */,
 				FA4228AB2551A6DF003CD327 /* Sources */,
 				FA4228AC2551A6DF003CD327 /* Frameworks */,
 				FA4228AD2551A6DF003CD327 /* Resources */,
+				4D88A599323D6DB8630369BC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -322,6 +349,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		051D097867A9240509A4D1DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Know the Quote-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D88A599323D6DB8630369BC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Know the Quote/Pods-Know the Quote-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Know the Quote/Pods-Know the Quote-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Know the Quote/Pods-Know the Quote-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FA4228AB2551A6DF003CD327 /* Sources */ = {
@@ -495,6 +564,7 @@
 		};
 		FA4228C42551A6E2003CD327 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE10800AA1E1910063ED0F31 /* Pods-Know the Quote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -514,6 +584,7 @@
 		};
 		FA4228C52551A6E2003CD327 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EAEA126E8C4FBEE27B08029 /* Pods-Know the Quote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
