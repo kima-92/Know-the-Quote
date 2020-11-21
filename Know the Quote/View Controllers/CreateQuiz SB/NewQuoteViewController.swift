@@ -42,6 +42,7 @@ class NewQuoteViewController: UIViewController {
         super.viewDidLoad()
         gatherTextFields()
         updateButtonsViews(clearTextFields: true, shouldEnableNext: false)
+        self.hideKeyboardWhenTappedAround()
     }
     
     // MARK: - Actions

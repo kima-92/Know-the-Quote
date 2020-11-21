@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuoteRepresentation {
+struct QuoteRepresentation: Codable {
     
     var firstPart: String
     var secondPart: String

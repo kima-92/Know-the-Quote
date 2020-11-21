@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct QuizRepresentation {
+struct QuizRepresentation: Codable {
     
     var id: UUID
     var title: String

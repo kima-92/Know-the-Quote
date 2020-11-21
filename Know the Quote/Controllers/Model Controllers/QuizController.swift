@@ -7,13 +7,16 @@
 
 import Foundation
 import CoreData
+import Firebase
 
 class QuizController {
     
     // MARK: - Properties
     
-    var quiz: Quiz?
+    private let baseURL = URL(string: "https://know-the-quote.firebaseio.com/")!
+    let db = Firestore.firestore()
     
+    var quiz: Quiz?
     var title: String?
     var creator: User?
     
@@ -43,7 +46,6 @@ class QuizController {
     
     // Create new Quiz and save in CD WITHOUT any quotes
     func createEmptyQuiz(context: NSManagedObjectContext) {
-        
         guard let title = title,
               let creator = creator else { return }
         
@@ -51,7 +53,48 @@ class QuizController {
         guard let quiz = quiz else { return }
         
         creator.addToQuizzesCreated(quiz)
-        CoreDataStack.shared.save(context: context)
+        put(quiz: quiz, id: quiz.id?.uuidString ?? "1") { (result) in
+            
+            if let err = result as? NetworkingError {
+                print("Something went wrong")
+            } else {
+                CoreDataStack.shared.save(context: context)
+            }
+        }
+    }
+    
+    // Save Quiz in Firebase
+    func put(quiz: Quiz, id: String, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
+        
+        guard let quizRep = quiz.quizRepresentation else { return }
+        
+        let requestURL = baseURL
+            .appendingPathComponent("Quizzes")
+            .appendingPathComponent(id)
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(quizRep)
+            completion(.success(quizRep))
+            print("Sucefully PUT quiz in Firebase")
+        } catch {
+            NSLog("Error encoding quizRepresentation: \(error)")
+            completion(.failure(.badEncode))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, _, error) in
+            
+            if let error = error {
+                NSLog("Error PUTting quiz: \(error)")
+                completion(.failure(.notAddedToFirebase))
+                return
+                // TODO: - Alert the user
+            }
+        }.resume()
     }
     
     // Add a new quote to the quiz

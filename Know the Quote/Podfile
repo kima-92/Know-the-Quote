@@ -10,5 +10,9 @@ target 'Know the Quote' do
   # Firebase
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
+  # Optionally, include the Swift extensions if using Swift.
+  pod 'FirebaseFirestoreSwift'
+  
 
 end
