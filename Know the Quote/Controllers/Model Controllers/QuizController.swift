@@ -79,20 +79,22 @@ class QuizController {
         do {
             request.httpBody = try JSONEncoder().encode(quizRep)
             completion(.success(quizRep))
-            print("Sucefully PUT quiz in Firebase")
         } catch {
             NSLog("Error encoding quizRepresentation: \(error)")
             completion(.failure(.badEncode))
             return
         }
-        
-        URLSession.shared.dataTask(with: request) { (_, _, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 NSLog("Error PUTting quiz: \(error)")
                 completion(.failure(.notAddedToFirebase))
                 return
                 // TODO: - Alert the user
+            }
+            
+            if (response as? HTTPURLResponse) != nil {
+                // TODO: - Handle response | response.statusCode
             }
         }.resume()
     }
