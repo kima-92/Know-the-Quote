@@ -99,6 +99,44 @@ class QuizController {
         }.resume()
     }
     
+    // Save Quotes in Firebase
+    func put(quotes: [Quote], quizID: String, completion: @escaping (Result<[QuoteRepresentation]?, NetworkingError>) -> Void) {
+        
+        let quoteReps = quotes.compactMap({$0.quoteRepresentation})
+        guard quoteReps.count == quotes.count else { return }
+        
+        let requestURL = baseURL
+            .appendingPathComponent("quizzes")
+            .appendingPathComponent(quizID)
+            .appendingPathComponent("quotes")
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(quoteReps)
+            completion(.success(quoteReps))
+        } catch {
+            NSLog("Error encoding array of quoteReps: \(error)")
+            completion(.failure(.badEncode))
+            return
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error PUTting quoteReps: \(error)")
+                completion(.failure(.notAddedToFirebase))
+                return
+                // TODO: - Alert the user
+            }
+            
+            if (response as? HTTPURLResponse) != nil {
+                // TODO: - Handle response | response.statusCode
+            }
+        }.resume()
+    }
+    
     // Add a new quote to the quiz
     func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [String], context: NSManagedObjectContext) {
         
