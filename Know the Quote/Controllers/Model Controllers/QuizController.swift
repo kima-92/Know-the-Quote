@@ -44,26 +44,57 @@ class QuizController {
     
     // MARK: - NewQuizVC Methods
     
-    // Create new Quiz and save in CD WITHOUT any quotes
-    func createEmptyQuiz(context: NSManagedObjectContext) {
-        guard let title = title,
-              let creator = creator,
-              let creatorID = creator.id  else { return }
-        
-        quiz = Quiz(title: title, creator: creator, context: context)
-        guard let quiz = quiz else { return }
-        
-        creator.addToQuizzesCreated(quiz)
-        put(quiz: quiz, creatorID: creatorID) { (result) in
-            
-            do {
-                let savedQuiz = try result.get()
-                CoreDataStack.shared.save(context: context)
-            } catch {
-                NSLog("Couldn't save new quiz on server: \(error)")
-            }
-        }
+    // Check if there's enough quotes to create a quiz
+    func quizCanBeSaved() -> Bool {
+        if quotes.count <= quizMaxQuotes && quotes.count >= quizMinQuotes { return true }
+        return false
     }
+    
+    // Check if currentQuote can move Prev/Next
+    func canMoveToNext() -> Bool {
+        if quotes.count <= quoteCountMax && currentQuote <= currentQuoteMaxIndex { return true }
+        return false
+    }
+    func canMoveToPrev() -> Bool {
+        if quotes.count != quoteCountMin && currentQuote > currentQuoteMinIndex { return true }
+        return false
+    }
+    
+    // Move currentQuote Prev/Next
+    func moveToNextQuote() {
+        if canMoveToNext() { currentQuote += 1 }
+    }
+    func moveToPrevQuote() {
+        if canMoveToPrev() { currentQuote -= 1 }
+    }
+    
+    // MARK: - QuizVC Methods
+    
+    // Setup to start a quiz
+    func setupStart(quiz: Quiz) -> Quote? {
+        resetCounter()
+        resetQuotesDictionary()
+        
+        // Fetch all quotes
+        getAllQuotesOf(quiz: quiz)
+        
+        resetCounter()
+        
+        // Return the first quote
+        return quotes[currentQuote]
+    }
+    
+    // Return the next quote that needs to be displayed
+    func nextQuoteToDisplay() -> Quote? {
+        if currentQuote < quotes.count {
+            
+            currentQuote += 1
+            return quotes[currentQuote]
+        }
+        return nil
+    }
+    
+    // MARK: - Firebase
     
     // Save Quiz in Firebase
     func put(quiz: Quiz, creatorID: UUID, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
@@ -183,6 +214,29 @@ class QuizController {
         }.resume()
     }
     
+    // MARK: - CoreData
+    
+    // Create new Quiz and save in CD WITHOUT any quotes
+    func createEmptyQuiz(context: NSManagedObjectContext) {
+        guard let title = title,
+              let creator = creator,
+              let creatorID = creator.id  else { return }
+        
+        quiz = Quiz(title: title, creator: creator, context: context)
+        guard let quiz = quiz else { return }
+        
+        creator.addToQuizzesCreated(quiz)
+        put(quiz: quiz, creatorID: creatorID) { (result) in
+            
+            do {
+                let savedQuiz = try result.get()
+                CoreDataStack.shared.save(context: context)
+            } catch {
+                NSLog("Couldn't save new quiz on server: \(error)")
+            }
+        }
+    }
+    
     // Add a new quote to the quiz
     func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [String], context: NSManagedObjectContext) {
         
@@ -200,46 +254,6 @@ class QuizController {
         } else {
             // TODO: - Alert the user they can't create a Quiz with more than 15 Quotes
         }
-    }
-    
-    // Check if there's enough quotes to create a quiz
-    func quizCanBeSaved() -> Bool {
-        if quotes.count <= quizMaxQuotes && quotes.count >= quizMinQuotes { return true }
-        return false
-    }
-    
-    // Check if currentQuote can move Prev/Next
-    func canMoveToNext() -> Bool {
-        if quotes.count <= quoteCountMax && currentQuote <= currentQuoteMaxIndex { return true }
-        return false
-    }
-    func canMoveToPrev() -> Bool {
-        if quotes.count != quoteCountMin && currentQuote > currentQuoteMinIndex { return true }
-        return false
-    }
-    
-    // Move currentQuote Prev/Next
-    func moveToNextQuote() {
-        if canMoveToNext() { currentQuote += 1 }
-    }
-    func moveToPrevQuote() {
-        if canMoveToPrev() { currentQuote -= 1 }
-    }
-    
-    // MARK: - QuizVC Methods
-    
-    // Setup to start a quiz
-    func setupStart(quiz: Quiz) -> Quote? {
-        resetCounter()
-        resetQuotesDictionary()
-        
-        // Fetch all quotes
-        getAllQuotesOf(quiz: quiz)
-        
-        resetCounter()
-        
-        // Return the first quote
-        return quotes[currentQuote]
     }
     
     // Fetch quotes of a specific quiz from CoreData
@@ -264,15 +278,5 @@ class QuizController {
             NSLog("Could not fetch quotes")
             // TODO: - Alert the user
         }
-    }
-    
-    // Return the next quote that needs to be displayed
-    func nextQuoteToDisplay() -> Quote? {
-        if currentQuote < quotes.count {
-            
-            currentQuote += 1
-            return quotes[currentQuote]
-        }
-        return nil
     }
 }
