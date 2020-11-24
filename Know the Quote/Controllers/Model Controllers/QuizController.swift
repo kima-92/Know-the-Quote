@@ -47,30 +47,34 @@ class QuizController {
     // Create new Quiz and save in CD WITHOUT any quotes
     func createEmptyQuiz(context: NSManagedObjectContext) {
         guard let title = title,
-              let creator = creator else { return }
+              let creator = creator,
+              let creatorID = creator.id  else { return }
         
         quiz = Quiz(title: title, creator: creator, context: context)
         guard let quiz = quiz else { return }
         
         creator.addToQuizzesCreated(quiz)
-        put(quiz: quiz, id: quiz.id?.uuidString ?? "1") { (result) in
+        put(quiz: quiz, creatorID: creatorID) { (result) in
             
-            if let err = result as? NetworkingError {
-                print("Something went wrong")
-            } else {
+            do {
+                let savedQuiz = try result.get()
                 CoreDataStack.shared.save(context: context)
+            } catch {
+                NSLog("Couldn't save new quiz on server: \(error)")
             }
         }
     }
     
     // Save Quiz in Firebase
-    func put(quiz: Quiz, id: String, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
+    func put(quiz: Quiz, creatorID: UUID, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
         
-        guard let quizRep = quiz.quizRepresentation else { return }
+        guard let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation))}
         
         let requestURL = baseURL
-            .appendingPathComponent("Quizzes")
-            .appendingPathComponent(id)
+            .appendingPathComponent("user")
+            .appendingPathComponent(creatorID.uuidString)
+            .appendingPathComponent("quizzes")
+            .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
@@ -100,14 +104,16 @@ class QuizController {
     }
     
     // Save Quotes in Firebase
-    func put(quotes: [Quote], quizID: String, completion: @escaping (Result<[QuoteRepresentation]?, NetworkingError>) -> Void) {
+    func put(quotes: [Quote], quizID: UUID, creatorID: UUID, completion: @escaping (Result<[QuoteRepresentation]?, NetworkingError>) -> Void) {
         
         let quoteReps = quotes.compactMap({$0.quoteRepresentation})
-        guard quoteReps.count == quotes.count else { return }
+        guard quoteReps.count == quotes.count else { return completion(.failure(.noRepresentation))}
         
         let requestURL = baseURL
+            .appendingPathComponent("user")
+            .appendingPathComponent(creatorID.uuidString)
             .appendingPathComponent("quizzes")
-            .appendingPathComponent(quizID)
+            .appendingPathComponent(quizID.uuidString)
             .appendingPathComponent("quotes")
             .appendingPathExtension("json")
         
@@ -126,6 +132,46 @@ class QuizController {
             
             if let error = error {
                 NSLog("Error PUTting quoteReps: \(error)")
+                completion(.failure(.notAddedToFirebase))
+                return
+                // TODO: - Alert the user
+            }
+            
+            if (response as? HTTPURLResponse) != nil {
+                // TODO: - Handle response | response.statusCode
+            }
+        }.resume()
+    }
+    
+    // Save new User in Firebase
+    func put(user: User, completion: @escaping (Result<UserRepresentation?, NetworkingError>) -> Void) {
+        
+        guard let userRep = user.userRepresentation,
+              let id = user.id?.uuidString else { return completion(.failure(.noRepresentation))}
+        
+        let requestURL = baseURL
+            .appendingPathComponent("user")
+            .appendingPathComponent(id)
+//            .appendingPathComponent("quizzes")
+//            .appendingPathComponent(quizID)
+//            .appendingPathComponent("quotes")
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(userRep)
+            completion(.success(userRep))
+        } catch {
+            NSLog("Error encoding new user: \(error)")
+            completion(.failure(.badEncode))
+            return
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error PUTting new user: \(error)")
                 completion(.failure(.notAddedToFirebase))
                 return
                 // TODO: - Alert the user
