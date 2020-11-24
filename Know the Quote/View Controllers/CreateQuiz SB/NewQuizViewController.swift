@@ -11,8 +11,8 @@ class NewQuizViewController: UIViewController {
     
     // MARK: - Poperties
     
-    var quizController = QuizController()
-    let user = User(username: "user", password: "pass", context: CoreDataStack.shared.mainContext)
+    var quizController: QuizController?
+    var user: User?
     
     // MARK: - Outlets
     
@@ -27,6 +27,9 @@ class NewQuizViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
+        
+        guard let user = user,
+              let quizController = quizController else { return }
         
         // Create empty Quiz then segue
         if let title = titleTextField.text,

@@ -16,6 +16,7 @@ class QuizController {
     private let baseURL = URL(string: "https://know-the-quote.firebaseio.com/")!
     let db = Firestore.firestore()
     
+    var user: User?
     var quiz: Quiz?
     var title: String?
     var creator: User?
@@ -216,6 +217,25 @@ class QuizController {
     
     // MARK: - CoreData
     
+    // Create new Quiz
+    // Save in CD/FB WITHOUT any quotes
+    func createUser(username: String, password: String, context: NSManagedObjectContext) -> User? {
+        
+        user = User(username: username, password: password, context: context)
+        guard let user = user else { return nil }
+        
+        put(user: user) { (result) in
+            
+            do {
+                _ = try result.get()
+                CoreDataStack.shared.save(context: context)
+            } catch {
+                NSLog("Couldn't save new user on server: \(error)")
+            }
+        }
+        return user
+    }
+    
     // Create new Quiz and save in CD WITHOUT any quotes
     func createEmptyQuiz(context: NSManagedObjectContext) {
         guard let title = title,
@@ -276,6 +296,22 @@ class QuizController {
             }
         } catch {
             NSLog("Could not fetch quotes")
+            // TODO: - Alert the user
+        }
+    }
+    
+    // Fetch All Users from CoreData
+    func getAllUsersFromCD() -> [User]? {
+        
+        let moc = CoreDataStack.shared.mainContext
+        let fetchRequest = NSFetchRequest<User>(entityName: "User")
+        
+        do {
+            let users = try moc.fetch(fetchRequest)
+            return users
+        } catch {
+            NSLog("Could not fetch quotes")
+            return nil
             // TODO: - Alert the user
         }
     }

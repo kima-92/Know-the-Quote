@@ -9,6 +9,11 @@ import UIKit
 import Firebase
 
 class LogInViewController: UIViewController {
+    
+    // MARK: - Poperties
+    
+    var quizController = QuizController()
+    var user: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,17 +21,29 @@ class LogInViewController: UIViewController {
     }
     
     private func getUser() {
-        
+        // Try fetch user from CD
+        if let users = quizController.getAllUsersFromCD(),
+           users.count > 0 {
+            let userOneArr = users.filter({$0.username == "userOne"})
+            if let userOne = userOneArr.first {
+                user = userOne
+            }
+        }
+        // Create new user
+        else {
+            user = quizController.createUser(username: "userOne", password: "pass", context: CoreDataStack.shared.mainContext)
+        }
     }
-
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // HomeVC
+        if segue.identifier == "showHomeSBsegue" {
+            guard let homeVC = segue.destination as? HomeViewController else { return }
+            
+            homeVC.user = user
+            homeVC.quizController = quizController
+        }
     }
-    */
-
 }
