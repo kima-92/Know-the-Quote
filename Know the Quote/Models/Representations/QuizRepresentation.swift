@@ -15,4 +15,10 @@ struct QuizRepresentation: Codable {
     var creator: UserRepresentation
     var quotes: [QuoteRepresentation]
     var hasBeenReported: Bool
+    
+//    func getKeyValueArray() -> {
+//        return [
+//            "id" : 
+//        ]
+//    }
 }
