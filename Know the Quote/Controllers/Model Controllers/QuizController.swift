@@ -103,9 +103,9 @@ class QuizController {
         guard let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation))}
         
         let requestURL = baseURL
-            .appendingPathComponent("user")
+            .appendingPathComponent("users")
             .appendingPathComponent(creatorID.uuidString)
-            .appendingPathComponent("quizzes")
+            .appendingPathComponent("quizzesCreated")
             .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathExtension("json")
         
@@ -135,35 +135,35 @@ class QuizController {
         }.resume()
     }
     
-    // Save Quotes in Firebase
-    func put(quotes: [Quote], quizID: UUID, creatorID: UUID, completion: @escaping (Result<[QuoteRepresentation]?, NetworkingError>) -> Void) {
+    // Save a Quote in Firebase
+    func put(quote: Quote, quizID: UUID, creatorID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
         
-        let quoteReps = quotes.compactMap({$0.quoteRepresentation})
-        guard quoteReps.count == quotes.count else { return completion(.failure(.noRepresentation))}
+        guard let quoteRep = quote.quoteRepresentation else { return }
         
         let requestURL = baseURL
-            .appendingPathComponent("user")
+            .appendingPathComponent("users")
             .appendingPathComponent(creatorID.uuidString)
-            .appendingPathComponent("quizzes")
+            .appendingPathComponent("quizzesCreated")
             .appendingPathComponent(quizID.uuidString)
             .appendingPathComponent("quotes")
+            .appendingPathComponent(quoteRep.quoteID)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
         
         do {
-            request.httpBody = try JSONEncoder().encode(quoteReps)
-            completion(.success(quoteReps))
+            request.httpBody = try JSONEncoder().encode(quoteRep)
+            completion(.success(quoteRep))
         } catch {
-            NSLog("Error encoding array of quoteReps: \(error)")
+            NSLog("Error encoding quote: \(error)")
             completion(.failure(.badEncode))
             return
         }
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                NSLog("Error PUTting quoteReps: \(error)")
+                NSLog("Error PUTting quote: \(error)")
                 completion(.failure(.notAddedToFirebase))
                 return
                 // TODO: - Alert the user
@@ -179,14 +179,11 @@ class QuizController {
     func put(user: User, completion: @escaping (Result<UserRepresentation?, NetworkingError>) -> Void) {
         
         guard let userRep = user.userRepresentation,
-              let id = user.id?.uuidString else { return completion(.failure(.noRepresentation))}
+              let username = user.username else { return completion(.failure(.noRepresentation))}
         
         let requestURL = baseURL
-            .appendingPathComponent("user")
-            .appendingPathComponent(id)
-//            .appendingPathComponent("quizzes")
-//            .appendingPathComponent(quizID)
-//            .appendingPathComponent("quotes")
+            .appendingPathComponent("users")
+            .appendingPathComponent(username)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
@@ -211,6 +208,50 @@ class QuizController {
             
             if (response as? HTTPURLResponse) != nil {
                 // TODO: - Handle response | response.statusCode
+            }
+        }.resume()
+    }
+    
+    // Fetch User from Firebase
+    func fetch(username: String, password: String, completion: @escaping (Result<User?, NetworkingError>) -> Void) {
+        
+        let requestURL = baseURL
+            .appendingPathComponent("users")
+            .appendingPathComponent(username)
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                NSLog("Failed to fetch user: \(error)")
+                completion(.failure(.noData))
+            }
+            
+            if let data = data {
+                // Decode then fetch from/create user in CoreData
+                do {
+                    let userRep = try JSONDecoder().decode(UserRepresentation.self, from: data)
+                    
+                    if let user = self.getUserFromCD(userID: userRep.id.uuidString) {
+                        self.user = user
+                        completion(.success(self.user))
+                    } else {
+                        let moc = CoreDataStack.shared.mainContext
+                        self.user = User(username: username, password: password, context: CoreDataStack.shared.mainContext)
+                        CoreDataStack.shared.save(context: moc)
+                        completion(.success(self.user))
+                    }
+                } catch {
+                    NSLog("Failed to fetch/decode user: \(error)")
+                    completion(.failure(.badDecode))
+                    // TODO: - Alert User
+                }
+            }
+            
+            if let response = response as? HTTPURLResponse,
+               response.statusCode != 200 {
+                completion(.failure(.unexpectedStatusCode(response.statusCode)))
             }
         }.resume()
     }
@@ -249,7 +290,7 @@ class QuizController {
         put(quiz: quiz, creatorID: creatorID) { (result) in
             
             do {
-                let savedQuiz = try result.get()
+                _ = try result.get()
                 CoreDataStack.shared.save(context: context)
             } catch {
                 NSLog("Couldn't save new quiz on server: \(error)")
@@ -259,18 +300,28 @@ class QuizController {
     
     // Add a new quote to the quiz
     func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [String], context: NSManagedObjectContext) {
+        guard let quiz = quiz,
+              let creator = creator,
+              let creatorID = creator.id,
+              let quizID = quiz.id else { return }
         
         // If there's less than 16 quotes in the array, create this new quote and add it to the quiz
         if quotes.count < 16 {
             
-            let quote = Quote(firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
+            let quote = Quote(quizID: quizID.uuidString, firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
-            self.quotes[quotes.count + 1] = quote
-            guard let quiz = quiz else { return }
-            quote.quizID = quiz.id?.uuidString
-            quiz.addToQuotes(quote)
-            
-            CoreDataStack.shared.save(context: context)
+            put(quote: quote, quizID: quizID, creatorID: creatorID) { (result) in
+                
+                do {
+                    _ = try result.get()
+                    self.quotes[self.quotes.count + 1] = quote
+                    quiz.addToQuotes(quote)
+                    CoreDataStack.shared.save(context: context)
+                } catch {
+                    NSLog("Failed to save Quote in Firebase \(error)")
+                    // TODO: - Alert User
+                }
+            }
         } else {
             // TODO: - Alert the user they can't create a Quiz with more than 15 Quotes
         }
@@ -310,7 +361,25 @@ class QuizController {
             let users = try moc.fetch(fetchRequest)
             return users
         } catch {
-            NSLog("Could not fetch quotes")
+            NSLog("Could not fetch users")
+            return nil
+            // TODO: - Alert the user
+        }
+    }
+    
+    // Fetch a User from CoreData
+    func getUserFromCD(userID: String) -> User? {
+        
+        let moc = CoreDataStack.shared.mainContext
+        let fetchRequest = NSFetchRequest<User>(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "id", userID)
+        
+        do {
+            let users = try moc.fetch(fetchRequest)
+            let user = users.first
+            return user
+        } catch {
+            NSLog("Could not fetch user fro FB")
             return nil
             // TODO: - Alert the user
         }

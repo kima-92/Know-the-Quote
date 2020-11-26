@@ -9,10 +9,11 @@ import Foundation
 
 struct QuoteRepresentation: Codable {
     
+    var quoteID: String
     var firstPart: String
     var secondPart: String
     var answer: String
-    var quiz: QuizRepresentation
+    var quizID: String
     var incorrectOptions: [String]
     var allOptions: [String]
 }

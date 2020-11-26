@@ -12,13 +12,7 @@ struct QuizRepresentation: Codable {
     var id: UUID
     var title: String
     var dateCreated: Date
-    var creator: UserRepresentation
+    var creatorID: String
     var quotes: [QuoteRepresentation]
     var hasBeenReported: Bool
-    
-//    func getKeyValueArray() -> {
-//        return [
-//            "id" : 
-//        ]
-//    }
 }
