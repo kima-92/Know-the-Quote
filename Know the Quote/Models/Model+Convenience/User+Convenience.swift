@@ -10,22 +10,22 @@ import CoreData
 extension User {
     
     var userRepresentation: UserRepresentation? {
-        var quizes: [QuizRepresentation] = []
+        var quizesIDs: [String] = []
         
         guard let id = id,
               let username = username,
               let password = password,
-              let quizesCreated = quizzesCreated,
+              let quizesCreatedIDs = quizzesCreated,
               let signupDate = signupDate else { return nil }
         
-        // Creating a Representation for each Quiz
-        for quiz in quizesCreated {
-            let q = quiz as? Quiz
-            if let quizRep = q?.quizRepresentation {
-                quizes.append(quizRep)
+        // Storing the ID of each Quiz
+        for quizElement in quizesCreatedIDs {
+            if let quiz = quizElement as? Quiz,
+            let id = quiz.id {
+                quizesIDs.append(id.uuidString)
             }
         }
-        return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizesCreated: quizes)
+        return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizesCreatedIDs: quizesIDs)
     }
     
     // Init

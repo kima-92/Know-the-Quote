@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct UserRepresentation {
+struct UserRepresentation: Codable {
     
     var id: UUID
     var signupDate: Date
     var username: String
     var password: String
     var coins: Int16
-    var quizesCreated: [QuizRepresentation]?
+    var quizesCreatedIDs: [String]?
 }

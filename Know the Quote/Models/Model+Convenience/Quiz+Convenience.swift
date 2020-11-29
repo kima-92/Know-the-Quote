@@ -16,8 +16,7 @@ extension Quiz {
         guard let id = id,
               let title = title,
               let date = dateCreated,
-              let creator = creator,
-              let creatorRep = creator.userRepresentation,
+              let creatorID = creatorID,
               let quotes = quotes else { return nil }
         
         // Getting the representation of each quote
@@ -28,17 +27,19 @@ extension Quiz {
             }
         }
         
-        return QuizRepresentation(id: id, title: title, dateCreated: date, creator: creatorRep, quotes: quotesReps, hasBeenReported: hasBeenReported)
+        return QuizRepresentation(id: id, title: title, dateCreated: date, creatorID: creatorID, quotes: quotesReps, hasBeenReported: hasBeenReported)
     }
     
     // Init
     @discardableResult convenience init(title: String, creator: User, context: NSManagedObjectContext) {
         self.init(context: context)
         
+        guard let creatorID = creator.id else { return }
+        
         id = UUID()
         dateCreated = Date()
         hasBeenReported = false
-        
+        self.creatorID = creatorID.uuidString
         self.title = title
         self.creator = creator
         

@@ -12,8 +12,8 @@ class QuizzesTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var quizController = QuizController()
-    var user = User()
+    var quizController: QuizController?
+    var user: User?
     
     var fetchedResultController: NSFetchedResultsController<Quiz> {
         let fetchRequest: NSFetchRequest<Quiz> = Quiz.fetchRequest()
