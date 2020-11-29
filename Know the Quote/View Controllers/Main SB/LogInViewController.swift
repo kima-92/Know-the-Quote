@@ -12,7 +12,7 @@ class LogInViewController: UIViewController {
     
     // MARK: - Poperties
     
-    var quizController = QuizController()
+    var kqController = KQController()
     var user: User?
 
     override func viewDidLoad() {
@@ -22,12 +22,13 @@ class LogInViewController: UIViewController {
     
     private func getUser() {
         
-        quizController.fetch(username: "userOne", password: "pass") { (result) in
+        kqController.userController.fetch(username: "userOne", password: "pass") { (result) in
             do {
                 self.user = try result.get()
+                self.kqController.syncUser()
             } catch {
-                // Create new user
-                self.user = self.quizController.createUser(username: "userOne", password: "pass", context: CoreDataStack.shared.mainContext)
+                // Create new user if fetch was unsuccessfull
+                self.user = self.kqController.createUserAndSync(username: "userOne", password: "pass", context: CoreDataStack.shared.mainContext)
                 // TODO: - Alert user if User object == nil
             }
         }
@@ -41,7 +42,7 @@ class LogInViewController: UIViewController {
             guard let homeVC = segue.destination as? HomeViewController else { return }
             
             homeVC.user = user
-            homeVC.quizController = quizController
+            homeVC.kqController = kqController
         }
     }
 }

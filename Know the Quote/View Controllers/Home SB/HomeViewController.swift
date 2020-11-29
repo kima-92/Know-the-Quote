@@ -11,7 +11,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Poperties
     
-    var quizController: QuizController?
+    var kqController: KQController?
     var user: User?
 
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
             guard let newQuizVC = segue.destination as? NewQuizViewController else { return }
             
             newQuizVC.user = user
-            newQuizVC.quizController = quizController
+            newQuizVC.kqController = kqController
         }
         
         // QuizzesTVC
@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
             guard let quizzesTVC = segue.destination as? QuizzesTableViewController else { return }
             
             quizzesTVC.user = user
-            quizzesTVC.quizController = quizController
+            quizzesTVC.kqController = kqController
         }
     }
 }

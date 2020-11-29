@@ -15,4 +15,5 @@ enum NetworkingError: Error {
     case badEncode
     case notAddedToFirebase
     case noRepresentation
+    case noBaseURL
 }

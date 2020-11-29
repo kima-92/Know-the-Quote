@@ -42,6 +42,9 @@
 		FA9B1BB72568A37F001195F8 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B1BB62568A37F001195F8 /* NetworkingError.swift */; };
 		FA9B1BBA2568A3F6001195F8 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B1BB92568A3F6001195F8 /* HTTPMethod.swift */; };
 		FAD9C5C1255F22A600A97B04 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD9C5C0255F22A600A97B04 /* Score.swift */; };
+		FAFE7A1425733136002357AC /* KQController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE7A1325733136002357AC /* KQController.swift */; };
+		FAFE7A1725733172002357AC /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE7A1625733172002357AC /* QuoteController.swift */; };
+		FAFE7A1A25733180002357AC /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE7A1925733180002357AC /* UserController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,9 @@
 		FA9B1BB62568A37F001195F8 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		FA9B1BB92568A3F6001195F8 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		FAD9C5C0255F22A600A97B04 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		FAFE7A1325733136002357AC /* KQController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KQController.swift; sourceTree = "<group>"; };
+		FAFE7A1625733172002357AC /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
+		FAFE7A1925733180002357AC /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				FA4228EC2551CD84003CD327 /* QuizController.swift */,
+				FAFE7A1625733172002357AC /* QuoteController.swift */,
+				FAFE7A1925733180002357AC /* UserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -250,6 +258,7 @@
 		FA4228EB2551CD53003CD327 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FAFE7A1325733136002357AC /* KQController.swift */,
 				FA4228EA2551CD45003CD327 /* Model Controllers */,
 			);
 			path = Controllers;
@@ -417,6 +426,7 @@
 				FA765C9A25605D66003C8CCE /* SelectedOption.swift in Sources */,
 				FA4228B52551A6DF003CD327 /* SceneDelegate.swift in Sources */,
 				FA244CAE25576F8B00658CD5 /* QuoteViewController.swift in Sources */,
+				FAFE7A1A25733180002357AC /* UserController.swift in Sources */,
 				FA4228FB2551D794003CD327 /* User+Convenience.swift in Sources */,
 				FA63B9C125645B3B00C08BD1 /* UIViewController+Extension.swift in Sources */,
 				FA4229042551DB23003CD327 /* Quote+Convenience.swift in Sources */,
@@ -426,9 +436,11 @@
 				FA9B1BB72568A37F001195F8 /* NetworkingError.swift in Sources */,
 				FA4228F52551D036003CD327 /* KnowTheQuote.xcdatamodeld in Sources */,
 				FA4228CC2551B0BE003CD327 /* LogInViewController.swift in Sources */,
+				FAFE7A1425733136002357AC /* KQController.swift in Sources */,
 				FA244CB125576FA400658CD5 /* QuizViewController.swift in Sources */,
 				FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */,
 				FA9B1BBA2568A3F6001195F8 /* HTTPMethod.swift in Sources */,
+				FAFE7A1725733172002357AC /* QuoteController.swift in Sources */,
 				FA9032A8255F8735009AB858 /* QuizResultTableViewController.swift in Sources */,
 				FAD9C5C1255F22A600A97B04 /* Score.swift in Sources */,
 				FA4E15AD255496790093EAB6 /* QuotePart.swift in Sources */,

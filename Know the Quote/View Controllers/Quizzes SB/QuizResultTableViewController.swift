@@ -11,7 +11,7 @@ class QuizResultTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var quizController: QuizController?
+    var kqController: KQController?
     var user: User?
     var quiz: Quiz?
     var score: Score?
@@ -42,11 +42,11 @@ class QuizResultTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let quizController = quizController,
+        guard let kqController = kqController,
               let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteResultCell", for: indexPath) as? QuoteResultTableViewCell else { return UITableViewCell() }
         
         cell.score = score
-        cell.quote = quizController.quotes[indexPath.row + 1]
+        cell.quote = kqController.quizController.quotes[indexPath.row + 1]
         cell.updateCell()
 
         return cell

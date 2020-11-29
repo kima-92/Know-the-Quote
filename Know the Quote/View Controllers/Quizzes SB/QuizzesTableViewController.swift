@@ -12,7 +12,7 @@ class QuizzesTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var quizController: QuizController?
+    var kqController: KQController?
     var user: User?
     
     var fetchedResultController: NSFetchedResultsController<Quiz> {
@@ -77,7 +77,7 @@ class QuizzesTableViewController: UITableViewController {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 quizVC.quiz = fetchedResultController.object(at: indexPath)
                 quizVC.user = user
-                quizVC.quizController = quizController
+                quizVC.kqController = kqController
             }
         }
     }
