@@ -14,6 +14,5 @@ struct UserRepresentation: Codable {
     var username: String
     var password: String
     var coins: Int16
-    var quizesCreated: [String]?
-//    var quizesCreated: [QuizRepresentation]?
+    var quizesCreatedIDs: [String]?
 }
