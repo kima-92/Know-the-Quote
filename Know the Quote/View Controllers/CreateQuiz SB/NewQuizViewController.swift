@@ -11,7 +11,7 @@ class NewQuizViewController: UIViewController {
     
     // MARK: - Poperties
     
-    var quizController: QuizController?
+    var kqController: KQController?
     var user: User?
     
     // MARK: - Outlets
@@ -29,14 +29,14 @@ class NewQuizViewController: UIViewController {
     @IBAction func startButtonTapped(_ sender: UIButton) {
         
         guard let _ = user,
-              let quizController = quizController else { return }
+              let kqController = kqController else { return }
         
         // Create empty Quiz then segue
         if let title = titleTextField.text,
            !title.isEmpty {
-            quizController.title = titleTextField.text
+            kqController.quizController.title = titleTextField.text
             
-            quizController.createEmptyQuiz(context: CoreDataStack.shared.mainContext)
+            kqController.quizController.createEmptyQuiz(context: CoreDataStack.shared.mainContext)
             
             performSegue(withIdentifier: "newQuoteDetailsSegue", sender: self)
         } else {
@@ -52,7 +52,7 @@ class NewQuizViewController: UIViewController {
         if segue.identifier == "newQuoteDetailsSegue" {
             if let newQuoteVC = segue.destination as? NewQuoteViewController {
                 newQuoteVC.user = user
-                newQuoteVC.quizController = quizController
+                newQuoteVC.kqController = kqController
             }
         }
     }

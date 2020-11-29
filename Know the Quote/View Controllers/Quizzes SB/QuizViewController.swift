@@ -11,7 +11,7 @@ class QuizViewController: UIViewController {
     
     // MARK: - Properties
     
-    var quizController: QuizController?
+    var kqController: KQController?
     var user: User?
     var quiz: Quiz?
     
@@ -36,7 +36,7 @@ class QuizViewController: UIViewController {
     
     private func updateViews() {
         guard let quiz = quiz,
-              let _ = quizController,
+              let _ = kqController,
               let _ = user else { return }
         titleLabel.text = quiz.title
     }
@@ -49,7 +49,7 @@ class QuizViewController: UIViewController {
             guard let quoteVC = segue.destination as? QuoteViewController else { return }
             
             quoteVC.user = user
-            quoteVC.quizController = quizController
+            quoteVC.kqController = kqController
             quoteVC.quiz = quiz
         }
     }

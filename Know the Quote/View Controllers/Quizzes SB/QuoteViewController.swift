@@ -11,7 +11,7 @@ class QuoteViewController: UIViewController {
     
     // MARK: - Properties
     
-    var quizController: QuizController?
+    var kqController: KQController?
     var user: User?
     var quiz: Quiz?
     var quote: Quote?
@@ -51,10 +51,10 @@ class QuoteViewController: UIViewController {
     
     // Processing the user's selection and updating UI
     private func processSelection(_ sender: UIButton) {
-        guard let quizController = quizController else { return }
+        guard let kqController = kqController else { return }
         
         updateScore(sender)
-        quote = quizController.nextQuoteToDisplay()
+        quote = kqController.quizController.nextQuoteToDisplay()
         displayQuote()
         
         // Segue to the next VC if this was the last quote
@@ -67,12 +67,12 @@ class QuoteViewController: UIViewController {
     }
     
     private func updateProgressBar(_ isLast: Bool = false) {
-        guard let quizController = quizController else { return }
+        guard let kqController = kqController else { return }
         
         if isLast {
             progressView.setProgress(1.0, animated: true)
         } else {
-            let currentProgress = Float(quizController.currentQuote - 1) / Float(quizController.quotes.count)
+            let currentProgress = Float(kqController.quizController.currentQuote - 1) / Float(kqController.quizController.quotes.count)
             progressView.setProgress(currentProgress, animated: true)
         }
     }
@@ -84,11 +84,11 @@ class QuoteViewController: UIViewController {
         if optSelected == quote.answer {
             score.points += 1
             score.answers[quote] = SelectedOption(selection: optSelected, isCorrect: true)
-//            score.selectedResponses[optSelected] = true
+            //            score.selectedResponses[optSelected] = true
             
         } else {
             score.answers[quote] = SelectedOption(selection: optSelected, isCorrect: false)
-//            score.selectedResponses[optSelected] = false
+            //            score.selectedResponses[optSelected] = false
         }
     }
     
@@ -120,22 +120,22 @@ class QuoteViewController: UIViewController {
     
     // Start the Quiz
     private func setupQuiz() {
-        guard let quizController = quizController,
+        guard let kqController = kqController,
               let quiz = quiz else { return }
         
         // Setup the quiz if it hasn't started yet
         if quote == nil {
-            self.quote = quizController.setupStart(quiz: quiz)
+            self.quote = kqController.quizController.setupStart(quiz: quiz)
         }
         // Display the next quote if the quiz already started
-        else if let quote = quizController.nextQuoteToDisplay() {
+        else if let quote = kqController.quizController.nextQuoteToDisplay() {
             self.quote = quote
         }
         // TODO: - Alert the user something went wrong
     }
     
     private func updateViews() {
-        guard let _ = quizController,
+        guard let _ = kqController,
               let _ = quiz else { return }
     }
     
@@ -147,7 +147,7 @@ class QuoteViewController: UIViewController {
             guard let quizResultTVC = segue.destination as? QuizResultTableViewController else { return }
             
             quizResultTVC.user = user
-            quizResultTVC.quizController = quizController
+            quizResultTVC.kqController = kqController
             quizResultTVC.quiz = quiz
             quizResultTVC.score = score
         }

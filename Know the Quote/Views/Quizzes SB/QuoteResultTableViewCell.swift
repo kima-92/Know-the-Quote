@@ -15,14 +15,14 @@ class QuoteResultTableViewCell: UITableViewCell {
     var score: Score?
     
     // MARK: - Outlets
-
+    
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var answerChosenLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

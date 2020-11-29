@@ -21,7 +21,7 @@ extension User {
         // Storing the ID of each Quiz
         for quizElement in quizesCreatedIDs {
             if let quiz = quizElement as? Quiz,
-            let id = quiz.id {
+               let id = quiz.id {
                 quizesIDs.append(id.uuidString)
             }
         }

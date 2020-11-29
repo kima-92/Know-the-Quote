@@ -11,7 +11,7 @@ class NewQuoteViewController: UIViewController {
     
     // MARK: - Poperties
     
-    var quizController: QuizController?
+    var kqController: KQController?
     var user: User?
     var incompleteQuote: [QuotePart : String]?
     
@@ -58,18 +58,17 @@ class NewQuoteViewController: UIViewController {
     }
     
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
-        // Done button
+        guard let kqController = kqController else { return }
+        
         if doneButton.isEnabled == false,
-           let quizController = quizController,
-           quizController.quotes.count == 2,
+           kqController.quizController.quotes.count == 2,
            isDataComplete() {
             
             enable(button: doneButton)
         }
         
         if nextButton.isEnabled == false,
-           let quizController = quizController,
-           quizController.canMoveToNext(),
+           kqController.quizController.canMoveToNext(),
            isDataComplete() {
             enable(button: nextButton)
         }
@@ -78,11 +77,11 @@ class NewQuoteViewController: UIViewController {
     // MARK: - Methods
     
     private func moveToPrev() {
-        guard let quizController = quizController,
-              quizController.canMoveToPrev() else { return }
+        guard let kqController = kqController,
+              kqController.quizController.canMoveToPrev() else { return }
         
         saveIncompleteData()
-        quizController.moveToPrevQuote()
+        kqController.quizController.moveToPrevQuote()
         displayQuoteData()
     }
     
@@ -100,30 +99,33 @@ class NewQuoteViewController: UIViewController {
     
     // Check if need to display an existing quote, or set the screen for a new one
     private func moveToNext() {
-        guard let quizController = quizController,
-              quizController.canMoveToNext()
+        guard let kqController = kqController,
+              kqController.quizController.canMoveToNext()
         
         else {
             // TODO: - Alert user you can't move forward
             return
         }
         
-        if quizController.currentQuote == quizController.quotes.count + 1 {
+        let current = kqController.quizController.currentQuote
+        let count = kqController.quizController.quotes.count
+        
+        if current == count + 1 {
             // Saving the latest (unsaved) quote
             
             if saveQuote() { // if it's successfull
-                quizController.moveToNextQuote()
+                kqController.quizController.moveToNextQuote()
                 updateButtonsViews(clearTextFields: true, shouldEnableNext: false)
             }
             
-        } else if quizController.currentQuote == quizController.quotes.count {
+        } else if current == count {
             // Clear out the screen for the next quote,
             // or filling in with the previously (still incomplete) quote
             
             // TODO: - Save changes made to this quote before moving to the next
             
             updateButtonsViews(clearTextFields: true, shouldEnableNext: false) // clear the screen
-            quizController.moveToNextQuote()
+            kqController.quizController.moveToNextQuote()
             tryLoadIncompleteData()
             
             if isDataComplete() {
@@ -133,7 +135,7 @@ class NewQuoteViewController: UIViewController {
             // Display next previously saved quote
             
             // TODO: - Save changes made to this quote
-            quizController.moveToNextQuote()
+            kqController.quizController.moveToNextQuote()
             displayQuoteData()
         }
         resetSets()
@@ -152,8 +154,8 @@ class NewQuoteViewController: UIViewController {
     
     // Fill in the textFields with a Quote's data
     private func displayQuoteData() {
-        guard let quizController = quizController,
-              let quote = quizController.quotes[quizController.currentQuote],
+        guard let kqController = kqController,
+              let quote = kqController.quizController.quotes[kqController.quizController.currentQuote],
               let incorrectOptions = quote.incorrectOptions as? [String]  else { return }
         
         part1TextField.text = quote.firstPart
@@ -181,9 +183,9 @@ class NewQuoteViewController: UIViewController {
     
     // Finish saving the Quiz and popToRoot
     private func finishCreatingQuiz() {
-        guard let quizController = quizController else { return }
+        guard let kqController = kqController else { return }
         
-        if quizController.quotes.count >= 2,
+        if kqController.quizController.quotes.count >= 2,
            isDataComplete(),
            saveQuote() {
             navigationController?.popToRootViewController(animated: true)
@@ -194,11 +196,11 @@ class NewQuoteViewController: UIViewController {
     // Save this Quote if the Data is complete
     private func saveQuote() -> Bool {
         guard isDataComplete(),
-              let quizController = quizController else { return false }
+              let kqController = kqController else { return false }
         
         collectCompleteData()
         
-        quizController.createQuote(firstPart: dataDictionary[.part1], secondPart: dataDictionary[.part2], answer: dataDictionary[.answer]!, incorrectAnswers: incorrectOptsArray, context: CoreDataStack.shared.mainContext)
+        kqController.quizController.createQuote(firstPart: dataDictionary[.part1], secondPart: dataDictionary[.part2], answer: dataDictionary[.answer]!, incorrectAnswers: incorrectOptsArray, context: CoreDataStack.shared.mainContext)
         return true
     }
     
@@ -263,7 +265,7 @@ class NewQuoteViewController: UIViewController {
     
     // Disable/Enable buttons and clear (or not) TextFields
     private func updateButtonsViews(clearTextFields: Bool, shouldEnableNext: Bool) {
-        guard let quizController = quizController,
+        guard let kqController = kqController,
               let textFields = textFields else { return }
         
         // Clear the textFields
@@ -274,7 +276,7 @@ class NewQuoteViewController: UIViewController {
         }
         
         // Prev Button
-        if quizController.canMoveToPrev() {
+        if kqController.quizController.canMoveToPrev() {
             enable(button: prevButton)
         } else {
             disable(button: prevButton)
@@ -282,14 +284,14 @@ class NewQuoteViewController: UIViewController {
         
         // Next Button
         if shouldEnableNext,
-           quizController.canMoveToNext() {
+           kqController.quizController.canMoveToNext() {
             enable(button: nextButton)
         } else {
             disable(button: nextButton)
         }
         
         // Done Button
-        if quizController.quizCanBeSaved() {
+        if kqController.quizController.quizCanBeSaved() {
             enable(button: doneButton)
         } else {
             disable(button: doneButton)
