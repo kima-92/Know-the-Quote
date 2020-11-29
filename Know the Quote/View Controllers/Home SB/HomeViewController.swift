@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     
     var kqController: KQController?
     var user: User?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

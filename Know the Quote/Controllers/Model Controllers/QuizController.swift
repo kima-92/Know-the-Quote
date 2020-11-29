@@ -191,7 +191,7 @@ class QuizController {
             
             let quote = Quote(quizID: quizID.uuidString, firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
-                quoteController.put(quote: quote, quizID: quizID) { (result) in
+            quoteController.put(quote: quote, quizID: quizID) { (result) in
                 
                 do {
                     _ = try result.get()

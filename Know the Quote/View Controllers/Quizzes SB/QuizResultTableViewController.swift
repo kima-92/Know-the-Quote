@@ -17,7 +17,7 @@ class QuizResultTableViewController: UITableViewController {
     var score: Score?
     
     // MARK: - Outlets
-
+    
     @IBOutlet weak var quizTitleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
@@ -29,13 +29,13 @@ class QuizResultTableViewController: UITableViewController {
     }
     
     // MARK: - Actions
-
+    
     @IBAction func doneButtonTapped(_ sender: UIButton) {
         navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return score?.answers.count ?? 0
     }
@@ -48,7 +48,7 @@ class QuizResultTableViewController: UITableViewController {
         cell.score = score
         cell.quote = kqController.quizController.quotes[indexPath.row + 1]
         cell.updateCell()
-
+        
         return cell
     }
     
