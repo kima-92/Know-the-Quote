@@ -19,7 +19,6 @@ class QuizController {
     var user: User?
     var quiz: Quiz?
     var title: String?
-    var creator: User?
     
     // Max / Min
     let quoteCountMin = 0
@@ -98,13 +97,15 @@ class QuizController {
     // MARK: - Firebase
     
     // Save Quiz in Firebase
-    func put(quiz: Quiz, creatorID: UUID, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
+    func put(quiz: Quiz, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
         
-        guard let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation))}
+        guard let quizRep = quiz.quizRepresentation,
+              let creator = user,
+              let creatorUsername = creator.username else { return completion(.failure(.noRepresentation)) }
         
         let requestURL = baseURL
             .appendingPathComponent("users")
-            .appendingPathComponent(creatorID.uuidString)
+            .appendingPathComponent(creatorUsername)
             .appendingPathComponent("quizzesCreated")
             .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathExtension("json")
@@ -136,13 +137,15 @@ class QuizController {
     }
     
     // Save a Quote in Firebase
-    func put(quote: Quote, quizID: UUID, creatorID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
+    func put(quote: Quote, quizID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
         
-        guard let quoteRep = quote.quoteRepresentation else { return }
+        guard let quoteRep = quote.quoteRepresentation,
+              let creator = user,
+              let creatorUsername = creator.username else { return completion(.failure(.noRepresentation)) }
         
         let requestURL = baseURL
             .appendingPathComponent("users")
-            .appendingPathComponent(creatorID.uuidString)
+            .appendingPathComponent(creatorUsername)
             .appendingPathComponent("quizzesCreated")
             .appendingPathComponent(quizID.uuidString)
             .appendingPathComponent("quotes")
@@ -218,6 +221,7 @@ class QuizController {
         let requestURL = baseURL
             .appendingPathComponent("users")
             .appendingPathComponent(username)
+            .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.get.rawValue
@@ -233,7 +237,7 @@ class QuizController {
                 do {
                     let userRep = try JSONDecoder().decode(UserRepresentation.self, from: data)
                     
-                    if let user = self.getUserFromCD(userID: userRep.id.uuidString) {
+                    if let user = self.getUserFromCD(username: userRep.username) {
                         self.user = user
                         completion(.success(self.user))
                     } else {
@@ -272,6 +276,7 @@ class QuizController {
                 CoreDataStack.shared.save(context: context)
             } catch {
                 NSLog("Couldn't save new user on server: \(error)")
+                // TODO: - Alert user
             }
         }
         return user
@@ -280,14 +285,13 @@ class QuizController {
     // Create new Quiz and save in CD WITHOUT any quotes
     func createEmptyQuiz(context: NSManagedObjectContext) {
         guard let title = title,
-              let creator = creator,
-              let creatorID = creator.id  else { return }
+              let creator = user else { return }
         
         quiz = Quiz(title: title, creator: creator, context: context)
         guard let quiz = quiz else { return }
         
         creator.addToQuizzesCreated(quiz)
-        put(quiz: quiz, creatorID: creatorID) { (result) in
+        put(quiz: quiz) { (result) in
             
             do {
                 _ = try result.get()
@@ -301,8 +305,6 @@ class QuizController {
     // Add a new quote to the quiz
     func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [String], context: NSManagedObjectContext) {
         guard let quiz = quiz,
-              let creator = creator,
-              let creatorID = creator.id,
               let quizID = quiz.id else { return }
         
         // If there's less than 16 quotes in the array, create this new quote and add it to the quiz
@@ -310,7 +312,7 @@ class QuizController {
             
             let quote = Quote(quizID: quizID.uuidString, firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
-            put(quote: quote, quizID: quizID, creatorID: creatorID) { (result) in
+            put(quote: quote, quizID: quizID) { (result) in
                 
                 do {
                     _ = try result.get()
@@ -368,11 +370,11 @@ class QuizController {
     }
     
     // Fetch a User from CoreData
-    func getUserFromCD(userID: String) -> User? {
+    func getUserFromCD(username: String) -> User? {
         
         let moc = CoreDataStack.shared.mainContext
         let fetchRequest = NSFetchRequest<User>(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "id", userID)
+        fetchRequest.predicate = NSPredicate(format: "username == %@", username)
         
         do {
             let users = try moc.fetch(fetchRequest)

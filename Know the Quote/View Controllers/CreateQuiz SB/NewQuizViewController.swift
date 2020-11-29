@@ -28,13 +28,13 @@ class NewQuizViewController: UIViewController {
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
         
-        guard let user = user,
+        guard let _ = user,
               let quizController = quizController else { return }
         
         // Create empty Quiz then segue
         if let title = titleTextField.text,
            !title.isEmpty {
-            quizController.creator = user
+//            quizController.creator = user
             quizController.title = titleTextField.text
             
             quizController.createEmptyQuiz(context: CoreDataStack.shared.mainContext)

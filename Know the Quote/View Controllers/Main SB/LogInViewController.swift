@@ -21,14 +21,6 @@ class LogInViewController: UIViewController {
     }
     
     private func getUser() {
-//        // Try fetch user from CD
-//        if let users = quizController.getAllUsersFromCD(),
-//           users.count > 0 {
-//            let userOneArr = users.filter({$0.username == "userOne"})
-//            if let userOne = userOneArr.first {
-//                user = userOne
-//            }
-//        }
         
         quizController.fetch(username: "userOne", password: "pass") { (result) in
             do {
@@ -36,6 +28,7 @@ class LogInViewController: UIViewController {
             } catch {
                 // Create new user
                 self.user = self.quizController.createUser(username: "userOne", password: "pass", context: CoreDataStack.shared.mainContext)
+                // TODO: - Alert user if User object == nil
             }
         }
     }
