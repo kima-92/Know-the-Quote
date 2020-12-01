@@ -116,7 +116,7 @@ class QuizController {
     
     // MARK: - Firebase
     
-    // Save Quiz in Firebase
+    // Save Quiz under user's createdQuizzes in Firebase
     func put(quiz: Quiz, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
         
         guard let baseURL = baseURL,
@@ -157,24 +157,72 @@ class QuizController {
         }.resume()
     }
     
+    // Add Quiz in Firebase by category
+    private func putInCategory(quiz: Quiz, category: String, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
+        
+        guard let baseURL = baseURL,
+              let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation)) }
+        
+        let requestURL = baseURL
+            .appendingPathComponent("quizzes")
+            .appendingPathComponent(category)
+            .appendingPathComponent(quizRep.id.uuidString)
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(quizRep)
+            completion(.success(quizRep))
+        } catch {
+            NSLog("Error encoding quizRepresentation: \(error)")
+            completion(.failure(.badEncode))
+            return
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error PUTting quiz: \(error)")
+                completion(.failure(.notAddedToFirebase))
+                return
+                // TODO: - Alert the user
+            }
+            
+            if (response as? HTTPURLResponse) != nil {
+                // TODO: - Handle response | response.statusCode
+            }
+        }.resume()
+    }
+    
     // MARK: - CoreData
     
     // Create new Quiz and save in CD WITHOUT any quotes
-    func createEmptyQuiz(context: NSManagedObjectContext) {
+    func createEmptyQuiz(category: String, context: NSManagedObjectContext) {
         guard let title = title,
               let creator = user else { return }
         
         quiz = Quiz(title: title, creator: creator, context: context)
         guard let quiz = quiz else { return }
         
+        // Save in user's account
         put(quiz: quiz) { (result) in
             
             do {
                 _ = try result.get()
-                creator.addToQuizzesCreated(quiz)
-                CoreDataStack.shared.save(context: context)
+                // Add to quizzes by category
+                self.putInCategory(quiz: quiz, category: category) { (result) in
+                    do {
+                        _ = try result.get()
+                        creator.addToQuizzesCreated(quiz)
+                        CoreDataStack.shared.save(context: context)
+                        
+                    } catch {
+                        NSLog("Couldn't add new quiz in category on server: \(error)")
+                    }
+                }
             } catch {
-                NSLog("Couldn't save new quiz on server: \(error)")
+                NSLog("Couldn't save new quiz created by user on server: \(error)")
             }
         }
     }

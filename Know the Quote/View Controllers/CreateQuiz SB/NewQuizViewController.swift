@@ -36,7 +36,8 @@ class NewQuizViewController: UIViewController {
            !title.isEmpty {
             kqController.quizController.title = titleTextField.text
             
-            kqController.quizController.createEmptyQuiz(context: CoreDataStack.shared.mainContext)
+            kqController.quizController.createEmptyQuiz(category: "category1", context: CoreDataStack.shared.mainContext)
+            // TODO: - UNhardcode the category!
             
             performSegue(withIdentifier: "newQuoteDetailsSegue", sender: self)
         } else {
