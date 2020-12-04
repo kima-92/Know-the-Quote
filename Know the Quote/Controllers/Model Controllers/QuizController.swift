@@ -202,7 +202,7 @@ class QuizController {
         guard let title = title,
               let creator = user else { return }
         
-        quiz = Quiz(title: title, creator: creator, context: context)
+        quiz = Quiz(title: title, creator: creator, category: category, context: context)
         guard let quiz = quiz else { return }
         
         // Save in user's account

@@ -15,4 +15,5 @@ struct QuizRepresentation: Codable {
     var creatorID: String
     var quotes: [QuoteRepresentation]
     var hasBeenReported: Bool
+    var category: String
 }

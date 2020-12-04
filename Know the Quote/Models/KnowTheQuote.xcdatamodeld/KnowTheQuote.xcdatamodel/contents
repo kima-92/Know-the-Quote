@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Quiz" representedClassName="Quiz" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="creatorID" optional="YES" attributeType="String"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasBeenReported" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -28,7 +29,7 @@
         <relationship name="quizzesCreated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quiz" inverseName="creator" inverseEntity="Quiz"/>
     </entity>
     <elements>
-        <element name="Quiz" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Quiz" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="Quote" positionX="-45" positionY="54" width="128" height="163"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="133"/>
     </elements>
