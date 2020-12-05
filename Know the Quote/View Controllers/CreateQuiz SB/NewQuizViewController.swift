@@ -17,6 +17,7 @@ class NewQuizViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var categoryTextField: UITextField!
     
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -33,10 +34,12 @@ class NewQuizViewController: UIViewController {
         
         // Create empty Quiz then segue
         if let title = titleTextField.text,
-           !title.isEmpty {
+           let category = categoryTextField.text,
+           !title.isEmpty,
+           !category.isEmpty {
             kqController.quizController.title = titleTextField.text
             
-            kqController.quizController.createEmptyQuiz(category: "category1", context: CoreDataStack.shared.mainContext)
+            kqController.quizController.createEmptyQuiz(category: category, context: CoreDataStack.shared.mainContext)
             // TODO: - UNhardcode the category!
             
             performSegue(withIdentifier: "newQuoteDetailsSegue", sender: self)
