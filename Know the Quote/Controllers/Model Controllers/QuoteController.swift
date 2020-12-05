@@ -29,8 +29,8 @@ class QuoteController {
     
     // MARK: - Firebase
     
-    // Save a Quote in Firebase
-    func put(quote: Quote, quizID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
+    // Save a Quote in User's account - Firebase
+    func putQuoteForUser(quote: Quote, quizID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
         
         guard let baseURL = baseURL,
               let quoteRep = quote.quoteRepresentation,
@@ -41,6 +41,46 @@ class QuoteController {
             .appendingPathComponent("users")
             .appendingPathComponent(creatorUsername)
             .appendingPathComponent("quizzesCreated")
+            .appendingPathComponent(quizID.uuidString)
+            .appendingPathComponent("quotes")
+            .appendingPathComponent(quoteRep.quoteID)
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(quoteRep)
+            completion(.success(quoteRep))
+        } catch {
+            NSLog("Error encoding quote: \(error)")
+            completion(.failure(.badEncode))
+            return
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error PUTting quote: \(error)")
+                completion(.failure(.notAddedToFirebase))
+                return
+                // TODO: - Alert the user
+            }
+            
+            if (response as? HTTPURLResponse) != nil {
+                // TODO: - Handle response | response.statusCode
+            }
+        }.resume()
+    }
+    
+    // Save a Quote in categorized Quizzes - Firebase
+    func putForQuizBy(category: String, quote: Quote, quizID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
+        
+        guard let baseURL = baseURL,
+              let quoteRep = quote.quoteRepresentation else { return completion(.failure(.noRepresentation)) }
+        
+        let requestURL = baseURL
+            .appendingPathComponent("quizzes")
+            .appendingPathComponent(category)
             .appendingPathComponent(quizID.uuidString)
             .appendingPathComponent("quotes")
             .appendingPathComponent(quoteRep.quoteID)

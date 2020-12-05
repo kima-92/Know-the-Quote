@@ -230,7 +230,8 @@ class QuizController {
     // Add a new quote to the quiz
     func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [String], context: NSManagedObjectContext) {
         guard let quiz = quiz,
-              let quizID = quiz.id else { return }
+              let quizID = quiz.id,
+              let category = quiz.category else { return }
         
         syncUser()
         
@@ -239,15 +240,26 @@ class QuizController {
             
             let quote = Quote(quizID: quizID.uuidString, firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
-            quoteController.put(quote: quote, quizID: quizID) { (result) in
+            quoteController.putQuoteForUser(quote: quote, quizID: quizID) { (userResult) in
                 
                 do {
-                    _ = try result.get()
-                    self.quotes[self.quotes.count + 1] = quote
-                    quiz.addToQuotes(quote)
-                    CoreDataStack.shared.save(context: context)
+                    // Saving on user's account
+                    _ = try userResult.get()
+                    
+                    self.quoteController.putForQuizBy(category: category, quote: quote, quizID: quizID) { (quizResult) in
+                        do {
+                            // Saving in categorized Quizzes
+                            _ = try quizResult.get()
+                            self.quotes[self.quotes.count + 1] = quote
+                            quiz.addToQuotes(quote)
+                            CoreDataStack.shared.save(context: context)
+                        } catch {
+                            NSLog("Failed to save Quote for categorized Quiz in Firebase: \(error)")
+                            // TODO: - Alert User
+                        }
+                    }
                 } catch {
-                    NSLog("Failed to save Quote in Firebase \(error)")
+                    NSLog("Failed to save Quote for user in Firebase: \(error)")
                     // TODO: - Alert User
                 }
             }
