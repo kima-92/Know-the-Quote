@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A52C27F460B581ADB7B1D79 /* Pods_Know_the_Quote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FB781956BBD01159431538 /* Pods_Know_the_Quote.framework */; };
 		FA0A5A302561E4B800C06D72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0A5A2F2561E4B800C06D72 /* GoogleService-Info.plist */; };
+		FA1779AD257DA81800E22F3D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1779AC257DA81800E22F3D /* Category.swift */; };
 		FA244C992557508300658CD5 /* QuizzesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244C982557508300658CD5 /* QuizzesTableViewController.swift */; };
 		FA244C9E2557509E00658CD5 /* Quizzes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA244C9D2557509E00658CD5 /* Quizzes.storyboard */; };
 		FA244CA52557524300658CD5 /* QuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA244CA42557524300658CD5 /* QuizTableViewCell.swift */; };
@@ -52,6 +53,7 @@
 		9EAEA126E8C4FBEE27B08029 /* Pods-Know the Quote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Know the Quote.release.xcconfig"; path = "Target Support Files/Pods-Know the Quote/Pods-Know the Quote.release.xcconfig"; sourceTree = "<group>"; };
 		AE10800AA1E1910063ED0F31 /* Pods-Know the Quote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Know the Quote.debug.xcconfig"; path = "Target Support Files/Pods-Know the Quote/Pods-Know the Quote.debug.xcconfig"; sourceTree = "<group>"; };
 		FA0A5A2F2561E4B800C06D72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA1779AC257DA81800E22F3D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		FA244C982557508300658CD5 /* QuizzesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesTableViewController.swift; sourceTree = "<group>"; };
 		FA244C9D2557509E00658CD5 /* Quizzes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Quizzes.storyboard; sourceTree = "<group>"; };
 		FA244CA42557524300658CD5 /* QuizTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewCell.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				FA4229062551E02B003CD327 /* Representations */,
 				FAD9C5C0255F22A600A97B04 /* Score.swift */,
 				FA765C9925605D66003C8CCE /* SelectedOption.swift */,
+				FA1779AC257DA81800E22F3D /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				FA4228DB2551C31E003CD327 /* HomeViewController.swift in Sources */,
 				FA9032A5255F8709009AB858 /* QuoteResultTableViewCell.swift in Sources */,
 				FA4228B32551A6DF003CD327 /* AppDelegate.swift in Sources */,
+				FA1779AD257DA81800E22F3D /* Category.swift in Sources */,
 				FA4228ED2551CD84003CD327 /* QuizController.swift in Sources */,
 				FA4228E52551C63C003CD327 /* QuizRepresentation.swift in Sources */,
 				FA4228E22551C59C003CD327 /* UserRepresentation.swift in Sources */,

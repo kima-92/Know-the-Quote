@@ -16,4 +16,5 @@ enum NetworkingError: Error {
     case notAddedToFirebase
     case noRepresentation
     case noBaseURL
+    case unsuccessfulFetch
 }

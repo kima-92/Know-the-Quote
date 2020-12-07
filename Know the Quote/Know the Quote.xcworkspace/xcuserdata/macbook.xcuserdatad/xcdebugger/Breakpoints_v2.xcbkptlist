@@ -7,224 +7,144 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "326DBE5E-EC99-4180-945A-62DD0E07BB98"
+            uuid = "84AD4AED-3E5A-4E24-9EB0-BBF0A8CD75EE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/Model Controllers/QuizController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "createEmptyQuiz(category:context:)"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "getAllCategories(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "875E9A23-D2D9-4558-B418-51B1037EA961"
+            uuid = "5549C3FF-8AD4-4A4B-8BE3-52A77A9E8DB6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/Model Controllers/QuizController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
-            landmarkName = "createEmptyQuiz(category:context:)"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "getAllCategories(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1ABFC9E9-49E1-48A8-A60D-EE4F714D42F9"
+            uuid = "2CDB7287-A8B3-44A3-AF8A-568E155BCC4D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/Model Controllers/QuizController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "putInCategory(quiz:category:completion:)"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "getAllCategories(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E19684DB-0BCE-4588-B9D6-72EE7783216F"
+            uuid = "6D6146C0-F8CA-4AB7-AE05-916CD1CAD7B9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/Model Controllers/QuizController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "putInCategory(quiz:category:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E19684DB-0BCE-4588-B9D6-72EE7783216F - f61b1358c6ca9d5d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Know_the_Quote.QuizController.(putInCategory in _4801F7D425F8AFDEDCBDBBB791365F69)(quiz: Know_the_Quote.Quiz, category: Swift.String, completion: (Swift.Result&lt;Swift.Optional&lt;Know_the_Quote.QuizRepresentation&gt;, Know_the_Quote.NetworkingError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Know the Quote"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Documents/My%20practice%20notebooks/Lambda/**iOSDevCourse/PracticeOnMyOwn/MyOwnProjects/Know%20the%20Quote/Know-the-Quote/Know%20the%20Quote/Controllers/Model%20Controllers/QuizController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "183"
-                  endingLineNumber = "183"
-                  offsetFromSymbolStart = "2079">
-               </Location>
-               <Location
-                  uuid = "E19684DB-0BCE-4588-B9D6-72EE7783216F - 5f6b0a27b2b700ce"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Know_the_Quote.QuizController.(putInCategory in _4801F7D425F8AFDEDCBDBBB791365F69)(quiz: Know_the_Quote.Quiz, category: Swift.String, completion: (Swift.Result&lt;Swift.Optional&lt;Know_the_Quote.QuizRepresentation&gt;, Know_the_Quote.NetworkingError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Know the Quote"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Documents/My%20practice%20notebooks/Lambda/**iOSDevCourse/PracticeOnMyOwn/MyOwnProjects/Know%20the%20Quote/Know-the-Quote/Know%20the%20Quote/Controllers/Model%20Controllers/QuizController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "185"
-                  endingLineNumber = "185"
-                  offsetFromSymbolStart = "185">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "93CB8DFF-0129-4CD1-935F-6883B56F286A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Controllers/Model Controllers/QuizController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "putInCategory(quiz:category:completion:)"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "getAllCategories(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3FC3A964-4C2C-4CD6-AB72-DEC24D7F9666"
+            uuid = "B5BD17EC-FA28-4A78-BE71-B25005CCCF41"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Controllers/Model Controllers/QuizController.swift"
+            filePath = "View Controllers/Quizzes SB/QuizzesTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "putInCategory(quiz:category:completion:)"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "fetchQuizzes()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "64F42469-D7EF-4DBE-9BD8-82C3B7B27FE3"
+            uuid = "1FA1CA47-4C0F-4970-8E60-7F1642E4A4F2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Controllers/Model Controllers/QuizController.swift"
+            filePath = "View Controllers/Quizzes SB/QuizzesTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "createQuote(firstPart:secondPart:answer:incorrectAnswers:context:)"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "fetchQuizzes()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "337938A8-653C-4ABB-B3FF-6C13791EDF64"
+            uuid = "F6E83208-1CE6-4546-B323-B466FA8A4857"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Controllers/Model Controllers/QuizController.swift"
+            filePath = "View Controllers/Quizzes SB/QuizzesTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "createQuote(firstPart:secondPart:answer:incorrectAnswers:context:)"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "fetchQuizzes()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5FA98DD6-DA52-4BCF-84D8-FEC7A1D35757"
+            uuid = "2217F3B6-8278-4512-A499-FAF9FF4454EF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/Model Controllers/QuizController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "createQuote(firstPart:secondPart:answer:incorrectAnswers:context:)"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
+            landmarkName = "getAllCategories(completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5FA98DD6-DA52-4BCF-84D8-FEC7A1D35757 - 933c32ceb02cd05e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Know_the_Quote.QuoteRepresentation&gt;, Know_the_Quote.NetworkingError&gt;) -&gt; () in Know_the_Quote.QuizController.createQuote(firstPart: Swift.Optional&lt;Swift.String&gt;, secondPart: Swift.Optional&lt;Swift.String&gt;, answer: Swift.String, incorrectAnswers: Swift.Array&lt;Swift.String&gt;, context: __C.NSManagedObjectContext) -&gt; ()"
-                  moduleName = "Know the Quote"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Documents/My%20practice%20notebooks/Lambda/**iOSDevCourse/PracticeOnMyOwn/MyOwnProjects/Know%20the%20Quote/Know-the-Quote/Know%20the%20Quote/Controllers/Model%20Controllers/QuizController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "248"
-                  endingLineNumber = "248"
-                  offsetFromSymbolStart = "431">
-               </Location>
-               <Location
-                  uuid = "5FA98DD6-DA52-4BCF-84D8-FEC7A1D35757 - ea1d8a7b48d6826a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Know_the_Quote.QuoteRepresentation&gt;, Know_the_Quote.NetworkingError&gt;) -&gt; () in closure #1 (Swift.Result&lt;Swift.Optional&lt;Know_the_Quote.QuoteRepresentation&gt;, Know_the_Quote.NetworkingError&gt;) -&gt; () in Know_the_Quote.QuizController.createQuote(firstPart: Swift.Optional&lt;Swift.String&gt;, secondPart: Swift.Optional&lt;Swift.String&gt;, answer: Swift.String, incorrectAnswers: Swift.Array&lt;Swift.String&gt;, context: __C.NSManagedObjectContext) -&gt; ()"
-                  moduleName = "Know the Quote"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Documents/My%20practice%20notebooks/Lambda/**iOSDevCourse/PracticeOnMyOwn/MyOwnProjects/Know%20the%20Quote/Know-the-Quote/Know%20the%20Quote/Controllers/Model%20Controllers/QuizController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "251"
-                  endingLineNumber = "251"
-                  offsetFromSymbolStart = "121">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BB184022-2BF3-47F5-B4AB-474844669C7C"
+            uuid = "F1BACC7F-7950-49AF-A9A3-79F121243700"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/Model Controllers/QuizController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
-            landmarkName = "createQuote(firstPart:secondPart:answer:incorrectAnswers:context:)"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "getAllCategories(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

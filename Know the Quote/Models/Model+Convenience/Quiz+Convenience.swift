@@ -47,4 +47,20 @@ extension Quiz {
         
         // * NOTE * : Quotes are NOT being added here
     }
+    
+    // Init from Representation
+    @discardableResult convenience init(quizRep: QuizRepresentation, context: NSManagedObjectContext) {
+        self.init(context: context)
+        
+        id = quizRep.id
+        dateCreated = quizRep.dateCreated
+        hasBeenReported = quizRep.hasBeenReported
+        self.creatorID = quizRep.creatorID
+        self.title = quizRep.title
+        self.category = quizRep.category
+        
+        // * NOTES * :
+        // 1. Quotes are NOT being added here
+        // 2. This Quiz will NOT have a creator object
+    }
 }

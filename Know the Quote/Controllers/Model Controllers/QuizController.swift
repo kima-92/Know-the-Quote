@@ -20,6 +20,8 @@ class QuizController {
     
     var quiz: Quiz?
     var title: String?
+    var quizzes: [Quiz]?
+    var categories: [Category]?
     
     // Max / Min
     let quoteCountMin = 0
@@ -163,17 +165,21 @@ class QuizController {
         guard let baseURL = baseURL,
               let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation)) }
         
+        let categoryM = Category(name: category, quizzes: [quizRep])
+        
         let requestURL = baseURL
-            .appendingPathComponent("quizzes")
+            .appendingPathComponent("categories")
             .appendingPathComponent(category)
             .appendingPathComponent(quizRep.id.uuidString)
+//            .appendingPathComponent("quizzes")
+//            .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
         
         do {
-            request.httpBody = try JSONEncoder().encode(quizRep)
+            request.httpBody = try JSONEncoder().encode(categoryM)
             completion(.success(quizRep))
         } catch {
             NSLog("Error encoding quizRepresentation: \(error)")
@@ -191,6 +197,56 @@ class QuizController {
             
             if (response as? HTTPURLResponse) != nil {
                 // TODO: - Handle response | response.statusCode
+            }
+        }.resume()
+    }
+    
+    // Get all categorized quizzes - Firebase
+    func getAllCategories(completion: @escaping (Result<(categories: [Category], quizzes: [Quiz])?, NetworkingError>) -> Void) {
+        
+        guard let baseURL = baseURL else { return completion(.failure(.noRepresentation)) }
+        
+        let requestURL = baseURL
+            .appendingPathComponent("categories")
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error fetching categorized quizzes: \(error)")
+                completion(.failure(.unsuccessfulFetch))
+                return
+                // TODO: - Alert the user
+            }
+            
+            if (response as? HTTPURLResponse) != nil {
+                // TODO: - Handle response | response.statusCode
+            }
+            
+            if let data = data {
+                do {
+                    let categories = try JSONDecoder().decode([Category].self, from: data)
+                    self.quizzes = []
+                    self.categories = []
+                    
+                    // Save categories and quizzes
+                    for category in categories {
+                        self.categories?.append(category)
+                        
+                        for quizRep in category.quizzes {
+                            let quiz = Quiz(quizRep: quizRep, context: CoreDataStack.shared.mainContext)
+                            self.quizzes?.append(quiz)
+                        }
+                    }
+                    
+                    completion(.success((self.categories!, self.quizzes!)))
+                } catch {
+                    print("\nBad decode\n")
+                    completion(.failure(.badDecode))
+                }
             }
         }.resume()
     }
