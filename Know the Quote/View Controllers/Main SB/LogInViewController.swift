@@ -18,6 +18,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getUser()
+        getCategories()
     }
     
     private func getUser() {
@@ -30,6 +31,16 @@ class LogInViewController: UIViewController {
                 // Create new user if fetch was unsuccessfull
                 self.user = self.kqController.createUserAndSync(username: "userOne", password: "pass", context: CoreDataStack.shared.mainContext)
                 // TODO: - Alert user if User object == nil
+            }
+        }
+    }
+    
+    private func getCategories() {
+        kqController.quizController.getAllCategories { (result) in
+            do {
+                let _ = try result.get()
+            } catch {
+                print("\nNo categories where fetched\n")
             }
         }
     }

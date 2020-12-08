@@ -21,7 +21,7 @@ class QuizController {
     var quiz: Quiz?
     var title: String?
     var quizzes: [Quiz]?
-    var categories: [Category]?
+    var categoryStrings: [String]?
     
     // Max / Min
     let quoteCountMin = 0
@@ -159,18 +159,17 @@ class QuizController {
         }.resume()
     }
     
-    // Add Quiz in Firebase by category
-    private func putInCategory(quiz: Quiz, category: String, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
+    // Save new Category -> Firebase
+    private func createNew(category: String, completion: @escaping (Result<Category?, NetworkingError>) -> Void) {
         
-        guard let baseURL = baseURL,
-              let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation)) }
+        guard let baseURL = baseURL else { return completion(.failure(.noBaseURL)) }
         
-        let categoryM = Category(name: category, quizzes: [quizRep])
+        let cat = Category(name: category, quizzes: [])
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
             .appendingPathComponent(category)
-            .appendingPathComponent(quizRep.id.uuidString)
+//            .appendingPathComponent(quizRep.id.uuidString)
 //            .appendingPathComponent("quizzes")
 //            .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathExtension("json")
@@ -179,7 +178,47 @@ class QuizController {
         request.httpMethod = HTTPMethod.put.rawValue
         
         do {
-            request.httpBody = try JSONEncoder().encode(categoryM)
+            request.httpBody = try JSONEncoder().encode(cat)
+            completion(.success(cat))
+        } catch {
+            NSLog("Error encoding category: \(error)")
+            completion(.failure(.badEncode))
+            return
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error PUTting empty category: \(error)")
+                completion(.failure(.notAddedToFirebase))
+                return
+                // TODO: - Alert the user
+            }
+            
+            if (response as? HTTPURLResponse) != nil {
+                // TODO: - Handle response | response.statusCode
+            }
+        }.resume()
+    }
+    
+    // Add Quiz in category -> Firebase
+    private func putInCategory(quiz: Quiz, category: String, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
+        
+        guard let baseURL = baseURL,
+              let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation)) }
+        
+        let requestURL = baseURL
+            .appendingPathComponent("categories")
+            .appendingPathComponent(category)
+//            .appendingPathComponent(quizRep.id.uuidString)
+            .appendingPathComponent("quizzes")
+            .appendingPathComponent(quizRep.id.uuidString)
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(quizRep)
             completion(.success(quizRep))
         } catch {
             NSLog("Error encoding quizRepresentation: \(error)")
@@ -230,19 +269,18 @@ class QuizController {
                 do {
                     let categories = try JSONDecoder().decode([Category].self, from: data)
                     self.quizzes = []
-                    self.categories = []
+                    self.categoryStrings = []
                     
                     // Save categories and quizzes
                     for category in categories {
-                        self.categories?.append(category)
+                        self.categoryStrings?.append(category.name)
                         
                         for quizRep in category.quizzes {
                             let quiz = Quiz(quizRep: quizRep, context: CoreDataStack.shared.mainContext)
                             self.quizzes?.append(quiz)
                         }
                     }
-                    
-                    completion(.success((self.categories!, self.quizzes!)))
+                    completion(.success((categories, self.quizzes!)))
                 } catch {
                     print("\nBad decode\n")
                     completion(.failure(.badDecode))
@@ -260,6 +298,26 @@ class QuizController {
         
         quiz = Quiz(title: title, creator: creator, category: category, context: context)
         guard let quiz = quiz else { return }
+        
+        // Check if we need to create a new category
+        if let categories = self.categories {
+           let cat = categories.filter({$0.name == category})
+            
+            if cat.first == nil {
+                
+                // Create new category
+                createNew(category: category) { (result) in
+                    do {
+                        let cat = try result.get()
+                        self.categories!.append(cat!)
+                    } catch {
+                        print("\nCouldn't save new category in FB\n")
+                    }
+                }
+            }
+        } else {
+            
+        }
         
         // Save in user's account
         put(quiz: quiz) { (result) in
