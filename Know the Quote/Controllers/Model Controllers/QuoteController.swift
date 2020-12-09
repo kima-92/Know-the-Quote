@@ -79,8 +79,9 @@ class QuoteController {
               let quoteRep = quote.quoteRepresentation else { return completion(.failure(.noRepresentation)) }
         
         let requestURL = baseURL
-            .appendingPathComponent("quizzes")
+            .appendingPathComponent("categories")
             .appendingPathComponent(category)
+            .appendingPathComponent("quizzes")
             .appendingPathComponent(quizID.uuidString)
             .appendingPathComponent("quotes")
             .appendingPathComponent(quoteRep.quoteID)

@@ -165,6 +165,7 @@ class QuizController {
         guard let baseURL = baseURL else { return completion(.failure(.noBaseURL)) }
         
         let cat = Category(name: category, quizzes: [])
+        categoryStrings?.append(category)
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
@@ -179,7 +180,7 @@ class QuizController {
         
         do {
             request.httpBody = try JSONEncoder().encode(cat)
-            completion(.success(cat))
+//            completion(.success(cat))
         } catch {
             NSLog("Error encoding category: \(error)")
             completion(.failure(.badEncode))
@@ -197,6 +198,11 @@ class QuizController {
             if (response as? HTTPURLResponse) != nil {
                 // TODO: - Handle response | response.statusCode
             }
+            
+            if let data = data {
+                completion(.success(cat))
+            }
+            
         }.resume()
     }
     
@@ -242,8 +248,10 @@ class QuizController {
     
     // Get all categorized quizzes - Firebase
     func getAllCategories(completion: @escaping (Result<(categories: [Category], quizzes: [Quiz])?, NetworkingError>) -> Void) {
-        
         guard let baseURL = baseURL else { return completion(.failure(.noRepresentation)) }
+        
+        self.quizzes = []
+        self.categoryStrings = []
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
@@ -268,8 +276,6 @@ class QuizController {
             if let data = data {
                 do {
                     let categories = try JSONDecoder().decode([Category].self, from: data)
-                    self.quizzes = []
-                    self.categoryStrings = []
                     
                     // Save categories and quizzes
                     for category in categories {
@@ -297,26 +303,28 @@ class QuizController {
               let creator = user else { return }
         
         quiz = Quiz(title: title, creator: creator, category: category, context: context)
-        guard let quiz = quiz else { return }
+        guard let categoryStrings = self.categoryStrings,
+              let quiz = quiz else { return }
         
         // Check if we need to create a new category
-        if let categories = self.categories {
-           let cat = categories.filter({$0.name == category})
-            
-            if cat.first == nil {
-                
-                // Create new category
-                createNew(category: category) { (result) in
-                    do {
-                        let cat = try result.get()
-                        self.categories!.append(cat!)
-                    } catch {
-                        print("\nCouldn't save new category in FB\n")
-                    }
+        if categoryStrings.contains(category) {
+            putInCategory(quiz: quiz, category: category) { (result) in
+                do {
+                    _ = try result.get()
+                } catch {
+                    NSLog("\nCouldn't put quiz in category: \(error)")
+                    // TODO: - Alert User
                 }
             }
         } else {
-            
+            createNew(category: category) { (result) in
+                do {
+                    _ = try result.get()
+                } catch {
+                    NSLog("\nCouldn't save new category in FB: \(error)")
+                    // TODO: - Alert user
+                }
+            }
         }
         
         // Save in user's account
