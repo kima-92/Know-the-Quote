@@ -10,26 +10,36 @@ import CoreData
 extension User {
     
     var userRepresentation: UserRepresentation? {
-        var quizesIDs: [String] = []
+        var quizesCreatedIDs: [String] = []
         
         guard let id = id,
               let username = username,
               let password = password,
-              let quizesCreatedIDs = quizzesCreated,
+              let quizzes = quizzesCreated,
               let signupDate = signupDate else { return nil }
         
         // Storing the ID of each Quiz
-        for quizElement in quizesCreatedIDs {
+        for quizElement in quizzes {
             if let quiz = quizElement as? Quiz,
                let id = quiz.id {
-                quizesIDs.append(id.uuidString)
+                quizesCreatedIDs.append(id.uuidString)
             }
         }
-        return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizesCreatedIDs: quizesIDs)
+        return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizesCreatedIDs: quizesCreatedIDs)
+    }
+    
+    // Init from Representation
+    @discardableResult convenience init?(userRep: UserRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(username: userRep.username, password: userRep.password, context: context)
+        id = userRep.id
+        signupDate = userRep.signupDate
+        coins = userRep.coins
+        
+        // TODO: - Handle quizzesCreated
     }
     
     // Init
-    @discardableResult convenience init(username: String, password: String, context: NSManagedObjectContext) {
+    @discardableResult convenience init(username: String, password: String, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         
         id = UUID()

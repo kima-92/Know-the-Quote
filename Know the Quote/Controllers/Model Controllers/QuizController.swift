@@ -198,11 +198,7 @@ class QuizController {
             if (response as? HTTPURLResponse) != nil {
                 // TODO: - Handle response | response.statusCode
             }
-            
-            if let data = data {
-                completion(.success(cat))
-            }
-            
+            completion(.success(cat))
         }.resume()
     }
     

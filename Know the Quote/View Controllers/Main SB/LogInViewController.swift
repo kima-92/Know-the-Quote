@@ -22,15 +22,24 @@ class LogInViewController: UIViewController {
     }
     
     private func getUser() {
+        let username = "userOne" // TODO: - UNHARDCODE THIS LINE!!!!
         
-        kqController.userController.fetch(username: "userOne", password: "pass") { (result) in
+        kqController.userController.fetch(username: username, password: "pass") { (result) in
             do {
                 self.user = try result.get()
                 self.kqController.syncUser()
             } catch {
                 // Create new user if fetch was unsuccessfull
-                self.user = self.kqController.createUserAndSync(username: "userOne", password: "pass", context: CoreDataStack.shared.mainContext)
+                self.user = self.kqController.createUserAndSync(username: username, password: "pass", context: CoreDataStack.shared.mainContext)
                 // TODO: - Alert user if User object == nil
+            }
+        }
+        // MARK: - TESTING PORPUSES
+        kqController.userController.fetchAll { (result) in
+            do {
+                let users = try result.get()
+            } catch {
+                print("/n/nCouldn't/n/n")
             }
         }
     }

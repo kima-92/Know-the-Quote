@@ -43,7 +43,6 @@ class UserController {
         
         do {
             request.httpBody = try JSONEncoder().encode(userRep)
-            completion(.success(userRep))
         } catch {
             NSLog("Error encoding new user: \(error)")
             completion(.failure(.badEncode))
@@ -61,6 +60,7 @@ class UserController {
             if (response as? HTTPURLResponse) != nil {
                 // TODO: - Handle response | response.statusCode
             }
+            completion(.success(userRep))
         }.resume()
     }
     
@@ -96,9 +96,54 @@ class UserController {
                         self.user = User(username: username, password: password, context: CoreDataStack.shared.mainContext)
                         CoreDataStack.shared.save(context: moc)
                         completion(.success(self.user))
+                        return
                     }
                 } catch {
                     NSLog("Failed to fetch/decode user: \(error)")
+                    completion(.failure(.badDecode))
+                    return
+                    // TODO: - Alert User
+                }
+            }
+            
+            if let response = response as? HTTPURLResponse,
+               response.statusCode != 200 {
+                completion(.failure(.unexpectedStatusCode(response.statusCode)))
+            }
+        }.resume()
+    }
+    
+    // Fetch User from Firebase
+    func fetchAll(completion: @escaping (Result<[User]?, NetworkingError>) -> Void) {
+        
+        guard let baseURL = baseURL else { return completion(.failure(.noBaseURL))}
+        
+        let requestURL = baseURL
+            .appendingPathComponent("users")
+            .appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                NSLog("Failed to fetch user: \(error)")
+                completion(.failure(.noData))
+            }
+            
+            if let data = data {
+                // Decode then fetch from/create user in CoreData
+                do {
+                    let userReps = Array(try JSONDecoder().decode([String : UserRepresentation].self, from: data).values)
+                    
+                    var users: [User] = []
+                    for userRep in userReps {
+                        users.append(User(username: userRep.username, password: userRep.password, context: CoreDataStack.shared.mainContext))
+                    }
+                    completion(.success(users))
+                    return
+                } catch {
+                    NSLog("Failed to fetch/decode users: \(error)")
                     completion(.failure(.badDecode))
                     // TODO: - Alert User
                 }
