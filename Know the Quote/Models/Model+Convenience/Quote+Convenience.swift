@@ -23,11 +23,11 @@ extension Quote {
     }
     
     // Init
-    @discardableResult convenience init(quizID: String, firstPart: String = "", secondPart: String = "", incorrectOptions: [String], answer: String, context: NSManagedObjectContext) {
+    @discardableResult convenience init(quizID: UUID, firstPart: String = "", secondPart: String = "", incorrectOptions: [String], answer: String, context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.incorrectOptions = incorrectOptions as NSArray
-        self.quoteID = UUID().uuidString
+        self.quoteID = UUID()
         self.quizID = quizID
         self.firstPart = firstPart
         self.secondPart = secondPart
@@ -37,5 +37,13 @@ extension Quote {
         allOptions.append(answer)
         
         self.allOptions = allOptions as NSArray
+    }
+    
+    // Init from Representation
+    @discardableResult convenience init(quoteRep: QuoteRepresentation, context: NSManagedObjectContext) {
+        
+        self.init(quizID: quoteRep.quizID, firstPart: quoteRep.firstPart, secondPart: quoteRep.secondPart, incorrectOptions: quoteRep.incorrectOptions, answer: quoteRep.answer, context: context)
+        
+        self.quoteID = quoteRep.quoteID
     }
 }

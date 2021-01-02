@@ -12,8 +12,8 @@ struct QuizRepresentation: Codable {
     var id: UUID
     var title: String
     var dateCreated: Date
-    var creatorID: String
-    var quotes: [QuoteRepresentation]
+    var creatorID: UUID
+    var quoteReps: [QuoteRepresentation]
     var hasBeenReported: Bool
-    var category: String
+    var categoryName: String
 }

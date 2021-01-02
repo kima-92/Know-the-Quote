@@ -43,7 +43,7 @@ class QuoteController {
             .appendingPathComponent("quizzesCreated")
             .appendingPathComponent(quizID.uuidString)
             .appendingPathComponent("quotes")
-            .appendingPathComponent(quoteRep.quoteID)
+            .appendingPathComponent(quoteRep.quoteID.uuidString)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
@@ -73,18 +73,18 @@ class QuoteController {
     }
     
     // Save a Quote in categorized Quizzes - Firebase
-    func putForQuizBy(category: String, quote: Quote, quizID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
+    func putForQuizBy(categoryName: String, quote: Quote, quizID: UUID, completion: @escaping (Result<QuoteRepresentation?, NetworkingError>) -> Void) {
         
         guard let baseURL = baseURL,
               let quoteRep = quote.quoteRepresentation else { return completion(.failure(.noRepresentation)) }
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
-            .appendingPathComponent(category)
+            .appendingPathComponent(categoryName)
             .appendingPathComponent("quizzes")
             .appendingPathComponent(quizID.uuidString)
             .appendingPathComponent("quotes")
-            .appendingPathComponent(quoteRep.quoteID)
+            .appendingPathComponent(quoteRep.quoteID.uuidString)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)

@@ -9,10 +9,10 @@ import Foundation
 
 struct UserRepresentation: Codable {
     
-    var id: UUID
+    var id: UUID // Compatible with JSON??
     var signupDate: Date
     var username: String
     var password: String
     var coins: Int16
-    var quizesCreatedIDs: [String]?
+    var quizzesCreatedIDs: [String]?
 }

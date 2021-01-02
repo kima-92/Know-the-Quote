@@ -10,32 +10,22 @@ import CoreData
 extension User {
     
     var userRepresentation: UserRepresentation? {
-        var quizesCreatedIDs: [String] = []
+//        var quizesCreatedIDs: [String] = []
         
         guard let id = id,
               let username = username,
               let password = password,
-              let quizzes = quizzesCreated,
+              let quizzesCreatedIDs = quizzesCreatedIDs as? [String],
               let signupDate = signupDate else { return nil }
         
-        // Storing the ID of each Quiz
-        for quizElement in quizzes {
-            if let quiz = quizElement as? Quiz,
-               let id = quiz.id {
-                quizesCreatedIDs.append(id.uuidString)
-            }
-        }
-        return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizesCreatedIDs: quizesCreatedIDs)
-    }
-    
-    // Init from Representation
-    @discardableResult convenience init?(userRep: UserRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        self.init(username: userRep.username, password: userRep.password, context: context)
-        id = userRep.id
-        signupDate = userRep.signupDate
-        coins = userRep.coins
-        
-        // TODO: - Handle quizzesCreated
+//        // Storing the ID of each Quiz
+//        for quizElement in quizzes {
+//            if let quiz = quizElement as? Quiz,
+//               let id = quiz.id {
+//                quizesCreatedIDs.append(id.uuidString)
+//            }
+//        }
+        return UserRepresentation(id: id, signupDate: signupDate, username: username, password: password, coins: coins, quizzesCreatedIDs: quizzesCreatedIDs)
     }
     
     // Init
@@ -45,9 +35,23 @@ extension User {
         id = UUID()
         signupDate = Date()
         coins = 250
-        quizzesCreated = []
+        quizzesCreatedIDs = [] as NSObject // TODO: - Are they being added after creating this empty array?
         
         self.username = username
         self.password = password
+    }
+    
+    // Init from Representation
+    @discardableResult convenience init?(userRep: UserRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(username: userRep.username, password: userRep.password, context: context)
+        id = userRep.id
+        signupDate = userRep.signupDate
+        coins = userRep.coins
+        
+        if userRep.quizzesCreatedIDs as NSArray? == nil {
+            quizzesCreatedIDs = [] as NSObject // TODO: - Are they being added after creating this empty array?
+            return
+        }
+        quizzesCreatedIDs = userRep.quizzesCreatedIDs as NSArray?
     }
 }

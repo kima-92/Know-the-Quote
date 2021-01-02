@@ -11,56 +11,61 @@ extension Quiz {
     
     // Representation
     var quizRepresentation: QuizRepresentation? {
-        var quotesReps: [QuoteRepresentation] = []
+        var quoteReps: [QuoteRepresentation] = []
         
         guard let id = id,
               let title = title,
-              let date = dateCreated,
+              let dateCreated = dateCreated,
               let creatorID = creatorID,
-              let category = category,
-              let quotes = quotes else { return nil }
+              let categoryName = categoryName else { return nil }
+//              let quotes = quotes else { return nil }
         
         // Getting the representation of each quote
-        for quote in quotes {
-            let q = quote as? Quote
-            if let quoteRep = q?.quoteRepresentation {
-                quotesReps.append(quoteRep)
+        if let quotes = quotes {
+            for quoteData in quotes {
+                let quote = quoteData as? Quote
+                if let quoteRep = quote?.quoteRepresentation {
+                    quoteReps.append(quoteRep)
+                }
             }
         }
+//        for quote in quotes {
+//            let q = quote as? Quote
+//            if let quoteRep = q?.quoteRepresentation {
+//                quotesReps.append(quoteRep)
+//            }
+//        }
         
-        return QuizRepresentation(id: id, title: title, dateCreated: date, creatorID: creatorID, quotes: quotesReps, hasBeenReported: hasBeenReported, category: category)
+        return QuizRepresentation(id: id, title: title, dateCreated: dateCreated, creatorID: creatorID, quoteReps: quoteReps, hasBeenReported: hasBeenReported, categoryName: categoryName)
     }
     
     // Init
-    @discardableResult convenience init(title: String, creator: User, category: String, context: NSManagedObjectContext) {
+    @discardableResult convenience init(title: String, creatorID: UUID, categoryName: String, context: NSManagedObjectContext) {
         self.init(context: context)
-        
-        guard let creatorID = creator.id else { return }
         
         id = UUID()
         dateCreated = Date()
         hasBeenReported = false
-        self.creatorID = creatorID.uuidString
+        self.creatorID = creatorID
         self.title = title
-        self.creator = creator
-        self.category = category
+        self.categoryName = categoryName
         
         // * NOTE * : Quotes are NOT being added here
+        self.quotes = [] //<-- TODO: - Does this make it crash?
     }
     
     // Init from Representation
     @discardableResult convenience init(quizRep: QuizRepresentation, context: NSManagedObjectContext) {
-        self.init(context: context)
+        self.init(title: quizRep.title, creatorID: quizRep.creatorID, categoryName: quizRep.categoryName, context: context)
         
         id = quizRep.id
         dateCreated = quizRep.dateCreated
         hasBeenReported = quizRep.hasBeenReported
-        self.creatorID = quizRep.creatorID
-        self.title = quizRep.title
-        self.category = quizRep.category
         
-        // * NOTES * :
-        // 1. Quotes are NOT being added here
-        // 2. This Quiz will NOT have a creator object
+        for quoteRep in quizRep.quoteReps {
+            self.addToQuotes(Quote(quoteRep: quoteRep, context: context))
+        }
+        print()
+        print(self.quotes)
     }
 }

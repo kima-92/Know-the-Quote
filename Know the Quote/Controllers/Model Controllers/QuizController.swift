@@ -21,7 +21,7 @@ class QuizController {
     var quiz: Quiz?
     var title: String?
     var quizzes: [Quiz]?
-    var categoryStrings: [String]?
+    var categoryNames: [String]?
     
     // Max / Min
     let quoteCountMin = 0
@@ -160,16 +160,18 @@ class QuizController {
     }
     
     // Save new Category -> Firebase
-    private func createNew(category: String, completion: @escaping (Result<Category?, NetworkingError>) -> Void) {
+    private func createNew(categoryName: String, completion: @escaping (Result<Category?, NetworkingError>) -> Void) {
         
         guard let baseURL = baseURL else { return completion(.failure(.noBaseURL)) }
         
-        let cat = Category(name: category, quizzes: [])
-        categoryStrings?.append(category)
+        let categoryID = UUID()
+        
+        let category = Category(name: categoryName, quizzes: [])
+        categoryNames?.append(categoryName)
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
-            .appendingPathComponent(category)
+            .appendingPathComponent(categoryID.uuidString)
 //            .appendingPathComponent(quizRep.id.uuidString)
 //            .appendingPathComponent("quizzes")
 //            .appendingPathComponent(quizRep.id.uuidString)
@@ -179,7 +181,7 @@ class QuizController {
         request.httpMethod = HTTPMethod.put.rawValue
         
         do {
-            request.httpBody = try JSONEncoder().encode(cat)
+            request.httpBody = try JSONEncoder().encode(category)
 //            completion(.success(cat))
         } catch {
             NSLog("Error encoding category: \(error)")
@@ -198,19 +200,19 @@ class QuizController {
             if (response as? HTTPURLResponse) != nil {
                 // TODO: - Handle response | response.statusCode
             }
-            completion(.success(cat))
+            completion(.success(category))
         }.resume()
     }
     
     // Add Quiz in category -> Firebase
-    private func putInCategory(quiz: Quiz, category: String, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
+    private func putInCategory(quiz: Quiz, categoryName: String, completion: @escaping (Result<QuizRepresentation?, NetworkingError>) -> Void) {
         
         guard let baseURL = baseURL,
               let quizRep = quiz.quizRepresentation else { return completion(.failure(.noRepresentation)) }
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
-            .appendingPathComponent(category)
+            .appendingPathComponent(categoryName)
 //            .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathComponent("quizzes")
             .appendingPathComponent(quizRep.id.uuidString)
@@ -243,11 +245,10 @@ class QuizController {
     }
     
     // Get all categorized quizzes - Firebase
-    func getAllCategories(completion: @escaping (Result<(categories: [Category], quizzes: [Quiz])?, NetworkingError>) -> Void) {
+    func getAllCategories(withQuizzes: Bool, completion: @escaping (Result<[Category], NetworkingError>) -> Void) {
         guard let baseURL = baseURL else { return completion(.failure(.noRepresentation)) }
         
-        self.quizzes = []
-        self.categoryStrings = []
+        self.categoryNames = []
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
@@ -275,16 +276,21 @@ class QuizController {
                     
                     // Save categories and quizzes
                     for category in categories {
-                        self.categoryStrings?.append(category.name)
+                        self.categoryNames?.append(category.name)
                         
-                        for quizRep in category.quizzes {
-                            let quiz = Quiz(quizRep: quizRep, context: CoreDataStack.shared.mainContext)
-                            self.quizzes?.append(quiz)
+                        if withQuizzes == true {
+                            self.quizzes = []
+                            
+                            for quizRep in category.quizzes {
+                                let quiz = Quiz(quizRep: quizRep, context: CoreDataStack.shared.mainContext)
+                                self.quizzes?.append(quiz)
+                            }
                         }
                     }
-                    completion(.success((categories, self.quizzes!)))
+                    completion(.success(categories))
                 } catch {
                     print("\nBad decode\n")
+                    // TODO: - Handle this catch
                     completion(.failure(.badDecode))
                 }
             }
@@ -294,17 +300,19 @@ class QuizController {
     // MARK: - CoreData
     
     // Create new Quiz and save in CD WITHOUT any quotes
-    func createEmptyQuiz(category: String, context: NSManagedObjectContext) {
+    func createEmptyQuizFor(categoryName: String, context: NSManagedObjectContext) {
         guard let title = title,
-              let creator = user else { return }
+              let creator = user,
+              let creatorID = creator.id else { return }
         
-        quiz = Quiz(title: title, creator: creator, category: category, context: context)
-        guard let categoryStrings = self.categoryStrings,
-              let quiz = quiz else { return }
+        quiz = Quiz(title: title, creatorID: creatorID, categoryName: categoryName, context: context)
+        guard let categoryNames = self.categoryNames,
+              let quiz = quiz,
+              let quizID = quiz.id else { return }
         
         // Check if we need to create a new category
-        if categoryStrings.contains(category) {
-            putInCategory(quiz: quiz, category: category) { (result) in
+        if categoryNames.contains(categoryName) {
+            putInCategory(quiz: quiz, categoryName: categoryName) { (result) in
                 do {
                     _ = try result.get()
                 } catch {
@@ -312,16 +320,17 @@ class QuizController {
                     // TODO: - Alert User
                 }
             }
-        } else {
-            createNew(category: category) { (result) in
-                do {
-                    _ = try result.get()
-                } catch {
-                    NSLog("\nCouldn't save new category in FB: \(error)")
-                    // TODO: - Alert user
-                }
-            }
         }
+//        else {
+//            createNew(category: category) { (result) in
+//                do {
+//                    _ = try result.get()
+//                } catch {
+//                    NSLog("\nCouldn't save new category in FB: \(error)")
+//                    // TODO: - Alert user
+//                }
+//            }
+//        }
         
         // Save in user's account
         put(quiz: quiz) { (result) in
@@ -329,10 +338,15 @@ class QuizController {
             do {
                 _ = try result.get()
                 // Add to quizzes by category
-                self.putInCategory(quiz: quiz, category: category) { (result) in
+                self.putInCategory(quiz: quiz, categoryName: categoryName) { (result) in
                     do {
                         _ = try result.get()
-                        creator.addToQuizzesCreated(quiz)
+//                        creator.addToQuizzesCreated(quiz)
+                        
+                        var quizzes = creator.quizzesCreatedIDs as? [String]
+                        quizzes?.append(quizID.uuidString)
+                        creator.quizzesCreatedIDs = quizzes as NSArray?
+                        
                         CoreDataStack.shared.save(context: context)
                         
                     } catch {
@@ -349,14 +363,14 @@ class QuizController {
     func createQuote(firstPart: String?, secondPart: String?, answer: String, incorrectAnswers: [String], context: NSManagedObjectContext) {
         guard let quiz = quiz,
               let quizID = quiz.id,
-              let category = quiz.category else { return }
+              let categoryName = quiz.categoryName else { return }
         
         syncUser()
         
         // If there's less than 16 quotes in the array, create this new quote and add it to the quiz
         if quotes.count < 16 {
             
-            let quote = Quote(quizID: quizID.uuidString, firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
+            let quote = Quote(quizID: quizID, firstPart: firstPart ?? "", secondPart: secondPart ?? "", incorrectOptions: incorrectAnswers, answer: answer, context: context)
             
             quoteController.putQuoteForUser(quote: quote, quizID: quizID) { (userResult) in
                 
@@ -364,7 +378,7 @@ class QuizController {
                     // Saving on user's account
                     _ = try userResult.get()
                     
-                    self.quoteController.putForQuizBy(category: category, quote: quote, quizID: quizID) { (quizResult) in
+                    self.quoteController.putForQuizBy(categoryName: categoryName, quote: quote, quizID: quizID) { (quizResult) in
                         do {
                             // Saving in categorized Quizzes
                             _ = try quizResult.get()

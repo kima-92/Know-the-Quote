@@ -34,13 +34,13 @@ class NewQuizViewController: UIViewController {
         
         // Create empty Quiz then segue
         if let title = titleTextField.text,
-           let category = categoryTextField.text,
+           let categoryName = categoryTextField.text,              // Pick category from menu (should NOT create a new one here)
            !title.isEmpty,
-           !category.isEmpty {
+           !categoryName.isEmpty {
             kqController.quizController.title = titleTextField.text
             
-            kqController.quizController.createEmptyQuiz(category: category, context: CoreDataStack.shared.mainContext)
-            // TODO: - UNhardcode the category!
+            kqController.quizController.createEmptyQuizFor(categoryName: categoryName, context: CoreDataStack.shared.mainContext)
+            // TODO: - Find a way to offer the available categories to the user, and if they wish to create a new one, go about it a different way. It should NOT be here! Here only have them add to an existing category. In fact, make sure this category exists before calling this method
             
             performSegue(withIdentifier: "newQuoteDetailsSegue", sender: self)
         } else {

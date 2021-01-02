@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H114" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Quiz" representedClassName="Quiz" syncable="YES" codeGenerationType="class">
-        <attribute name="category" optional="YES" attributeType="String"/>
-        <attribute name="creatorID" optional="YES" attributeType="String"/>
+        <attribute name="categoryName" optional="YES" attributeType="String"/>
+        <attribute name="creatorID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasBeenReported" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="quizzesCreated" inverseEntity="User"/>
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="quiz" inverseEntity="Quote"/>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES" codeGenerationType="class">
@@ -15,8 +14,8 @@
         <attribute name="answer" optional="YES" attributeType="String"/>
         <attribute name="firstPart" optional="YES" attributeType="String"/>
         <attribute name="incorrectOptions" optional="YES" attributeType="Transformable"/>
-        <attribute name="quizID" optional="YES" attributeType="String"/>
-        <attribute name="quoteID" optional="YES" attributeType="String"/>
+        <attribute name="quizID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="quoteID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="secondPart" optional="YES" attributeType="String"/>
         <relationship name="quiz" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quiz" inverseName="quotes" inverseEntity="Quiz"/>
     </entity>
@@ -24,12 +23,12 @@
         <attribute name="coins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="quizzesCreatedIDs" optional="YES" attributeType="Transformable"/>
         <attribute name="signupDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="username" optional="YES" attributeType="String"/>
-        <relationship name="quizzesCreated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quiz" inverseName="creator" inverseEntity="Quiz"/>
     </entity>
     <elements>
-        <element name="Quiz" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="Quiz" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="Quote" positionX="-45" positionY="54" width="128" height="163"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="133"/>
     </elements>

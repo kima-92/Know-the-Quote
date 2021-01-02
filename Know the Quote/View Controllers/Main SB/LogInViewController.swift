@@ -14,15 +14,15 @@ class LogInViewController: UIViewController {
     
     var kqController = KQController()
     var user: User?
+    let username = "userOne" // TODO: - UNHARDCODE THIS LINE!!!!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getUser()
-        getCategories()
+        fetchCategoryNames()
     }
     
     private func getUser() {
-        let username = "userOne" // TODO: - UNHARDCODE THIS LINE!!!!
         
         kqController.userController.fetch(username: username, password: "pass") { (result) in
             do {
@@ -30,10 +30,11 @@ class LogInViewController: UIViewController {
                 self.kqController.syncUser()
             } catch {
                 // Create new user if fetch was unsuccessfull
-                self.user = self.kqController.createUserAndSync(username: username, password: "pass", context: CoreDataStack.shared.mainContext)
+                self.user = self.kqController.createUserAndSync(username: self.username, password: "pass", context: CoreDataStack.shared.mainContext)
                 // TODO: - Alert user if User object == nil
             }
         }
+        
         // MARK: - TESTING PORPUSES
         kqController.userController.fetchAll { (result) in
             do {
@@ -44,12 +45,14 @@ class LogInViewController: UIViewController {
         }
     }
     
-    private func getCategories() {
-        kqController.quizController.getAllCategories { (result) in
+    private func fetchCategoryNames() {
+        kqController.quizController.getAllCategories(withQuizzes: false) { (result) in
+            
             do {
                 let _ = try result.get()
             } catch {
                 print("\nNo categories where fetched\n")
+                // TODO: - Handle catch
             }
         }
     }

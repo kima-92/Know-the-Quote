@@ -78,21 +78,14 @@ class QuizzesTableViewController: UITableViewController {
     private func fetchQuizzes() {
         guard let kqController = kqController else { return }
         
-        kqController.quizController.getAllCategories { (result) in
+        kqController.quizController.getAllCategories(withQuizzes: true) { (result) in
+            
             do {
-                let touple = try result.get()
-                
-                if let categories = touple?.categories {
-                    var counter = 0
-                    
-                    for cat in categories {
-                        self.categories![counter] = cat
-                        counter += 1
-                    }
-                }
-                self.quizzes = touple?.quizzes
+                _ = try result.get()
+                self.quizzes = kqController.quizController.quizzes
             } catch {
                 print("\ncouln't fetch categorzed quizzes\n")
+                // TODO: - Handle catch
             }
         }
     }
