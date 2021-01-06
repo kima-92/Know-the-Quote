@@ -160,21 +160,19 @@ class QuizController {
     }
     
     // Save new Category -> Firebase
-    private func createNew(categoryName: String, completion: @escaping (Result<Category?, NetworkingError>) -> Void) {
+    private func createNewCategoryFor(quizRep: QuizRepresentation, categoryName: String, completion: @escaping (Result<Category?, NetworkingError>) -> Void) {
         
         guard let baseURL = baseURL else { return completion(.failure(.noBaseURL)) }
         
         let categoryID = UUID()
+        let category = Category(name: categoryName, quizzes: [quizRep])
         
-        let category = Category(name: categoryName, quizzes: [])
-        categoryNames?.append(categoryName)
+        if categoryNames != nil { categoryNames?.append(categoryName) }
+        else { categoryNames = [categoryName] }
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
             .appendingPathComponent(categoryID.uuidString)
-//            .appendingPathComponent(quizRep.id.uuidString)
-//            .appendingPathComponent("quizzes")
-//            .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
@@ -182,7 +180,6 @@ class QuizController {
         
         do {
             request.httpBody = try JSONEncoder().encode(category)
-//            completion(.success(cat))
         } catch {
             NSLog("Error encoding category: \(error)")
             completion(.failure(.badEncode))
@@ -308,6 +305,7 @@ class QuizController {
         quiz = Quiz(title: title, creatorID: creatorID, categoryName: categoryName, context: context)
         guard let categoryNames = self.categoryNames,
               let quiz = quiz,
+              let quizRep = quiz.quizRepresentation,
               let quizID = quiz.id else { return }
         
         // Check if we need to create a new category
@@ -321,40 +319,14 @@ class QuizController {
                 }
             }
         }
-//        else {
-//            createNew(category: category) { (result) in
-//                do {
-//                    _ = try result.get()
-//                } catch {
-//                    NSLog("\nCouldn't save new category in FB: \(error)")
-//                    // TODO: - Alert user
-//                }
-//            }
-//        }
-        
-        // Save in user's account
-        put(quiz: quiz) { (result) in
-            
-            do {
-                _ = try result.get()
-                // Add to quizzes by category
-                self.putInCategory(quiz: quiz, categoryName: categoryName) { (result) in
-                    do {
-                        _ = try result.get()
-//                        creator.addToQuizzesCreated(quiz)
-                        
-                        var quizzes = creator.quizzesCreatedIDs as? [String]
-                        quizzes?.append(quizID.uuidString)
-                        creator.quizzesCreatedIDs = quizzes as NSArray?
-                        
-                        CoreDataStack.shared.save(context: context)
-                        
-                    } catch {
-                        NSLog("Couldn't add new quiz in category on server: \(error)")
-                    }
+        else {
+            createNewCategoryFor(quizRep: quizRep, categoryName: categoryName) { (result) in
+                do {
+                    _ = try result.get()
+                } catch {
+                    NSLog("\nCouldn't save new category in FB: \(error)")
+                    // TODO: - Alert user
                 }
-            } catch {
-                NSLog("Couldn't save new quiz created by user on server: \(error)")
             }
         }
     }

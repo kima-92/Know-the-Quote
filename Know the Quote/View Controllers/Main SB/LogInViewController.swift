@@ -34,15 +34,6 @@ class LogInViewController: UIViewController {
                 // TODO: - Alert user if User object == nil
             }
         }
-        
-        // MARK: - TESTING PORPUSES
-        kqController.userController.fetchAll { (result) in
-            do {
-                let users = try result.get()
-            } catch {
-                print("/n/nCouldn't/n/n")
-            }
-        }
     }
     
     private func fetchCategoryNames() {
