@@ -164,15 +164,15 @@ class QuizController {
         
         guard let baseURL = baseURL else { return completion(.failure(.noBaseURL)) }
         
-        let categoryID = UUID()
-        let category = Category(name: categoryName, quizzes: [quizRep])
+//        let categoryID = UUID()
+        let category = Category(name: categoryName, quizzes: [])
         
         if categoryNames != nil { categoryNames?.append(categoryName) }
         else { categoryNames = [categoryName] }
         
         let requestURL = baseURL
             .appendingPathComponent("categories")
-            .appendingPathComponent(categoryID.uuidString)
+            .appendingPathComponent(categoryName)
             .appendingPathExtension("json")
         
         var request = URLRequest(url: requestURL)
@@ -210,7 +210,6 @@ class QuizController {
         let requestURL = baseURL
             .appendingPathComponent("categories")
             .appendingPathComponent(categoryName)
-//            .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathComponent("quizzes")
             .appendingPathComponent(quizRep.id.uuidString)
             .appendingPathExtension("json")
@@ -220,7 +219,6 @@ class QuizController {
         
         do {
             request.httpBody = try JSONEncoder().encode(quizRep)
-            completion(.success(quizRep))
         } catch {
             NSLog("Error encoding quizRepresentation: \(error)")
             completion(.failure(.badEncode))
@@ -238,6 +236,7 @@ class QuizController {
             if (response as? HTTPURLResponse) != nil {
                 // TODO: - Handle response | response.statusCode
             }
+            completion(.success(quizRep))
         }.resume()
     }
     
@@ -309,24 +308,23 @@ class QuizController {
               let quizID = quiz.id else { return }
         
         // Check if we need to create a new category
-        if categoryNames.contains(categoryName) {
-            putInCategory(quiz: quiz, categoryName: categoryName) { (result) in
-                do {
-                    _ = try result.get()
-                } catch {
-                    NSLog("\nCouldn't put quiz in category: \(error)")
-                    // TODO: - Alert User
-                }
-            }
-        }
-        else {
-            createNewCategoryFor(quizRep: quizRep, categoryName: categoryName) { (result) in
-                do {
-                    _ = try result.get()
-                } catch {
-                    NSLog("\nCouldn't save new category in FB: \(error)")
-                    // TODO: - Alert user
-                }
+//        if !categoryNames.contains(categoryName) {
+//            createNewCategoryFor(quizRep: quizRep, categoryName: categoryName) { (result) in
+//                do {
+//                    _ = try result.get()
+//                } catch {
+//                    NSLog("\nCouldn't save new category in FB: \(error)")
+//                    // TODO: - Alert user
+//                }
+//            }
+//        }
+        
+        putInCategory(quiz: quiz, categoryName: categoryName) { (result) in
+            do {
+                _ = try result.get()
+            } catch {
+                NSLog("\nCouldn't put quiz in category: \(error)")
+                // TODO: - Alert User
             }
         }
     }

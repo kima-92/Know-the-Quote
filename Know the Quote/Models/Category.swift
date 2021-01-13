@@ -14,26 +14,23 @@ struct Category: Codable {
     enum CategoryKeys : String, CodingKey {
         case name
         case quizzes
-        
-        enum QuizIDKeys: String, CodingKey {
-            case quiz
-        }
     }
 }
 
 extension Category {
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CategoryKeys.self)
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CategoryKeys.self)
         
-        try container.encode(name, forKey: .name)
+        name = try container.decode(String.self, forKey: .name)
         
-        var quizzesContainer = container.nestedContainer(keyedBy: CategoryKeys.QuizIDKeys.self, forKey: .quizzes)
-        var quizzesDict : [String : QuizRepresentation] = [:]
+        let quizzes = try container.decode([String : QuizRepresentation].self, forKey: .quizzes)
+        self.quizzes = []
         
-        for quiz in quizzes {
-            quizzesDict[quiz.id.uuidString] = quiz
-            try quizzesContainer.encode(quiz, forKey: .quiz)
+        for quizPair in quizzes {
+            self.quizzes.append(quizPair.value)
         }
     }
 }
+
+
